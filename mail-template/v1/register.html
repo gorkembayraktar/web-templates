@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMM Panel - Hoş Geldiniz</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Reset CSS */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f8fafc;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #1e293b;
+        }
+
+        /* Container */
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: #ffffff;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #4f46e5, #6366f1, #8b5cf6);
+            padding: 48px 32px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-icon {
+            font-size: 48px;
+            color: #ffffff;
+            margin-bottom: 24px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .logo-text {
+            color: #ffffff;
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: -0.5px;
+            margin-bottom: 16px;
+        }
+
+        .welcome-text {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 18px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        /* Content */
+        .content {
+            padding: 40px;
+            background: #ffffff;
+        }
+
+        .greeting {
+            font-size: 26px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #0f172a;
+            letter-spacing: -0.5px;
+        }
+
+        .message {
+            color: #475569;
+            margin-bottom: 32px;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        /* Features Grid */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin: 32px 0;
+        }
+
+        .feature {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid #e2e8f0;
+            text-align: center;
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: #eff6ff;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            color: #6366f1;
+            font-size: 20px;
+        }
+
+        .feature-title {
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .feature-text {
+            color: #64748b;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* Button */
+        .button {
+            display: inline-block;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, #4f46e5, #6366f1);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            margin: 24px 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+        }
+
+        .button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Footer */
+        .footer {
+            background: #f8fafc;
+            padding: 32px;
+            text-align: center;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .social-links {
+            margin-bottom: 24px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            margin: 0 8px;
+            color: #6366f1;
+            text-decoration: none;
+            background: #eff6ff;
+            border-radius: 100px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: #6366f1;
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .footer-text {
+            color: #64748b;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .divider {
+            height: 4px;
+            width: 40px;
+            background: #e2e8f0;
+            margin: 24px auto;
+            border-radius: 100px;
+        }
+
+        /* Responsive */
+        @media only screen and (max-width: 600px) {
+            .container {
+                margin: 20px;
+                border-radius: 16px;
+            }
+
+            .content {
+                padding: 24px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="welcome-icon">
+                <i class="fas fa-star"></i>
+            </div>
+            <div class="logo-text">SMM Panel</div>
+            <div class="welcome-text">
+                Sosyal Medya Yolculuğunuza Hoş Geldiniz!
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <div class="greeting">
+                Merhaba Ali,
+            </div>
+
+            <div class="message">
+                SMM Panel ailesine katıldığınız için teşekkür ederiz. Hesabınız başarıyla oluşturuldu ve artık tüm
+                hizmetlerimizden yararlanabilirsiniz.
+            </div>
+
+            <!-- Features -->
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="feature-title">Hızlı Teslimat</div>
+                    <div class="feature-text">Siparişleriniz otomatik sistemimiz sayesinde anında işleme alınır.</div>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="feature-title">Güvenli Ödeme</div>
+                    <div class="feature-text">SSL korumalı altyapı ile güvenli ödeme işlemleri.</div>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <div class="feature-title">7/24 Destek</div>
+                    <div class="feature-text">Canlı destek ekibimiz her zaman yanınızda.</div>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-tag"></i>
+                    </div>
+                    <div class="feature-title">Uygun Fiyatlar</div>
+                    <div class="feature-text">En kaliteli hizmetler, en uygun fiyatlarla.</div>
+                </div>
+            </div>
+
+            <a href="#" class="button">
+                Panele Git
+                <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+
+            <div class="message">
+                Herhangi bir sorunuz olursa, 7/24 canlı destek hattımızdan bize ulaşabilirsiniz. Size yardımcı olmaktan
+                mutluluk duyarız.
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-telegram"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="footer-text">
+                © 2024 SMM Panel. Tüm hakları saklıdır.<br>
+                Bu mail ali@example.com adresine gönderilmiştir.
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

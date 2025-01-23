@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindFlow | Kişisel Gelişim & Yaşam Koçluğu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Marcellus:wght@400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #2DD4BF;
+            --color-secondary: #0EA5E9;
+        }
+
+        @keyframes blob {
+            0% {
+                transform: translate(0px, 0px) scale(1);
+            }
+
+            33% {
+                transform: translate(30px, -50px) scale(1.1);
+            }
+
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+
+            100% {
+                transform: translate(0px, 0px) scale(1);
+            }
+        }
+
+        .animate-blob {
+            animation: blob 7s infinite;
+        }
+
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+
+        .animation-delay-4000 {
+            animation-delay: 4s;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Marcellus', serif;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-blob {
+            animation: blob 7s infinite;
+        }
+
+        @keyframes blob {
+            0% {
+                transform: translate(0px, 0px) scale(1);
+            }
+
+            33% {
+                transform: translate(30px, -50px) scale(1.1);
+            }
+
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+
+            100% {
+                transform: translate(0px, 0px) scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm">
+        <div class="container mx-auto px-6">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="#" class="flex items-center space-x-3">
+                    <div
+                        class="w-10 h-10 rounded-lg bg-gradient-to-r from-teal-400 to-sky-400 flex items-center justify-center">
+                        <span class="text-xl font-bold text-white">M</span>
+                    </div>
+                    <div>
+                        <h1
+                            class="text-2xl font-bold bg-gradient-to-r from-teal-400 to-sky-400 bg-clip-text text-transparent">
+                            MindFlow
+                        </h1>
+                        <p class="text-[10px] text-gray-500 -mt-1">Kişisel Gelişim & Yaşam Koçluğu</p>
+                    </div>
+                </a>
+
+                <!-- Desktop Menü -->
+                <div class="hidden md:flex items-center space-x-1">
+                    <a href="index.html"
+                        class="px-4 py-2 text-gray-700 hover:text-teal-500 transition-colors rounded-lg hover:bg-teal-50">
+                        Ana Sayfa
+                    </a>
+                    <a href="#"
+                        class="px-4 py-2 text-gray-700 hover:text-teal-500 transition-colors rounded-lg hover:bg-teal-50">
+                        Hizmetler
+                    </a>
+                    <a href="makaleler.html"
+                        class="px-4 py-2 text-gray-700 hover:text-teal-500 transition-colors rounded-lg hover:bg-teal-50">
+                        Blog
+                    </a>
+                    <a href="iletisim.html"
+                        class="px-4 py-2 text-gray-700 hover:text-teal-500 transition-colors rounded-lg hover:bg-teal-50">
+                        İletişim
+                    </a>
+                    <a href="#danismanlik"
+                        class="ml-4 px-6 py-2 bg-gradient-to-r from-teal-400 to-sky-400 text-white rounded-full hover:shadow-lg hover:shadow-teal-500/25 transition-all">
+                        Danışmanlık Al
+                    </a>
+                </div>
+
+                <!-- Mobil Menü Butonu -->
+                <button id="mobile-menu-button" class="md:hidden p-2 rounded-lg text-gray-500 hover:bg-gray-100">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobil Menü -->
+            <div id="mobile-menu" class="hidden md:hidden">
+                <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                    <div class="py-4 space-y-2 border-t border-gray-100">
+                        <a href="#"
+                            class="block px-4 py-3 text-gray-700 hover:text-teal-500 hover:bg-teal-50 rounded-lg transition-all">
+                            Ana Sayfa
+                        </a>
+                        <a href="#"
+                            class="block px-4 py-3 text-gray-700 hover:text-teal-500 hover:bg-teal-50 rounded-lg transition-all">
+                            Hizmetler
+                        </a>
+                        <a href="#"
+                            class="block px-4 py-3 text-gray-700 hover:text-teal-500 hover:bg-teal-50 rounded-lg transition-all">
+                            Blog
+                        </a>
+                        <a href="#"
+                            class="block px-4 py-3 text-gray-700 hover:text-teal-500 hover:bg-teal-50 rounded-lg transition-all">
+                            İletişim
+                        </a>
+                        <a href="#danismanlik"
+                            class="block px-4 py-3 text-white bg-gradient-to-r from-teal-400 to-sky-400 rounded-lg hover:shadow-lg hover:shadow-teal-500/25 transition-all">
+                            Danışmanlık Al
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 bg-gradient-to-b from-teal-50/50 to-white relative overflow-hidden">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute top-0 right-0 w-96 h-96 bg-teal-200/20 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 left-0 w-96 h-96 bg-sky-200/20 rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="container mx-auto px-6 relative">
+            <div class="max-w-4xl mx-auto text-center">
+                <span class="px-4 py-1.5 bg-teal-50 text-teal-500 rounded-full text-sm font-medium inline-block mb-4">
+                    Kişisel Koçluk Programı
+                </span>
+                <h1 class="text-4xl md:text-5xl font-bold mb-6 gradient-text">
+                    Potansiyelinizi Keşfedin, Hedeflerinize Ulaşın
+                </h1>
+                <p class="text-xl text-gray-600 leading-relaxed mb-8">
+                    Profesyonel koçluk desteğiyle kişisel gelişiminizi hızlandırın, hedeflerinize daha emin adımlarla
+                    ilerleyin.
+                </p>
+                <a href="#basvuru"
+                    class="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-teal-400 to-sky-400 text-white rounded-full hover:shadow-lg hover:shadow-teal-500/25 transition-all">
+                    <span>Hemen Başvuru Yapın</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Program Detayları -->
+    <section class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold mb-6 gradient-text">Program İçeriği</h2>
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 shrink-0 bg-teal-50 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-teal-500" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-2">Kişisel Analiz</h3>
+                                <p class="text-gray-600">Güçlü yönlerinizi ve gelişim alanlarınızı profesyonel araçlarla
+                                    analiz ediyoruz.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 shrink-0 bg-sky-50 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-2">Hedef Belirleme</h3>
+                                <p class="text-gray-600">SMART hedefler belirleyerek başarıya giden yol haritanızı
+                                    oluşturuyoruz.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 shrink-0 bg-purple-50 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-purple-500" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-2">Düzenli Görüşmeler</h3>
+                                <p class="text-gray-600">Haftalık online görüşmelerle ilerlemenizi takip ediyor ve
+                                    yönlendiriyoruz.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <img src="https://picsum.photos/seed/coaching/600/800" alt="Kişisel Koçluk"
+                        class="w-full h-[600px] object-cover rounded-2xl">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-2xl"></div>
+                    <div class="absolute bottom-8 left-8 right-8 text-white">
+                        <div class="flex items-center gap-4 mb-4">
+                            <img src="https://picsum.photos/seed/coach/100/100" alt="Koç"
+                                class="w-16 h-16 rounded-full border-2 border-white">
+                            <div>
+                                <h4 class="text-xl font-bold">Ayşe Yılmaz</h4>
+                                <p class="text-white/80">Sertifikalı Yaşam Koçu</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Başvuru Formu -->
+    <section id="basvuru" class="py-20 bg-gradient-to-br from-teal-50 to-sky-50/30">
+        <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold mb-4 gradient-text">Programa Başvurun</h2>
+                    <p class="text-gray-600">
+                        Kişisel koçluk programına başvurmak için aşağıdaki formu doldurun. En kısa sürede sizinle
+                        iletişime geçeceğiz.
+                    </p>
+                </div>
+
+                <form class="space-y-6 bg-white p-8 rounded-2xl shadow-lg">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Adınız</label>
+                            <input type="text" required
+                                class="w-full px-4 py-2.5 bg-white rounded-lg text-gray-800 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Soyadınız</label>
+                            <input type="text" required
+                                class="w-full px-4 py-2.5 bg-white rounded-lg text-gray-800 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">E-posta Adresiniz</label>
+                        <input type="email" required
+                            class="w-full px-4 py-2.5 bg-white rounded-lg text-gray-800 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Telefon Numaranız</label>
+                        <input type="tel" required
+                            class="w-full px-4 py-2.5 bg-white rounded-lg text-gray-800 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Hedefleriniz</label>
+                        <textarea rows="4"
+                            class="w-full px-4 py-2.5 bg-white rounded-lg text-gray-800 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent resize-none"></textarea>
+                    </div>
+
+                    <div class="flex items-start">
+                        <div class="flex items-center h-5">
+                            <input type="checkbox" required
+                                class="w-4 h-4 text-teal-500 border-gray-300 rounded focus:ring-teal-500">
+                        </div>
+                        <div class="ml-3">
+                            <label class="text-sm text-gray-500">
+                                <a href="#" class="text-teal-500 hover:text-teal-600">KVKK Aydınlatma Metni</a>'ni
+                                okudum ve kabul ediyorum.
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit"
+                        class="w-full px-8 py-4 bg-gradient-to-r from-teal-400 to-sky-400 text-white rounded-lg hover:shadow-lg hover:shadow-teal-500/25 transition-all">
+                        Başvuruyu Gönder
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Footer -->
+    <footer class="relative overflow-hidden">
+        <!-- Footer Üst Kısım - İstatistikler -->
+
+
+        <!-- Footer Ana Kısım -->
+        <div class="bg-gradient-to-br from-gray-900 to-gray-800 pt-20 pb-10 relative">
+            <!-- Dekoratif Elementler -->
+            <div class="absolute inset-0 overflow-hidden opacity-10">
+                <div class="hero-blob absolute top-0 right-0 w-96 h-96 bg-teal-400 rounded-full blur-3xl"></div>
+                <div
+                    class="hero-blob animation-delay-2000 absolute bottom-0 left-0 w-96 h-96 bg-sky-400 rounded-full blur-3xl">
+                </div>
+            </div>
+
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 relative">
+                    <!-- Logo ve Hakkında -->
+                    <div class="space-y-6">
+                        <div class="relative">
+                            <div class="absolute -top-12 -left-12 w-32 h-32 bg-teal-400/10 rounded-full blur-2xl"></div>
+                            <div class="flex items-center space-x-3">
+                                <div
+                                    class="w-12 h-12 rounded-xl bg-gradient-to-r from-teal-400 to-sky-400 flex items-center justify-center">
+                                    <span class="text-2xl font-bold text-white">M</span>
+                                </div>
+                                <div>
+                                    <h2
+                                        class="text-2xl font-bold bg-gradient-to-r from-teal-400 to-sky-400 bg-clip-text text-transparent">
+                                        MindFlow</h2>
+                                    <p class="text-sm text-gray-400">Kişisel Gelişim & Yaşam Koçluğu</p>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-400 leading-relaxed">
+                            Profesyonel koçluk ve kişisel gelişim hizmetleriyle hayatınızda fark yaratın.
+                        </p>
+                        <div class="flex items-center space-x-4">
+                            <span class="text-sm text-gray-400">Bizi Takip Edin:</span>
+                            <div class="flex space-x-4">
+                                <a href="#"
+                                    class="w-8 h-8 rounded-full bg-gray-800/50 flex items-center justify-center hover:bg-teal-500/20 transition-colors group">
+                                    <svg class="w-4 h-4 text-gray-400 group-hover:text-teal-400 transition-colors"
+                                        fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                                    </svg>
+                                </a>
+                                <!-- Diğer sosyal medya ikonları -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hızlı Linkler -->
+                    <div>
+                        <h3 class="text-lg font-semibold mb-8 text-teal-400 border-b border-gray-800 pb-2">Hızlı Linkler
+                        </h3>
+                        <ul class="space-y-4">
+                            <li>
+                                <a href="#"
+                                    class="text-gray-400 hover:text-teal-400 transition-colors flex items-center gap-2 group">
+                                    <svg class="w-4 h-4 text-teal-500/50 group-hover:text-teal-400 transition-colors"
+                                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 5l7 7-7 7" />
+                                    </svg>
+                                    <span>Ana Sayfa</span>
+                                </a>
+                            </li>
+                            <!-- Diğer linkler için de aynı yapı -->
+                            <li>
+                                <a href="#"
+                                    class="text-gray-400 hover:text-teal-400 transition-colors flex items-center gap-2 group">
+                                    <svg class="w-4 h-4 text-teal-500/50 group-hover:text-teal-400 transition-colors"
+                                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 5l7 7-7 7" />
+                                    </svg>
+                                    <span>Eğitimler</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- İletişim -->
+                    <div>
+                        <h3 class="text-lg font-semibold mb-8 text-teal-400 border-b border-gray-800 pb-2">İletişim</h3>
+                        <div class="space-y-6">
+                            <p class="text-gray-400 leading-relaxed">
+                                Sorularınız için bize ulaşın, size yardımcı olmaktan mutluluk duyarız.
+                            </p>
+                            <ul class="space-y-4">
+                                <!-- İletişim bilgileri -->
+                                <li class="flex items-center space-x-3 group">
+                                    <div
+                                        class="w-10 h-10 rounded-lg bg-gradient-to-br from-gray-800/50 to-gray-700/50 backdrop-blur-xl flex items-center justify-center group-hover:from-teal-500/20 group-hover:to-sky-500/20 transition-all duration-300">
+                                        <svg class="w-5 h-5 text-teal-400" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-gray-400">Telefon</p>
+                                        <p class="text-white group-hover:text-teal-400 transition-colors">+90 555 123
+                                            4567</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Bülten -->
+                    <div>
+                        <h3 class="text-lg font-semibold mb-8 text-teal-400 border-b border-gray-800 pb-2">Bültene
+                            Katılın</h3>
+                        <p class="text-gray-400 mb-6 leading-relaxed">
+                            Kişisel gelişim ipuçları ve güncel içeriklerimizden haberdar olun.
+                        </p>
+                        <form class="space-y-4">
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+                                    <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                    </svg>
+                                </div>
+                                <input type="email" placeholder="E-posta adresiniz"
+                                    class="w-full pl-12 pr-4 py-3 bg-white rounded-lg text-gray-800 placeholder-gray-500 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all hover:border-teal-500">
+                            </div>
+                            <button type="submit"
+                                class="w-full px-6 py-3 bg-gradient-to-r from-teal-400 to-sky-400 text-white rounded-lg hover:shadow-lg hover:shadow-teal-500/25 transition-all transform hover:scale-[1.02]">
+                                Katıl
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Alt Bilgi -->
+                <div class="mt-20 pt-8 border-t border-gray-800">
+                    <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                        <div class="text-gray-400 text-sm">
+                            &copy; 2024 MindFlow. Tüm hakları saklıdır.
+                        </div>
+                        <div class="flex flex-wrap justify-center items-center gap-6 text-sm">
+                            <a href="/page.html" class="text-gray-400 hover:text-teal-400 transition-colors">KVKK
+                                Aydınlatma Metni</a>
+                            <a href="#" class="text-gray-400 hover:text-teal-400 transition-colors">Gizlilik
+                                Politikası</a>
+                            <a href="#" class="text-gray-400 hover:text-teal-400 transition-colors">Kullanım
+                                Koşulları</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Danışmanlık Modal -->
+    <div id="danismanlik-modal" class="fixed inset-0 bg-black/50 z-50 hidden">
+        <div class="min-h-screen px-4 text-center">
+            <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+                <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+            </div>
+
+            <!-- Modal içeriği -->
+            <div
+                class="inline-block w-full max-w-xl p-6 my-16 text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-bold gradient-text">Ücretsiz Danışmanlık</h3>
+                    <button id="modal-close" class="text-gray-500 hover:text-gray-700">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <form id="danismanlik-form" class="space-y-6">
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="ad" class="block text-sm font-medium text-gray-700 mb-1">Adınız</label>
+                                <input type="text" id="ad" name="ad" required
+                                    class="w-full px-4 py-2.5 bg-white rounded-lg text-gray-800 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all">
+                            </div>
+                            <div>
+                                <label for="soyad"
+                                    class="block text-sm font-medium text-gray-700 mb-1">Soyadınız</label>
+                                <input type="text" id="soyad" name="soyad" required
+                                    class="w-full px-4 py-2.5 bg-white rounded-lg text-gray-800 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">E-posta
+                                Adresiniz</label>
+                            <input type="email" id="email" name="email" required
+                                class="w-full px-4 py-2.5 bg-white rounded-lg text-gray-800 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all">
+                        </div>
+
+                        <div>
+                            <label for="telefon" class="block text-sm font-medium text-gray-700 mb-1">Telefon
+                                Numaranız</label>
+                            <input type="tel" id="telefon" name="telefon" required
+                                class="w-full px-4 py-2.5 bg-white rounded-lg text-gray-800 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all">
+                        </div>
+
+                        <div>
+                            <label for="konu" class="block text-sm font-medium text-gray-700 mb-1">Danışmanlık
+                                Konusu</label>
+                            <select id="konu" name="konu" required
+                                class="w-full px-4 py-2.5 bg-white rounded-lg text-gray-800 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all">
+                                <option value="">Seçiniz</option>
+                                <option value="kariyer">Kariyer Gelişimi</option>
+                                <option value="kisisel">Kişisel Gelişim</option>
+                                <option value="liderlik">Liderlik</option>
+                                <option value="iliski">İlişki Koçluğu</option>
+                                <option value="diger">Diğer</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="mesaj" class="block text-sm font-medium text-gray-700 mb-1">Mesajınız</label>
+                            <textarea id="mesaj" name="mesaj" rows="4" required
+                                class="w-full px-4 py-2.5 bg-white rounded-lg text-gray-800 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all resize-none"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start">
+                        <div class="flex items-center h-5">
+                            <input id="kvkk" name="kvkk" type="checkbox" required
+                                class="w-4 h-4 text-teal-500 border-gray-300 rounded focus:ring-teal-500">
+                        </div>
+                        <div class="ml-3">
+                            <label for="kvkk" class="text-sm text-gray-500">
+                                <a href="/page.html" class="text-teal-500 hover:text-teal-600">KVKK Aydınlatma
+                                    Metni</a>'ni okudum ve kabul ediyorum.
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end gap-4">
+                        <button type="button" onclick="closeModal()"
+                            class="px-6 py-2.5 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-all">
+                            Vazgeç
+                        </button>
+                        <button type="submit"
+                            class="px-6 py-2.5 bg-gradient-to-r from-teal-400 to-sky-400 text-white rounded-lg hover:shadow-lg hover:shadow-teal-500/25 transition-all">
+                            Gönder
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Modal Kontrolü
+        const modal = document.getElementById('danismanlik-modal');
+        const modalClose = document.getElementById('modal-close');
+        const danismanlikForm = document.getElementById('danismanlik-form');
+        const danismanlikLinks = document.querySelectorAll('a[href="#danismanlik"]');
+
+        // Danışmanlık linklerine tıklandığında modalı aç
+        danismanlikLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                modal.classList.remove('hidden');
+                // Modal açılış animasyonu
+                gsap.fromTo(modal.querySelector('.bg-white'), {
+                    y: 50,
+                    opacity: 0
+                }, {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.3,
+                    ease: "power2.out"
+                });
+            });
+        });
+
+        // Modal'ı kapat
+        function closeModal() {
+            gsap.to(modal.querySelector('.bg-white'), {
+                y: 50,
+                opacity: 0,
+                duration: 0.3,
+                ease: "power2.in",
+                onComplete: () => {
+                    modal.classList.add('hidden');
+                    danismanlikForm.reset();
+                }
+            });
+        }
+
+        modalClose.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+
+        // Form gönderimi
+        danismanlikForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Form verilerini al
+            const formData = new FormData(danismanlikForm);
+            const data = Object.fromEntries(formData);
+
+            // Burada form verilerini backend'e gönderme işlemi yapılacak
+            console.log('Form verileri:', data);
+
+            // Başarılı gönderim mesajı
+            alert('Talebiniz başarıyla alındı. En kısa sürede size dönüş yapacağız.');
+            closeModal();
+        });
+
+        // Mobil Menü Kontrolü
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Mobil menü linklerine tıklandığında menüyü kapat
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Sayaç animasyonu
+        const counters = document.querySelectorAll('.counter');
+        const speed = 1000; // Animasyon hızı (ms)
+
+        const startCounting = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = parseInt(counter.getAttribute('data-target'));
+                    const count = +counter.innerText;
+
+                    const increment = Math.ceil(target / (speed / 16)); // 60fps'de smooth animasyon
+
+                    if (count < target) {
+                        const newCount = Math.min(count + increment, target);
+                        counter.innerText = newCount;
+                        if (newCount < target) {
+                            requestAnimationFrame(() => startCounting([entry], observer));
+                        } else {
+                            counter.innerText = target + (target === 98 ? '%' : '+');
+                        }
+                    } else {
+                        counter.innerText = target + (target === 98 ? '%' : '+');
+                    }
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(startCounting, {
+            threshold: 0.5,
+            rootMargin: '0px'
+        });
+
+        counters.forEach(counter => observer.observe(counter));
+    </script>
+</body>
+
+</html>

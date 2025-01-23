@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMM Panel - Mail Template</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Reset CSS */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f8fafc;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #1e293b;
+        }
+
+        /* Container */
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: #ffffff;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #4f46e5, #6366f1, #8b5cf6);
+            padding: 40px 32px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="0" cy="0" r="40" fill="rgba(255,255,255,0.05)"/></svg>') 0 0/50px 50px;
+            opacity: 0.3;
+        }
+
+        .logo {
+            position: relative;
+            margin-bottom: 16px;
+        }
+
+        .logo-text {
+            color: #ffffff;
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: -0.5px;
+        }
+
+        /* Content */
+        .content {
+            padding: 40px;
+            background: #ffffff;
+        }
+
+        .greeting {
+            font-size: 26px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #0f172a;
+            letter-spacing: -0.5px;
+        }
+
+        .message {
+            color: #475569;
+            margin-bottom: 32px;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        /* Button */
+        .button {
+            display: inline-block;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, #4f46e5, #6366f1);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            margin: 24px 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+        }
+
+        .button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Order Details */
+        .order-details {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 32px;
+            margin: 32px 0;
+            border: 1px solid #e2e8f0;
+        }
+
+        .order-title {
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 24px;
+            font-size: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            color: #475569;
+            font-size: 15px;
+        }
+
+        .order-item:last-child {
+            margin-bottom: 0;
+            padding-top: 16px;
+            border-top: 1px dashed #e2e8f0;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background: #ecfdf5;
+            color: #059669;
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        .footer {
+            background: #f8fafc;
+            padding: 32px;
+            text-align: center;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .social-links {
+            margin-bottom: 24px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            margin: 0 8px;
+            color: #6366f1;
+            text-decoration: none;
+            background: #eff6ff;
+            border-radius: 100px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: #6366f1;
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .footer-text {
+            color: #64748b;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .divider {
+            height: 4px;
+            width: 40px;
+            background: #e2e8f0;
+            margin: 24px auto;
+            border-radius: 100px;
+        }
+
+        /* Responsive */
+        @media only screen and (max-width: 600px) {
+            .container {
+                margin: 20px;
+                border-radius: 16px;
+            }
+
+            .content {
+                padding: 24px;
+            }
+
+            .order-details {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                <div class="logo-text">SMM Panel</div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <div class="greeting">
+                Merhaba Ali,
+            </div>
+
+            <div class="message">
+                Siparişiniz başarıyla alındı ve işleme konuldu. Aşağıda sipariş detaylarınızı inceleyebilirsiniz.
+            </div>
+
+            <!-- Order Details -->
+            <div class="order-details">
+                <div class="order-title">Sipariş Detayları</div>
+                <div class="order-item">
+                    <span>Sipariş No</span>
+                    <span>#SMM-123456</span>
+                </div>
+                <div class="order-item">
+                    <span>Hizmet</span>
+                    <span>Instagram Takipçi</span>
+                </div>
+                <div class="order-item">
+                    <span>Miktar</span>
+                    <span>1,000 Takipçi</span>
+                </div>
+                <div class="order-item">
+                    <span>Tutar</span>
+                    <span>₺29.99</span>
+                </div>
+                <div class="order-item">
+                    <span>Durum</span>
+                    <span class="status-badge">
+                        <i class="fas fa-check-circle"></i>
+                        Tamamlandı
+                    </span>
+                </div>
+            </div>
+
+            <a href="#" class="button">
+                Siparişi Görüntüle
+                <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+
+            <div class="message">
+                Herhangi bir sorunuz olursa, 7/24 canlı destek hattımızdan bize ulaşabilirsiniz. Size yardımcı olmaktan
+                mutluluk duyarız.
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-telegram"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="footer-text">
+                © 2024 SMM Panel. Tüm hakları saklıdır.<br>
+                Bu mail ali@example.com adresine gönderilmiştir.
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

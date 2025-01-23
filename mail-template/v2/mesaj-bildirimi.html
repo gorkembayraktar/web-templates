@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yeni Mesaj Bildirimi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f9fafb;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #1f2937;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Header */
+        .header {
+            background: #1e40af;
+            padding: 40px 32px;
+            text-align: center;
+            position: relative;
+        }
+
+        .logo {
+            margin-bottom: 24px;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .welcome-text {
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            letter-spacing: -0.025em;
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 16px;
+        }
+
+        /* Content */
+        .content {
+            padding: 48px 32px;
+        }
+
+        .greeting {
+            font-size: 20px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 16px;
+        }
+
+        .message {
+            color: #4b5563;
+            font-size: 16px;
+            line-height: 1.7;
+            margin-bottom: 32px;
+        }
+
+        /* Button */
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.2s ease;
+            width: auto;
+            min-width: 160px;
+        }
+
+        .button:hover {
+            transform: translateY(-1px);
+        }
+
+        /* Footer */
+        .footer {
+            background: #f9fafb;
+            padding: 32px;
+            text-align: center;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .social-links {
+            margin-bottom: 24px;
+        }
+
+        .social-links a {
+            color: #4b5563;
+            text-decoration: none;
+            margin: 0 12px;
+            font-size: 20px;
+            transition: color 0.2s ease;
+        }
+
+        .social-links a:hover {
+            color: #1e40af;
+        }
+
+        .footer-text {
+            color: #6b7280;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .footer-links {
+            margin-top: 16px;
+        }
+
+        .footer-links a {
+            color: #1e40af;
+            text-decoration: none;
+            margin: 0 8px;
+            font-size: 14px;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Security Notice */
+        .security-notice {
+            background: #fff8f1;
+            border: 1px solid #fed7aa;
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 32px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .security-notice i {
+            color: #ea580c;
+            margin-top: 2px;
+        }
+
+        .security-text {
+            color: #9a3412;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* Message Preview Box */
+        .message-preview {
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            border-radius: 8px;
+            padding: 24px;
+            margin: 32px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .message-preview::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, #0284c7, #0ea5e9);
+            opacity: 0.5;
+        }
+
+        .sender-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .sender-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #e0f2fe;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #0284c7;
+            font-weight: 600;
+        }
+
+        .sender-details {
+            flex: 1;
+        }
+
+        .sender-name {
+            font-weight: 600;
+            color: #0f172a;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .message-time {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .message-content {
+            color: #334155;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 24px;
+            padding: 16px;
+            background: #ffffff;
+            border-radius: 6px;
+            border-left: 4px solid #0ea5e9;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 24px;
+            margin-bottom: 0;
+        }
+
+        .button-primary {
+            background: #0284c7;
+        }
+
+        .button-primary:hover {
+            background: #0369a1;
+        }
+
+        .button-secondary {
+            background: #475569;
+        }
+
+        .button-secondary:hover {
+            background: #334155;
+        }
+
+        /* Message Stats */
+        .message-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 32px 0;
+            background: transparent;
+        }
+
+        .stat-item {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            margin: 32px 0;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .quick-action {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quick-action:hover {
+            background: #f1f5f9;
+            transform: translateY(-1px);
+        }
+
+        .quick-action i {
+            font-size: 24px;
+            color: #0284c7;
+            margin-bottom: 8px;
+            display: block;
+            transition: transform 0.2s ease;
+        }
+
+        .quick-action:hover i {
+            transform: scale(1.1);
+        }
+
+        .quick-action-text {
+            color: #334155;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Responsive */
+        @media only screen and (max-width: 600px) {
+            .container {
+                margin: 20px;
+                border-radius: 8px;
+            }
+
+            .content {
+                padding: 32px 24px;
+            }
+
+            .message-stats {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
+
+            .action-buttons {
+                grid-template-columns: 1fr;
+            }
+
+            .message-preview {
+                padding: 16px;
+            }
+
+            .sender-avatar {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+
+            .message-content {
+                padding: 12px;
+                font-size: 14px;
+            }
+
+            .stat-value {
+                font-size: 20px;
+            }
+
+            .stat-label {
+                font-size: 12px;
+            }
+
+            .message-preview::before {
+                height: 3px;
+            }
+
+            .quick-action {
+                padding: 12px;
+            }
+
+            .quick-action i {
+                font-size: 20px;
+                margin-bottom: 6px;
+            }
+
+            .quick-action-text {
+                font-size: 13px;
+            }
+
+            .security-notice {
+                padding: 12px;
+                font-size: 13px;
+            }
+        }
+
+        /* Header decorations */
+        .header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                <img src="logo.png" alt="Logo">
+            </div>
+            <div class="welcome-text">Yeni Mesajınız Var</div>
+            <div class="subtitle">Destek ekibimiz size yanıt verdi</div>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <div class="greeting">Merhaba Ahmet,</div>
+            <p class="message">
+                Destek talebinize yeni bir yanıt geldi. Aşağıda mesajın detaylarını görebilirsiniz.
+            </p>
+
+            <!-- Message Preview -->
+            <div class="message-preview">
+                <div class="sender-info">
+                    <div class="sender-avatar">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <div class="sender-details">
+                        <div class="sender-name">Mehmet Yılmaz</div>
+                        <div class="message-time">24 Mart 2024, 15:30</div>
+                    </div>
+                </div>
+                <div class="message-content">
+                    Merhaba Ahmet Bey,<br><br>
+                    Talebinizi inceledik. Hesabınızdaki sorun çözüldü. Herhangi bir sorunuz olursa bize
+                    bildirebilirsiniz.
+                    İyi günler dilerim.
+                </div>
+                <div class="action-buttons">
+                    <a href="#" class="button button-primary">
+                        <i class="fas fa-reply" style="margin-right: 8px;"></i>
+                        Yanıtla
+                    </a>
+                    <a href="#" class="button button-secondary">
+                        <i class="fas fa-folder" style="margin-right: 8px;"></i>
+                        Talebi Görüntüle
+                    </a>
+                </div>
+            </div>
+
+            <!-- Message Stats -->
+            <div class="message-stats">
+                <div class="stat-item">
+                    <div class="stat-value">3</div>
+                    <div class="stat-label">Toplam Mesaj</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">1s</div>
+                    <div class="stat-label">Yanıt Süresi</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">Açık</div>
+                    <div class="stat-label">Talep Durumu</div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <a href="#" class="quick-action">
+                    <i class="fas fa-history"></i>
+                    <div class="quick-action-text">Geçmiş Taleplerim</div>
+                </a>
+                <a href="#" class="quick-action">
+                    <i class="fas fa-plus-circle"></i>
+                    <div class="quick-action-text">Yeni Talep Oluştur</div>
+                </a>
+            </div>
+
+            <!-- Info Box -->
+            <div class="security-notice">
+                <i class="fas fa-info-circle"></i>
+                <div class="security-text">
+                    Bu e-posta size destek sistemi üzerinden gönderilmiştir. Yanıtlamak için lütfen sistem üzerinden
+                    işlem
+                    yapın.
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+            <div class="footer-text">
+                © 2024 Firma Adı. Tüm hakları saklıdır.<br>
+                Adres: İstanbul, Türkiye
+            </div>
+            <div class="footer-links">
+                <a href="#">Destek Merkezi</a>
+                <a href="#">SSS</a>
+                <a href="#">İletişim</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

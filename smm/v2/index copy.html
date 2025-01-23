@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMM Panel v2 | Sosyal Medya Hizmetleri</title>
+
+    <!-- Temel Stiller -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Modern Fontlar -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Slider ve Animasyon Kütüphaneleri -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.6.0/css/glide.core.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.6.0/glide.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.6.2/countUp.umd.min.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f6ff',
+                            100: '#e0eaff',
+                            200: '#c7d7fe',
+                            300: '#a4bafd',
+                            400: '#8094fb',
+                            500: '#6366f1', // Ana renk
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            800: '#3730a3',
+                            900: '#312e81',
+                            950: '#1e1b4b',
+                        },
+                        dark: {
+                            DEFAULT: '#0f172a',
+                            card: '#1e293b'
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    },
+                    backdropBlur: {
+                        xs: '2px',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom Styles -->
+    <style>
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Glass Effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .dark .glass {
+            background: rgba(15, 23, 42, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Modern Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        /* Card Hover Effect */
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Gradient Text Animation */
+        .animate-gradient {
+            background-size: 300%;
+            -webkit-animation: animatedgradient 6s ease infinite alternate;
+            animation: animatedgradient 6s ease infinite alternate;
+        }
+
+        @keyframes animatedgradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Blob Animation */
+        @keyframes blob {
+            0% {
+                transform: translate(0px, 0px) scale(1);
+            }
+
+            33% {
+                transform: translate(30px, -50px) scale(1.1);
+            }
+
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+
+            100% {
+                transform: translate(0px, 0px) scale(1);
+            }
+        }
+
+        .animate-blob {
+            animation: blob 7s infinite;
+        }
+
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+
+        .animation-delay-4000 {
+            animation-delay: 4s;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-slate-50 dark:bg-dark text-slate-800 dark:text-white selection:bg-primary-500/20 selection:text-primary-500">
+    <!-- Top Header -->
+    <div class="bg-slate-900 dark:bg-slate-950 text-white hidden sm:block">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-10">
+                <!-- Sol Kısım: İletişim Bilgileri -->
+                <div class="flex items-center gap-6">
+                    <!-- SSL Badge -->
+                    <div class="flex items-center gap-1.5 text-emerald-400/90">
+                        <i class="fas fa-shield-alt text-xs"></i>
+                        <span class="text-xs font-medium">SSL Korumalı</span>
+                    </div>
+
+                    <!-- Çalışma Saatleri -->
+                    <div class="flex items-center gap-1.5">
+                        <i class="far fa-clock text-primary-400/90 text-xs"></i>
+                        <span class="text-xs text-slate-300">7/24 Canlı Destek</span>
+                    </div>
+
+                    <!-- İletişim Linkleri -->
+                    <div class="flex items-center gap-4">
+                        <a href="tel:+908501234567"
+                            class="flex items-center gap-1.5 text-slate-300 hover:text-white transition-colors group">
+                            <i
+                                class="fas fa-phone-alt text-primary-400/90 text-xs group-hover:scale-110 transition-transform"></i>
+                            <span class="text-xs">0850 123 45 67</span>
+                        </a>
+                        <a href="mailto:info@smmpanel.com"
+                            class="flex items-center gap-1.5 text-slate-300 hover:text-white transition-colors group">
+                            <i
+                                class="far fa-envelope text-primary-400/90 text-xs group-hover:scale-110 transition-transform"></i>
+                            <span class="text-xs">info@smmpanel.com</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Sağ Kısım: Sosyal Medya ve Dil -->
+                <div class="flex items-center">
+                    <!-- Sosyal Medya İkonları -->
+                    <div class="flex items-center gap-4 px-6 border-x border-slate-800">
+                        <a href="#" class="text-slate-400 hover:text-white transition-colors" title="Instagram">
+                            <i class="fab fa-instagram text-sm"></i>
+                        </a>
+                        <a href="#" class="text-slate-400 hover:text-white transition-colors" title="TikTok">
+                            <i class="fab fa-tiktok text-sm"></i>
+                        </a>
+                        <a href="#" class="text-slate-400 hover:text-white transition-colors" title="Telegram">
+                            <i class="fab fa-telegram text-sm"></i>
+                        </a>
+                        <a href="#" class="text-slate-400 hover:text-white transition-colors" title="WhatsApp">
+                            <i class="fab fa-whatsapp text-sm"></i>
+                        </a>
+                    </div>
+
+                    <!-- Dil Seçimi -->
+                    <div class="relative group pl-6">
+                        <button class="flex items-center gap-2 text-xs text-slate-300 hover:text-white transition-all">
+                            <img src="https://hatscripts.github.io/circle-flags/flags/tr.svg"
+                                class="w-4 h-4 rounded-full ring-1 ring-white/10" alt="Türkçe">
+                            <span>Türkçe</span>
+                            <i
+                                class="fas fa-chevron-down text-[10px] opacity-50 group-hover:opacity-100 transition-all group-hover:rotate-180"></i>
+                        </button>
+
+                        <!-- Dil Menüsü -->
+                        <div
+                            class="hidden group-hover:block absolute right-0 mt-1 w-36 rounded-lg bg-slate-800 border border-slate-700 shadow-lg z-50">
+                            <div class="p-1">
+                                <a href="#"
+                                    class="flex items-center gap-2 px-3 py-2 text-xs text-slate-300 hover:text-white hover:bg-slate-700/50 rounded-md transition-colors">
+                                    <img src="https://hatscripts.github.io/circle-flags/flags/us.svg"
+                                        class="w-4 h-4 rounded-full ring-1 ring-white/10" alt="English">
+                                    <span>English</span>
+                                </a>
+                                <a href="#"
+                                    class="flex items-center gap-2 px-3 py-2 text-xs text-slate-300 hover:text-white hover:bg-slate-700/50 rounded-md transition-colors">
+                                    <img src="https://hatscripts.github.io/circle-flags/flags/de.svg"
+                                        class="w-4 h-4 rounded-full ring-1 ring-white/10" alt="Deutsch">
+                                    <span>Deutsch</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="sticky top-0 w-full z-50">
+        <div class="glass">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <!-- Logo -->
+                    <a href="#" class="flex items-center gap-2">
+                        <div
+                            class="w-8 h-8 rounded-lg bg-gradient-to-tr from-primary-600 to-primary-400 flex items-center justify-center">
+                            <span class="text-white font-bold">S</span>
+                        </div>
+                        <span
+                            class="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-primary-400">
+                            SMM Panel
+                        </span>
+                    </a>
+
+                    <!-- Desktop Menu -->
+                    <div class="hidden md:flex items-center gap-8">
+                        <div class="flex items-center gap-6">
+                            <a href="#services"
+                                class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">
+                                Hizmetler
+                            </a>
+                            <a href="#pricing"
+                                class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">
+                                Fiyatlar
+                            </a>
+                            <a href="#api"
+                                class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">
+                                API
+                            </a>
+                            <a href="#blog"
+                                class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">
+                                Blog
+                            </a>
+                        </div>
+
+                        <!-- Actions -->
+                        <div class="flex items-center gap-4">
+                            <!-- Notifications -->
+                            <div class="relative">
+                                <button id="notifications-button"
+                                    class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors relative">
+                                    <i class="far fa-bell text-slate-600 dark:text-slate-400"></i>
+                                    <!-- Notification Badge -->
+                                    <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                                </button>
+
+                                <!-- Notifications Dropdown -->
+                                <div id="notifications-menu"
+                                    class="hidden absolute right-0 mt-2 w-80 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-lg z-50">
+                                    <!-- Header -->
+                                    <div class="p-4 border-b border-slate-200 dark:border-slate-700">
+                                        <div class="flex items-center justify-between">
+                                            <h3 class="font-semibold text-slate-900 dark:text-white">Bildirimler</h3>
+                                            <span
+                                                class="px-2 py-1 text-xs font-medium bg-primary-500/10 text-primary-600 dark:text-primary-400 rounded-full">3
+                                                Yeni</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Notifications List -->
+                                    <div
+                                        class="divide-y divide-slate-200 dark:divide-slate-700 max-h-[400px] overflow-y-auto">
+                                        <!-- New Order Notification -->
+                                        <div class="p-4 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+                                            <div class="flex gap-3">
+                                                <div
+                                                    class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/10 flex items-center justify-center">
+                                                    <i class="fas fa-shopping-cart text-emerald-500"></i>
+                                                </div>
+                                                <div class="min-w-0">
+                                                    <p class="text-sm font-medium text-slate-900 dark:text-white">Yeni
+                                                        Sipariş</p>
+                                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Instagram
+                                                        takipçi siparişiniz başarıyla tamamlandı.</p>
+                                                    <p class="text-xs text-slate-400 dark:text-slate-500 mt-1">2 dakika
+                                                        önce</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- System Update Notification -->
+                                        <div class="p-4 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+                                            <div class="flex gap-3">
+                                                <div
+                                                    class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center">
+                                                    <i class="fas fa-info-circle text-blue-500"></i>
+                                                </div>
+                                                <div class="min-w-0">
+                                                    <p class="text-sm font-medium text-slate-900 dark:text-white">Sistem
+                                                        Güncellemesi</p>
+                                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Yeni
+                                                        özellikler eklendi ve performans iyileştirmeleri yapıldı.</p>
+                                                    <p class="text-xs text-slate-400 dark:text-slate-500 mt-1">1 saat
+                                                        önce</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Price Update Notification -->
+                                        <div class="p-4 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+                                            <div class="flex gap-3">
+                                                <div
+                                                    class="flex-shrink-0 w-10 h-10 rounded-full bg-violet-500/10 flex items-center justify-center">
+                                                    <i class="fas fa-tag text-violet-500"></i>
+                                                </div>
+                                                <div class="min-w-0">
+                                                    <p class="text-sm font-medium text-slate-900 dark:text-white">Fiyat
+                                                        Güncellemesi</p>
+                                                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">TikTok
+                                                        hizmetlerinde %20 indirim başladı!</p>
+                                                    <p class="text-xs text-slate-400 dark:text-slate-500 mt-1">3 saat
+                                                        önce</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Footer -->
+                                    <div class="p-4 border-t border-slate-200 dark:border-slate-700">
+                                        <button
+                                            class="w-full px-4 py-2 text-xs font-medium text-primary-600 dark:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-500/10 rounded-lg transition-colors">
+                                            Tüm Bildirimleri Gör
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Theme Toggle -->
+                            <button id="theme-toggle"
+                                class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                                <i class="far fa-moon text-slate-600 dark:text-slate-400 dark:hidden"></i>
+                                <i class="far fa-sun text-slate-400 hidden dark:block"></i>
+                            </button>
+
+                            <!-- Auth Buttons -->
+                            <a href="#login"
+                                class="px-4 py-2 text-sm font-medium text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors">
+                                Giriş Yap
+                            </a>
+                            <a href="#register"
+                                class="px-4 py-2 text-sm font-medium text-white bg-primary-500 hover:bg-primary-600 rounded-lg transition-colors">
+                                Kayıt Ol
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Menu Button -->
+                    <button
+                        class="md:hidden p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen pt-32 pb-20 overflow-hidden flex items-center">
+        <!-- Background Elements -->
+        <div class="absolute inset-0 -z-10">
+            <!-- Gradient Background -->
+            <div
+                class="absolute inset-0 bg-gradient-to-br from-primary-500/5 via-slate-50/80 dark:via-slate-900/80 to-transparent">
+            </div>
+
+            <!-- Hero Image -->
+            <div class="absolute inset-0 opacity-10 dark:opacity-5">
+                <img src="https://images.pexels.com/photos/6963098/pexels-photo-6963098.jpeg?auto=compress&cs=tinysrgb&w=1920"
+                    alt="Background" class="w-full h-full object-cover object-center" />
+            </div>
+
+            <!-- Animated Shapes -->
+            <div class="absolute inset-0">
+                <div
+                    class="absolute top-1/4 left-1/4 w-64 h-64 bg-primary-500/30 rounded-full mix-blend-multiply filter blur-xl animate-blob">
+                </div>
+                <div
+                    class="absolute top-1/3 right-1/4 w-64 h-64 bg-violet-500/30 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000">
+                </div>
+                <div
+                    class="absolute bottom-1/4 left-1/3 w-64 h-64 bg-pink-500/30 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000">
+                </div>
+            </div>
+
+            <!-- Grid Pattern -->
+            <div
+                class="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]">
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <!-- Left Content -->
+                <div class="flex-1 text-center lg:text-left">
+                    <!-- Hero Badge -->
+                    <div
+                        class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 mb-8">
+                        <span class="flex h-2 w-2">
+                            <span
+                                class="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-primary-500 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-primary-500"></span>
+                        </span>
+                        <span class="text-sm font-medium text-slate-800 dark:text-slate-200">
+                            7/24 Otomatik Teslimat
+                        </span>
+                    </div>
+
+                    <!-- Hero Title -->
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                        <span
+                            class="bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-primary-400 animate-gradient">
+                            Sosyal Medya Hizmetleri
+                        </span>
+                        <br />
+                        <span class="text-slate-700 dark:text-slate-300">ile Markanızı</span>
+                        <br class="md:hidden" />
+                        <span class="relative inline-block">
+                            <span class="text-slate-700 dark:text-slate-300">
+                                Hızla Büyütün
+                            </span>
+                            <svg class="absolute -bottom-2 left-0 w-full" viewBox="0 0 100 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path class="stroke-primary-500" d="M0 10 Q25 0, 50 10 T100 10" fill="none"
+                                    stroke-width="3" />
+                            </svg>
+                        </span>
+                    </h1>
+
+                    <!-- Hero Description -->
+                    <p class="text-lg md:text-xl text-slate-600 dark:text-slate-400 mb-12 max-w-2xl mx-auto lg:mx-0">
+                        En hızlı ve güvenilir sosyal medya hizmetleri ile hesaplarınızı büyütün.
+                        <span class="font-medium text-slate-800 dark:text-white">Instagram</span>,
+                        <span class="font-medium text-slate-800 dark:text-white">TikTok</span>,
+                        <span class="font-medium text-slate-800 dark:text-white">YouTube</span> ve daha fazlası.
+                    </p>
+
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="#services" class="group relative px-8 py-4 rounded-xl overflow-hidden">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-r from-primary-600 to-primary-500 transition-all duration-300 group-hover:scale-[1.02]">
+                            </div>
+                            <div class="relative flex items-center gap-2 text-white font-medium">
+                                <span>Hizmetleri İncele</span>
+                                <i class="fas fa-arrow-right transition-transform group-hover:translate-x-1"></i>
+                            </div>
+                        </a>
+                        <a href="#contact"
+                            class="group px-8 py-4 rounded-xl bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 transition-all duration-300 flex items-center gap-2">
+                            <i class="far fa-comments text-primary-500"></i>
+                            <span class="font-medium">İletişime Geç</span>
+                        </a>
+                    </div>
+
+                    <!-- Platform Icons -->
+                    <div class="mt-12 flex flex-wrap items-center gap-6 justify-center lg:justify-start">
+                        <div
+                            class="flex items-center gap-3 px-4 py-2 rounded-xl bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm">
+                            <i class="fab fa-instagram text-2xl text-pink-500"></i>
+                            <i class="fab fa-tiktok text-2xl text-slate-900 dark:text-white"></i>
+                            <i class="fab fa-youtube text-2xl text-red-500"></i>
+                            <i class="fab fa-twitter text-2xl text-blue-400"></i>
+                        </div>
+                        <span class="text-sm text-slate-500 dark:text-slate-400">ve daha fazlası...</span>
+                    </div>
+                </div>
+
+                <!-- Right Content - Hero Image -->
+                <div class="flex-1 hidden lg:block">
+                    <div class="relative">
+                        <!-- Main Image -->
+                        <div class="relative z-10 rounded-2xl overflow-hidden shadow-2xl">
+                            <img src="https://images.pexels.com/photos/5053740/pexels-photo-5053740.jpeg?auto=compress&cs=tinysrgb&w=800"
+                                alt="Social Media Marketing" class="w-full h-auto" />
+                            <!-- Overlay Gradient -->
+                            <div class="absolute inset-0 bg-gradient-to-tr from-primary-500/20 to-transparent"></div>
+                        </div>
+
+                        <!-- Floating Elements -->
+                        <div
+                            class="absolute -top-6 -right-6 w-24 h-24 bg-primary-500/10 rounded-xl backdrop-blur-sm border border-primary-500/20 animate-float">
+                        </div>
+                        <div
+                            class="absolute -bottom-8 -left-8 w-32 h-32 bg-violet-500/10 rounded-xl backdrop-blur-sm border border-violet-500/20 animate-float animation-delay-2000">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Animation Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const statsSection = document.querySelector('.grid-cols-2');
+            let animated = false;
+
+            const startAnimation = () => {
+                if (animated) return;
+                animated = true;
+
+                const options = {
+                    duration: 3,
+                    useEasing: true,
+                    useGrouping: true,
+                    separator: ',',
+                    decimal: '.',
+                    suffix: '',
+                };
+
+                // Her sayaç için farklı delay ve süre
+                new countUp.CountUp('customerCount', 50, {
+                    ...options,
+                    startVal: 0,
+                    duration: 2.5,
+                }).start();
+
+                new countUp.CountUp('orderCount', 100, {
+                    ...options,
+                    startVal: 0,
+                    duration: 3,
+                }).start();
+
+                new countUp.CountUp('followerCount', 1, {
+                    ...options,
+                    startVal: 0,
+                    duration: 2,
+                }).start();
+
+                new countUp.CountUp('satisfactionRate', 100, {
+                    ...options,
+                    startVal: 0,
+                    duration: 3.5,
+                }).start();
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        startAnimation();
+                    }
+                });
+            }, {
+                threshold: 0.3
+            });
+
+            if (statsSection) {
+                observer.observe(statsSection);
+            }
+        });
+    </script>
+
+
+
+    <!-- Popüler Hizmetler Section -->
+    <section class="relative py-24 bg-white dark:bg-slate-900">
+        <!-- Background Elements -->
+        <div class="absolute inset-0 -z-10">
+            <div
+                class="absolute inset-0 bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-primary-500/5 via-transparent to-transparent">
+            </div>
+            <div class="absolute w-full h-full opacity-30 dark:opacity-40"
+                style="background-image: url('data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%236366f1' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');">
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 mb-6">
+                    <span class="flex h-2 w-2">
+                        <span
+                            class="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-primary-500 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-primary-500"></span>
+                    </span>
+                    <span class="text-sm font-medium text-primary-600 dark:text-primary-400">En Çok Satanlar</span>
+                </div>
+                <h2 class="text-3xl font-bold mb-4">
+                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-primary-400">
+                        Popüler Hizmetler
+                    </span>
+                </h2>
+            </div>
+
+            <!-- Services Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Instagram Card -->
+                <div class="group relative">
+                    <div
+                        class="absolute inset-0.5 rounded-3xl bg-gradient-to-br from-pink-500 to-violet-500 opacity-10 blur-lg group-hover:opacity-20 transition duration-500">
+                    </div>
+                    <div
+                        class="relative h-full bg-white dark:bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 dark:border-slate-700/50 hover:border-transparent transition-all duration-300">
+                        <!-- Service Icon -->
+                        <div class="mb-6">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-500 to-violet-500 flex items-center justify-center text-white">
+                                <i class="fab fa-instagram text-xl"></i>
+                            </div>
+                        </div>
+
+                        <!-- Service Info -->
+                        <div class="mb-6">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-lg font-semibold text-slate-900 dark:text-white">Instagram Takipçi</h3>
+                                <span
+                                    class="px-2.5 py-1 text-xs font-medium bg-emerald-500/10 text-emerald-500 dark:text-emerald-400 rounded-full">%20
+                                    İndirim</span>
+                            </div>
+                            <p class="text-sm text-slate-600 dark:text-slate-400">Türk - Karışık</p>
+                        </div>
+
+                        <!-- Price -->
+                        <div class="flex items-baseline gap-1 mb-6">
+                            <span class="text-2xl font-bold text-slate-900 dark:text-white">₺29.99</span>
+                            <span class="text-sm text-slate-500 dark:text-slate-400">/1000 takipçi</span>
+                        </div>
+
+                        <!-- Features -->
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-center gap-3 text-sm">
+                                <i class="fas fa-check text-emerald-500"></i>
+                                <span class="text-slate-600 dark:text-slate-400">Kaliteli Hesaplar</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-sm">
+                                <i class="fas fa-check text-emerald-500"></i>
+                                <span class="text-slate-600 dark:text-slate-400">Düşme Garantisi</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-sm">
+                                <i class="fas fa-check text-emerald-500"></i>
+                                <span class="text-slate-600 dark:text-slate-400">Anında Teslimat</span>
+                            </li>
+                        </ul>
+
+                        <!-- Action Button -->
+                        <button
+                            class="w-full py-3 rounded-xl bg-gradient-to-r from-pink-500 to-violet-500 text-white font-medium hover:opacity-90 transition-all duration-300 flex items-center justify-center gap-2">
+                            <span>Sipariş Ver</span>
+                            <i class="fas fa-arrow-right text-sm transition-transform group-hover:translate-x-1"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- TikTok Card -->
+                <div class="group relative">
+                    <div
+                        class="absolute inset-0.5 rounded-3xl bg-gradient-to-br from-cyan-500 to-blue-500 opacity-10 blur-lg group-hover:opacity-20 transition duration-500">
+                    </div>
+                    <div
+                        class="relative h-full bg-white dark:bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 dark:border-slate-700/50 hover:border-transparent transition-all duration-300">
+                        <!-- Service Icon -->
+                        <div class="mb-6">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center text-white">
+                                <i class="fab fa-tiktok text-xl"></i>
+                            </div>
+                        </div>
+
+                        <!-- Service Info -->
+                        <div class="mb-6">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-lg font-semibold text-slate-900 dark:text-white">TikTok İzlenme</h3>
+                                <span
+                                    class="px-2.5 py-1 text-xs font-medium bg-emerald-500/10 text-emerald-500 dark:text-emerald-400 rounded-full">%30
+                                    İndirim</span>
+                            </div>
+                            <p class="text-sm text-slate-600 dark:text-slate-400">Global - Bot</p>
+                        </div>
+
+                        <!-- Price -->
+                        <div class="flex items-baseline gap-1 mb-6">
+                            <span class="text-2xl font-bold text-slate-900 dark:text-white">₺19.99</span>
+                            <span class="text-sm text-slate-500 dark:text-slate-400">/1000 izlenme</span>
+                        </div>
+
+                        <!-- Features -->
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-center gap-3 text-sm">
+                                <i class="fas fa-check text-emerald-500"></i>
+                                <span class="text-slate-600 dark:text-slate-400">Hızlı Teslimat</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-sm">
+                                <i class="fas fa-check text-emerald-500"></i>
+                                <span class="text-slate-600 dark:text-slate-400">Kalıcı İzlenme</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-sm">
+                                <i class="fas fa-check text-emerald-500"></i>
+                                <span class="text-slate-600 dark:text-slate-400">7/24 Destek</span>
+                            </li>
+                        </ul>
+
+                        <!-- Action Button -->
+                        <button
+                            class="w-full py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-medium hover:opacity-90 transition-all duration-300 flex items-center justify-center gap-2">
+                            <span>Sipariş Ver</span>
+                            <i class="fas fa-arrow-right text-sm transition-transform group-hover:translate-x-1"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- YouTube Card -->
+                <div class="group relative">
+                    <div
+                        class="absolute inset-0.5 rounded-3xl bg-gradient-to-br from-red-500 to-orange-500 opacity-10 blur-lg group-hover:opacity-20 transition duration-500">
+                    </div>
+                    <div
+                        class="relative h-full bg-white dark:bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 dark:border-slate-700/50 hover:border-transparent transition-all duration-300">
+                        <!-- Service Icon -->
+                        <div class="mb-6">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center text-white">
+                                <i class="fab fa-youtube text-xl"></i>
+                            </div>
+                        </div>
+
+                        <!-- Service Info -->
+                        <div class="mb-6">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-lg font-semibold text-slate-900 dark:text-white">YouTube İzlenme</h3>
+                                <span
+                                    class="px-2.5 py-1 text-xs font-medium bg-emerald-500/10 text-emerald-500 dark:text-emerald-400 rounded-full">%40
+                                    İndirim</span>
+                            </div>
+                            <p class="text-sm text-slate-600 dark:text-slate-400">Global - Organik</p>
+                        </div>
+
+                        <!-- Price -->
+                        <div class="flex items-baseline gap-1 mb-6">
+                            <span class="text-2xl font-bold text-slate-900 dark:text-white">₺24.99</span>
+                            <span class="text-sm text-slate-500 dark:text-slate-400">/1000 izlenme</span>
+                        </div>
+
+                        <!-- Features -->
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-center gap-3 text-sm">
+                                <i class="fas fa-check text-emerald-500"></i>
+                                <span class="text-slate-600 dark:text-slate-400">Gerçek İzleyiciler</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-sm">
+                                <i class="fas fa-check text-emerald-500"></i>
+                                <span class="text-slate-600 dark:text-slate-400">Kalıcı İzlenme</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-sm">
+                                <i class="fas fa-check text-emerald-500"></i>
+                                <span class="text-slate-600 dark:text-slate-400">Güvenli Hizmet</span>
+                            </li>
+                        </ul>
+
+                        <!-- Action Button -->
+                        <button
+                            class="w-full py-3 rounded-xl bg-gradient-to-r from-red-500 to-orange-500 text-white font-medium hover:opacity-90 transition-all duration-300 flex items-center justify-center gap-2">
+                            <span>Sipariş Ver</span>
+                            <i class="fas fa-arrow-right text-sm transition-transform group-hover:translate-x-1"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- View All Button -->
+            <div class="text-center mt-16">
+                <a href="#services" class="group relative inline-flex">
+                    <div
+                        class="absolute -inset-0.5 rounded-xl bg-gradient-to-r from-primary-500 to-violet-500 opacity-30 blur group-hover:opacity-50 transition duration-500">
+                    </div>
+                    <div class="relative px-8 py-3 bg-white dark:bg-slate-800 rounded-xl flex items-center gap-2">
+                        <span
+                            class="font-medium bg-gradient-to-r from-primary-500 to-violet-500 bg-clip-text text-transparent">Tüm
+                            Hizmetleri Görüntüle</span>
+                        <i
+                            class="fas fa-arrow-right text-sm text-violet-500 transition-transform group-hover:translate-x-1"></i>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Initialize Glide -->
+    <script>
+        new Glide('.glide', {
+            type: 'carousel',
+            startAt: 0,
+            perView: 3,
+            gap: 32,
+            breakpoints: {
+                1024: {
+                    perView: 2
+                },
+                640: {
+                    perView: 1
+                }
+            },
+            autoplay: 5000,
+            hoverpause: true,
+            animationDuration: 800
+        }).mount();
+    </script>
+
+    <!-- Blog Section -->
+    <section class="relative py-24 bg-white dark:bg-slate-900">
+        <!-- Background Elements -->
+        <div class="absolute inset-0 -z-10">
+            <div class="absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-primary-500/5 to-transparent"></div>
+            <div class="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-primary-500/5 to-transparent"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl font-bold mb-4">
+                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-primary-400">
+                        Blog & Haberler
+                    </span>
+                </h2>
+                <p class="text-slate-600 dark:text-slate-400">
+                    Sosyal medya dünyasındaki son gelişmeler ve önemli ipuçları
+                </p>
+            </div>
+
+            <!-- Blog Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Blog Card 1 -->
+                <div
+                    class="group relative bg-white dark:bg-slate-800 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 hover:border-primary-500/50 dark:hover:border-primary-500/50 transition-all duration-300">
+                    <div class="aspect-video overflow-hidden">
+                        <img src="https://images.pexels.com/photos/4549414/pexels-photo-4549414.jpeg?auto=compress&cs=tinysrgb&w=800"
+                            alt="Instagram Marketing"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-4">
+                            <span
+                                class="px-3 py-1 text-xs font-medium bg-primary-500/10 text-primary-600 dark:text-primary-400 rounded-full">Instagram</span>
+                            <span class="text-sm text-slate-500 dark:text-slate-400">5 gün önce</span>
+                        </div>
+                        <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-2 line-clamp-2">
+                            Instagram'ın Yeni Algoritması Nasıl Çalışıyor?
+                        </h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm mb-4 line-clamp-2">
+                            2024 yılında Instagram algoritmasında yapılan değişiklikler ve öne çıkma taktikleri...
+                        </p>
+                        <a href="#"
+                            class="inline-flex items-center gap-2 text-sm font-medium text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300">
+                            Devamını Oku
+                            <i class="fas fa-arrow-right text-xs transition-transform group-hover:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Blog Card 2 -->
+                <div
+                    class="group relative bg-white dark:bg-slate-800 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 hover:border-primary-500/50 dark:hover:border-primary-500/50 transition-all duration-300">
+                    <div class="aspect-video overflow-hidden">
+                        <img src="https://images.pexels.com/photos/6953867/pexels-photo-6953867.jpeg?auto=compress&cs=tinysrgb&w=800"
+                            alt="TikTok Growth"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-4">
+                            <span
+                                class="px-3 py-1 text-xs font-medium bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 rounded-full">TikTok</span>
+                            <span class="text-sm text-slate-500 dark:text-slate-400">3 gün önce</span>
+                        </div>
+                        <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-2 line-clamp-2">
+                            TikTok'ta Viral Olmanın Püf Noktaları
+                        </h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm mb-4 line-clamp-2">
+                            2024'ün en etkili TikTok içerik stratejileri ve trend yakalama taktikleri...
+                        </p>
+                        <a href="#"
+                            class="inline-flex items-center gap-2 text-sm font-medium text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300">
+                            Devamını Oku
+                            <i class="fas fa-arrow-right text-xs transition-transform group-hover:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Blog Card 3 -->
+                <div
+                    class="group relative bg-white dark:bg-slate-800 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 hover:border-primary-500/50 dark:hover:border-primary-500/50 transition-all duration-300">
+                    <div class="aspect-video overflow-hidden">
+                        <img src="https://images.pexels.com/photos/4144923/pexels-photo-4144923.jpeg?auto=compress&cs=tinysrgb&w=800"
+                            alt="YouTube Success"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-4">
+                            <span
+                                class="px-3 py-1 text-xs font-medium bg-red-500/10 text-red-600 dark:text-red-400 rounded-full">YouTube</span>
+                            <span class="text-sm text-slate-500 dark:text-slate-400">1 hafta önce</span>
+                        </div>
+                        <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-2 line-clamp-2">
+                            YouTube SEO: Videolarınızı Üst Sıralara Taşıyın
+                        </h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm mb-4 line-clamp-2">
+                            YouTube arama sonuçlarında üst sıralara çıkmanın etkili yöntemleri...
+                        </p>
+                        <a href="#"
+                            class="inline-flex items-center gap-2 text-sm font-medium text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300">
+                            Devamını Oku
+                            <i class="fas fa-arrow-right text-xs transition-transform group-hover:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tüm Blog Yazıları Butonu -->
+            <div class="text-center mt-12">
+                <a href="#blog"
+                    class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary-500/10 text-primary-600 dark:text-primary-400 hover:bg-primary-500/20 transition-colors">
+                    <span class="font-medium">Tüm Blog Yazıları</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative bg-slate-900 dark:bg-slate-950 text-white pt-16 pb-8">
+        <!-- Background Elements -->
+        <div class="absolute inset-0 -z-10">
+            <div class="absolute inset-0 bg-gradient-to-b from-primary-500/5 to-transparent"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Footer Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <!-- Brand Info -->
+                <div>
+                    <div class="flex items-center gap-2 mb-6">
+                        <div
+                            class="w-8 h-8 rounded-lg bg-gradient-to-tr from-primary-600 to-primary-400 flex items-center justify-center">
+                            <span class="text-white font-bold">S</span>
+                        </div>
+                        <span
+                            class="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary-400 to-primary-600">
+                            SMM Panel
+                        </span>
+                    </div>
+                    <p class="text-slate-400 text-sm mb-6">
+                        En uygun fiyatlarla sosyal medya hizmetleri sunan otomatik panel.
+                    </p>
+                    <!-- Social Links -->
+                    <div class="flex items-center gap-4">
+                        <a href="#" class="text-slate-400 hover:text-white transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-slate-400 hover:text-white transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-slate-400 hover:text-white transition-colors">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="#" class="text-slate-400 hover:text-white transition-colors">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Hızlı Linkler</h4>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="#" class="text-slate-400 hover:text-white transition-colors">Hizmetler</a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-slate-400 hover:text-white transition-colors">Fiyatlar</a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-slate-400 hover:text-white transition-colors">API</a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-slate-400 hover:text-white transition-colors">Blog</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Support -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Destek</h4>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="#" class="text-slate-400 hover:text-white transition-colors">SSS</a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-slate-400 hover:text-white transition-colors">İletişim</a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-slate-400 hover:text-white transition-colors">Kullanım Şartları</a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-slate-400 hover:text-white transition-colors">Gizlilik
+                                Politikası</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">İletişim</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-2 text-slate-400">
+                            <i class="fas fa-phone"></i>
+                            <span>0850 123 45 67</span>
+                        </li>
+                        <li class="flex items-center gap-2 text-slate-400">
+                            <i class="fas fa-envelope"></i>
+                            <span>info@smmpanel.com</span>
+                        </li>
+                        <li class="flex items-center gap-2 text-slate-400">
+                            <i class="fas fa-clock"></i>
+                            <span>7/24 Canlı Destek</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="pt-8 border-t border-slate-800">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                    <p class="text-slate-400 text-sm">
+                        © 2024 SMM Panel. Tüm hakları saklıdır.
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <img src="https://example.com/payment-logos/visa.svg" alt="Visa" class="h-6">
+                        <img src="https://example.com/payment-logos/mastercard.svg" alt="Mastercard" class="h-6">
+                        <img src="https://example.com/payment-logos/paypal.svg" alt="PayPal" class="h-6">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Dark Mode Script -->
+    <script>
+        // Theme toggle functionality
+        const themeToggleBtn = document.getElementById('theme-toggle');
+
+        // Check for saved theme preference or use system preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+
+        // Toggle theme
+        themeToggleBtn.addEventListener('click', () => {
+            const isDark = document.documentElement.classList.toggle('dark');
+            localStorage.theme = isDark ? 'dark' : 'light';
+        });
+    </script>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 z-50 hidden">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm"></div>
+
+        <!-- Menu Content -->
+        <div class="absolute right-0 top-0 h-full w-64 bg-white dark:bg-slate-800 shadow-xl">
+            <div class="p-6">
+                <!-- Close Button -->
+                <button id="close-mobile-menu"
+                    class="absolute top-4 right-4 p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300">
+                    <i class="fas fa-times"></i>
+                </button>
+
+                <!-- Mobile Navigation -->
+                <nav class="mt-8">
+                    <ul class="space-y-4">
+                        <li>
+                            <a href="#services"
+                                class="block text-slate-600 dark:text-slate-400 hover:text-primary-500 dark:hover:text-primary-400">
+                                Hizmetler
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#pricing"
+                                class="block text-slate-600 dark:text-slate-400 hover:text-primary-500 dark:hover:text-primary-400">
+                                Fiyatlar
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#api"
+                                class="block text-slate-600 dark:text-slate-400 hover:text-primary-500 dark:hover:text-primary-400">
+                                API
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#blog"
+                                class="block text-slate-600 dark:text-slate-400 hover:text-primary-500 dark:hover:text-primary-400">
+                                Blog
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <!-- Mobile Actions -->
+                <div class="mt-8 space-y-4">
+                    <a href="#login"
+                        class="block w-full text-center px-4 py-2 text-primary-600 dark:text-primary-400 border border-primary-500/20 rounded-lg">
+                        Giriş Yap
+                    </a>
+                    <a href="#register" class="block w-full text-center px-4 py-2 bg-primary-500 text-white rounded-lg">
+                        Kayıt Ol
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Menu Script -->
+    <script>
+        const mobileMenuBtn = document.querySelector('.md\\:hidden');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMobileMenuBtn = document.getElementById('close-mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        });
+
+        function closeMobileMenu() {
+            mobileMenu.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        closeMobileMenuBtn.addEventListener('click', closeMobileMenu);
+        mobileMenu.querySelector('.absolute.inset-0').addEventListener('click', closeMobileMenu);
+    </script>
+
+    <!-- Scroll to Top Button -->
+    <button id="scroll-to-top"
+        class="fixed bottom-8 right-8 p-3 rounded-full bg-primary-500 text-white shadow-lg opacity-0 invisible transition-all duration-300 hover:bg-primary-600">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        const scrollToTopBtn = document.getElementById('scroll-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.remove('opacity-0', 'invisible');
+            } else {
+                scrollToTopBtn.classList.add('opacity-0', 'invisible');
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+
+    <!-- Loading Spinner -->
+    <div id="loading-spinner" class="fixed inset-0 z-50 flex items-center justify-center bg-white dark:bg-slate-900">
+        <div class="relative w-16 h-16">
+            <div class="absolute inset-0 border-4 border-primary-500/20 rounded-full"></div>
+            <div class="absolute inset-0 border-4 border-primary-500 rounded-full border-t-transparent animate-spin">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('load', () => {
+            const spinner = document.getElementById('loading-spinner');
+            spinner.style.opacity = '0';
+            setTimeout(() => {
+                spinner.style.display = 'none';
+            }, 300);
+        });
+    </script>
+
+    <!-- Notifications Menu Script -->
+    <script>
+        const notificationsButton = document.getElementById('notifications-button');
+        const notificationsMenu = document.getElementById('notifications-menu');
+
+        // Toggle notifications menu
+        notificationsButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            notificationsMenu.classList.toggle('hidden');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!notificationsMenu.contains(e.target) && !notificationsButton.contains(e.target)) {
+                notificationsMenu.classList.add('hidden');
+            }
+        });
+
+        // Prevent menu close when clicking inside
+        notificationsMenu.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        // Close menu on scroll
+        window.addEventListener('scroll', () => {
+            notificationsMenu.classList.add('hidden');
+        });
+    </script>
+</body>
+
+</html>

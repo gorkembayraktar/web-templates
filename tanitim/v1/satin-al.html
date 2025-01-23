@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="tr" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextGen Pro | Satın Al</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.39/dist/lenis.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .gradient-border {
+            position: relative;
+            border-radius: 1rem;
+        }
+
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 1rem;
+            background: linear-gradient(to right, #3B82F6, #8B5CF6);
+            z-index: -1;
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .gradient-border:hover::before {
+            opacity: 1;
+        }
+
+        @media (min-width: 1024px) {
+            #paymentForm {
+                position: sticky;
+                top: 100px;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-xl border-b border-gray-200/50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center space-x-4">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-blue-500/20 blur-xl rounded-full"></div>
+                        <span
+                            class="relative text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">
+                            NextGen
+                        </span>
+                    </div>
+                    <span class="text-blue-600 font-semibold">Pro</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Ana Bölüm -->
+    <main class="pt-24 pb-16">
+        <div class="container mx-auto px-6">
+            <!-- Paketler -->
+            <div id="packagesSection" class="mb-16">
+                <div class="text-center mb-16">
+                    <h1 class="text-4xl font-bold mb-4">NextGen Pro'nuzu Seçin</h1>
+                    <p class="text-gray-600">Size en uygun modeli seçin ve geleceğin teknolojisine sahip olun</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Standart Paket -->
+                    <div class="bg-white p-8 rounded-2xl shadow-lg gradient-border relative overflow-hidden group">
+                        <div class="absolute top-0 right-0 bg-gray-100 px-4 py-2 rounded-bl-2xl text-sm font-medium">
+                            Standart
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">NextGen Pro</h3>
+                        <div class="text-3xl font-bold mb-6">
+                            2.499 TL
+                        </div>
+                        <ul class="space-y-4 mb-8">
+                            <li class="flex items-center gap-3">
+                                <i class="fas fa-check text-green-500"></i>
+                                <span>7/24 Sağlık Takibi</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fas fa-check text-green-500"></i>
+                                <span>30 Gün Pil Ömrü</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fas fa-check text-green-500"></i>
+                                <span>Su Geçirmez (IP68)</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fas fa-check text-green-500"></i>
+                                <span>1 Yıl Garanti</span>
+                            </li>
+                        </ul>
+                        <button onclick="selectPackage('standard', 2499)"
+                            class="w-full bg-gray-900 text-white py-3 rounded-xl hover:bg-gray-800 transition-colors">
+                            Seç
+                        </button>
+                    </div>
+
+                    <!-- Premium Paket -->
+                    <div
+                        class="bg-white p-8 rounded-2xl shadow-lg gradient-border relative overflow-hidden group transform scale-105 border-2 border-blue-500">
+                        <div
+                            class="absolute top-0 right-0 bg-blue-500 text-white px-4 py-2 rounded-bl-2xl text-sm font-medium">
+                            Premium
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">NextGen Pro+</h3>
+                        <div class="text-3xl font-bold mb-6">
+                            3.499 TL
+                        </div>
+                        <ul class="space-y-4 mb-8">
+                            <li class="flex items-center gap-3">
+                                <i class="fas fa-check text-green-500"></i>
+                                <span>Tüm Standart Özellikler</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fas fa-check text-green-500"></i>
+                                <span>EKG Sensörü</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fas fa-check text-green-500"></i>
+                                <span>GPS Takibi</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fas fa-check text-green-500"></i>
+                                <span>2 Yıl Garanti</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fas fa-check text-green-500"></i>
+                                <span>Premium Kayış</span>
+                            </li>
+                        </ul>
+                        <button onclick="selectPackage('premium', 3499)"
+                            class="w-full bg-blue-600 text-white py-3 rounded-xl hover:bg-blue-700 transition-colors">
+                            Seç
+                        </button>
+                    </div>
+
+                    <!-- Ultimate Paket -->
+                    <div class="bg-white p-8 rounded-2xl shadow-lg gradient-border relative overflow-hidden group">
+                        <div
+                            class="absolute top-0 right-0 bg-purple-500 text-white px-4 py-2 rounded-bl-2xl text-sm font-medium">
+                            Ultimate
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">NextGen Pro Max</h3>
+                        <div class="text-3xl font-bold mb-6">
+                            4.999 TL
+                        </div>
+                        <ul class="space-y-4 mb-8">
+                            <li class="flex items-center gap-3">
+                                <i class="fas fa-check text-green-500"></i>
+                                <span>Tüm Premium Özellikler</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fas fa-check text-green-500"></i>
+                                <span>Titanyum Kasa</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fas fa-check text-green-500"></i>
+                                <span>3 Yıl Garanti</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fas fa-check text-green-500"></i>
+                                <span>VIP Destek</span>
+                            </li>
+                        </ul>
+                        <button onclick="selectPackage('ultimate', 4999)"
+                            class="w-full bg-gray-900 text-white py-3 rounded-xl hover:bg-gray-800 transition-colors">
+                            Seç
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seçilen ürün detayı için yeni section -->
+            <div id="selectedPackageSection" class="mb-16 hidden">
+                <div class="bg-white rounded-2xl shadow-lg p-8">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-6">
+                            <div class="w-24 h-24 bg-gray-100 rounded-xl flex items-center justify-center">
+                                <i class="fas fa-watch text-4xl text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-2xl font-bold mb-2" id="selectedProductTitle">NextGen Pro</h2>
+                                <div class="flex items-center gap-4">
+                                    <span class="text-lg font-bold text-blue-600" id="selectedProductPrice">0 TL</span>
+                                    <span class="text-sm text-gray-500" id="selectedProductType">Standart</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button onclick="showPackages()"
+                            class="flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors">
+                            <i class="fas fa-exchange-alt"></i>
+                            <span>Değiştir</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ödeme Formu -->
+            <div id="paymentForm" class="max-w-2xl mx-auto bg-white p-8 rounded-2xl shadow-lg hidden">
+                <!-- Form Steps -->
+                <div class="flex items-center justify-between mb-8">
+                    <div class="flex items-center">
+                        <div
+                            class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold">
+                            1</div>
+                        <div class="ml-3">
+                            <div class="text-sm font-medium text-blue-600">Adım 1</div>
+                            <div class="text-gray-500 text-sm">Kişisel Bilgiler</div>
+                        </div>
+                    </div>
+                    <div class="flex-1 h-0.5 mx-4 bg-gray-200"></div>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center font-bold"
+                            id="step2Circle">2</div>
+                        <div class="ml-3">
+                            <div class="text-sm font-medium text-gray-600">Adım 2</div>
+                            <div class="text-gray-500 text-sm">Teslimat Bilgileri</div>
+                        </div>
+                    </div>
+                    <div class="flex-1 h-0.5 mx-4 bg-gray-200"></div>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center font-bold"
+                            id="step3Circle">3</div>
+                        <div class="ml-3">
+                            <div class="text-sm font-medium text-gray-600">Adım 3</div>
+                            <div class="text-gray-500 text-sm">Ödeme</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Steps Content -->
+                <div class="space-y-8">
+                    <!-- Step 1: Kişisel Bilgiler -->
+                    <div id="step1" class="space-y-6">
+                        <h2 class="text-2xl font-bold mb-6">Kişisel Bilgiler</h2>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Ad*</label>
+                                <input type="text" required
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Soyad*</label>
+                                <input type="text" required
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">E-posta*</label>
+                            <input type="email" required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Telefon*</label>
+                            <input type="tel" required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
+                        </div>
+
+                        <div class="flex justify-end">
+                            <button onclick="nextStep(2)"
+                                class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                İleri
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Teslimat Bilgileri -->
+                    <div id="step2" class="space-y-6 hidden">
+                        <h2 class="text-2xl font-bold mb-6">Teslimat Bilgileri</h2>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Adres Başlığı*</label>
+                            <input type="text" placeholder="Ev, İş vb." required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">İl*</label>
+                                <select name="il" required
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
+                                    <option value="">Seçiniz</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">İlçe*</label>
+                                <select name="ilce" required
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
+                                    <option value="">Seçiniz</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Mahalle*</label>
+                            <input type="text" name="mahalle" required disabled
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Açık Adres*</label>
+                            <textarea rows="3" required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"></textarea>
+                        </div>
+
+                        <div class="flex justify-between">
+                            <button onclick="prevStep(1)"
+                                class="bg-gray-200 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-300 transition-colors">
+                                Geri
+                            </button>
+                            <button onclick="nextStep(3)"
+                                class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                İleri
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Ödeme Bilgileri -->
+                    <div id="step3" class="space-y-6 hidden">
+                        <h2 class="text-2xl font-bold mb-6">Ödeme Bilgileri</h2>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Kart Üzerindeki İsim*</label>
+                            <input type="text" required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Kart Numarası*</label>
+                            <div class="relative">
+                                <input type="text" required placeholder="**** **** **** ****"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
+                                <div
+                                    class="absolute right-4 top-1/2 transform -translate-y-1/2 flex items-center gap-2">
+                                    <i class="fab fa-cc-visa text-gray-400"></i>
+                                    <i class="fab fa-cc-mastercard text-gray-400"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Son Kullanma Tarihi*</label>
+                                <input type="text" required placeholder="AA/YY"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">CVV*</label>
+                                <input type="text" required placeholder="***"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
+                            </div>
+                        </div>
+
+                        <!-- Sipariş Özeti -->
+                        <div class="border-t pt-6">
+                            <h3 class="text-lg font-semibold mb-4">Sipariş Özeti</h3>
+                            <div class="space-y-3">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Ürün</span>
+                                    <span class="font-medium" id="productName">NextGen Pro</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Kargo</span>
+                                    <span class="font-medium">Ücretsiz</span>
+                                </div>
+                                <div class="flex justify-between text-lg font-bold">
+                                    <span>Toplam</span>
+                                    <span id="totalPrice">0 TL</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-between">
+                            <button onclick="prevStep(2)"
+                                class="bg-gray-200 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-300 transition-colors">
+                                Geri
+                            </button>
+                            <button onclick="submitOrder()"
+                                class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                Siparişi Tamamla
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Global değişken olarak currentStep'i tanımlayalım
+        let currentStep = 1;
+
+        // Form validation fonksiyonu
+        function validateForm(form) {
+            const inputs = form.querySelectorAll('input[required], select[required], textarea[required]');
+            let isValid = true;
+
+            inputs.forEach(input => {
+                if (!input.value) {
+                    isValid = false;
+                    input.classList.add('border-red-500');
+                    // Input'a focus olduğunda kırmızı kenarlığı kaldır
+                    input.addEventListener('focus', () => {
+                        input.classList.remove('border-red-500');
+                    });
+                } else {
+                    input.classList.remove('border-red-500');
+                }
+            });
+
+            if (!isValid) {
+                Swal.fire({
+                    title: 'Eksik Bilgi',
+                    text: 'Lütfen tüm zorunlu alanları doldurun.',
+                    icon: 'warning',
+                    confirmButtonText: 'Tamam',
+                    confirmButtonColor: '#3B82F6'
+                });
+            }
+
+            return isValid;
+        }
+
+        function nextStep(step) {
+            const currentForm = document.getElementById(`step${currentStep}`);
+
+            if (!validateForm(currentForm)) return;
+
+            // Mevcut adımı gizle
+            document.getElementById(`step${currentStep}`).classList.add('hidden');
+            // Yeni adımı göster
+            document.getElementById(`step${step}`).classList.remove('hidden');
+            // Yeni adımın göstergesini aktif yap
+            document.getElementById(`step${step}Circle`).classList.remove('bg-gray-200');
+            document.getElementById(`step${step}Circle`).classList.add('bg-blue-600', 'text-white');
+            // Smooth scroll
+            document.getElementById(`step${step}`).scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // Current step'i güncelle
+            currentStep = step;
+        }
+
+        function prevStep(step) {
+            // Mevcut adımı gizle
+            document.getElementById(`step${currentStep}`).classList.add('hidden');
+            // Önceki adımı göster
+            document.getElementById(`step${step}`).classList.remove('hidden');
+            // Mevcut adımın göstergesini pasif yap
+            document.getElementById(`step${currentStep}Circle`).classList.remove('bg-blue-600', 'text-white');
+            document.getElementById(`step${currentStep}Circle`).classList.add('bg-gray-200');
+            // Smooth scroll
+            document.getElementById(`step${step}`).scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // Current step'i güncelle
+            currentStep = step;
+        }
+
+        function submitOrder() {
+            const currentForm = document.getElementById(`step${currentStep}`);
+
+            if (!validateForm(currentForm)) return;
+
+            // Loading göster
+            Swal.fire({
+                title: 'Siparişiniz İşleniyor',
+                html: 'Lütfen bekleyin...',
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+
+            // Simüle edilmiş API çağrısı
+            setTimeout(() => {
+                Swal.fire({
+                    title: 'Başarılı!',
+                    text: 'Siparişiniz başarıyla alındı.',
+                    icon: 'success',
+                    confirmButtonText: 'Tamam',
+                    confirmButtonColor: '#3B82F6',
+                    showConfirmButton: false,
+                    timer: 2000
+                }).then(() => {
+                    window.location.href = 'index.html';
+                });
+            }, 1500);
+        }
+
+        function selectPackage(type, price) {
+            // Ürün seçildiğinde tatlı bir bildirim göster
+            Swal.fire({
+                title: 'Ürün Seçildi!',
+                text: `${type.charAt(0).toUpperCase() + type.slice(1)} paket seçtiniz.`,
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 1500,
+                position: 'top-end',
+                toast: true
+            });
+
+            // Paketler section'ını gizle
+            document.getElementById('packagesSection').classList.add('hidden');
+
+            // Seçilen ürün detayını göster
+            const selectedSection = document.getElementById('selectedPackageSection');
+            selectedSection.classList.remove('hidden');
+
+            // Seçilen ürün bilgilerini güncelle
+            document.getElementById('selectedProductTitle').textContent = `NextGen Pro ${type.charAt(0).toUpperCase() + type.slice(1)}`;
+            document.getElementById('selectedProductPrice').textContent = `${price} TL`;
+            document.getElementById('selectedProductType').textContent = type.charAt(0).toUpperCase() + type.slice(1);
+
+            // Ödeme formunu göster
+            document.getElementById('paymentForm').classList.remove('hidden');
+            // Fiyatı güncelle
+            document.getElementById('totalPrice').textContent = `${price} TL`;
+            // Ürün adını güncelle
+            document.getElementById('productName').textContent = `NextGen Pro ${type.charAt(0).toUpperCase() + type.slice(1)}`;
+            // Forma smooth scroll
+            document.getElementById('paymentForm').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Paketleri tekrar göstermek için yeni fonksiyon
+        function showPackages() {
+            Swal.fire({
+                title: 'Ürün Değiştiriliyor',
+                text: 'Seçiminizi güncelleyebilirsiniz',
+                icon: 'info',
+                showConfirmButton: false,
+                timer: 1500,
+                position: 'top-end',
+                toast: true
+            });
+
+            // Seçili ürün detayını gizle
+            document.getElementById('selectedPackageSection').classList.add('hidden');
+            // Ödeme formunu gizle
+            document.getElementById('paymentForm').classList.add('hidden');
+            // Paketleri göster
+            document.getElementById('packagesSection').classList.remove('hidden');
+            // Sayfa başına scroll
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // İl-İlçe mock data ekleyelim ve select elementlerine name özelliği ekleyelim
+        const ilcelerData = {
+            istanbul: [
+                "Adalar", "Arnavutköy", "Ataşehir", "Avcılar", "Bağcılar", "Bahçelievler", "Bakırköy",
+                "Başakşehir", "Bayrampaşa", "Beşiktaş", "Beykoz", "Beylikdüzü", "Beyoğlu", "Büyükçekmece",
+                "Çatalca", "Çekmeköy", "Esenler", "Esenyurt", "Eyüp", "Fatih", "Gaziosmanpaşa", "Güngören",
+                "Kadıköy", "Kağıthane", "Kartal", "Küçükçekmece", "Maltepe", "Pendik", "Sancaktepe",
+                "Sarıyer", "Silivri", "Sultanbeyli", "Sultangazi", "Şile", "Şişli", "Tuzla", "Ümraniye",
+                "Üsküdar", "Zeytinburnu"
+            ],
+            ankara: [
+                "Akyurt", "Altındağ", "Ayaş", "Bala", "Beypazarı", "Çamlıdere", "Çankaya", "Çubuk",
+                "Elmadağ", "Etimesgut", "Evren", "Gölbaşı", "Güdül", "Haymana", "Kalecik", "Kazan",
+                "Keçiören", "Kızılcahamam", "Mamak", "Nallıhan", "Polatlı", "Pursaklar", "Sincan",
+                "Şereflikoçhisar", "Yenimahalle"
+            ],
+            izmir: [
+                "Aliağa", "Balçova", "Bayındır", "Bayraklı", "Bergama", "Beydağ", "Bornova", "Buca",
+                "Çeşme", "Çiğli", "Dikili", "Foça", "Gaziemir", "Güzelbahçe", "Karabağlar", "Karaburun",
+                "Karşıyaka", "Kemalpaşa", "Kınık", "Kiraz", "Konak", "Menderes", "Menemen", "Narlıdere",
+                "Ödemiş", "Seferihisar", "Selçuk", "Tire", "Torbalı", "Urla"
+            ]
+        };
+
+        // İl select elementini güncelle
+        const ilSelect = document.querySelector('select[name="il"]');
+        ilSelect.innerHTML = `
+            <option value="">Seçiniz</option>
+            <option value="istanbul">İstanbul</option>
+            <option value="ankara">Ankara</option>
+            <option value="izmir">İzmir</option>
+        `;
+
+        // İlçe güncelleme fonksiyonunu güncelle
+        document.querySelector('select[name="il"]')?.addEventListener('change', function (e) {
+            const il = e.target.value;
+            if (!il) return;
+
+            Swal.fire({
+                title: 'İlçeler Yükleniyor',
+                text: 'Lütfen bekleyin...',
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+
+            // İlçeleri güncelle (mock data kullanarak)
+            setTimeout(() => {
+                const ilceSelect = document.querySelector('select[name="ilce"]');
+                const ilceler = ilcelerData[il] || [];
+
+                ilceSelect.innerHTML = `
+                    <option value="">Seçiniz</option>
+                    ${ilceler.map(ilce => `<option value="${ilce.toLowerCase()}">${ilce}</option>`).join('')}
+                `;
+
+                Swal.close();
+            }, 500);
+        });
+
+        // İlçe seçildiğinde mahalle input'unu aktif et
+        document.querySelector('select[name="ilce"]')?.addEventListener('change', function (e) {
+            const mahalleInput = document.querySelector('input[name="mahalle"]');
+            if (e.target.value) {
+                mahalleInput.removeAttribute('disabled');
+            } else {
+                mahalleInput.setAttribute('disabled', 'disabled');
+            }
+        });
+
+        // Kart numarası formatla
+        document.querySelector('input[placeholder="**** **** **** ****"]')?.addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\D/g, '');
+            value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
+            e.target.value = value;
+        });
+
+        // Son kullanma tarihi formatla
+        document.querySelector('input[placeholder="AA/YY"]')?.addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                value = value.slice(0, 2) + '/' + value.slice(2, 4);
+            }
+            e.target.value = value;
+        });
+
+        // CVV sadece rakam
+        document.querySelector('input[placeholder="***"]')?.addEventListener('input', function (e) {
+            e.target.value = e.target.value.replace(/\D/g, '').slice(0, 3);
+        });
+
+        // Lenis smooth scroll
+        const lenis = new Lenis({
+            duration: 0.8,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            orientation: 'vertical',
+            gestureOrientation: 'vertical',
+            smoothWheel: true,
+            wheelMultiplier: 1.5,
+            smoothTouch: false,
+            touchMultiplier: 2,
+            infinite: false,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+
+        requestAnimationFrame(raf);
+    </script>
+</body>
+
+</html>

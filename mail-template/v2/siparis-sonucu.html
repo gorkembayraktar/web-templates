@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sipariş Onayı</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Temel stiller register.html'den alınacak */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f9fafb;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #1f2937;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Header */
+        .header {
+            background: #1e40af;
+            padding: 40px 32px;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Order Success Icon */
+        .success-icon {
+            width: 64px;
+            height: 64px;
+            background: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: #059669;
+            font-size: 32px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .welcome-text {
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            letter-spacing: -0.025em;
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 16px;
+        }
+
+        /* Content */
+        .content {
+            padding: 48px 32px;
+        }
+
+        /* Order Summary */
+        .order-summary {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 32px;
+        }
+
+        .summary-title {
+            font-weight: 600;
+            color: #0f172a;
+            font-size: 18px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .order-number {
+            color: #475569;
+            font-size: 14px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        /* Product List */
+        .product-list {
+            margin-bottom: 32px;
+        }
+
+        .product-item {
+            display: flex;
+            gap: 16px;
+            padding: 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            background: #ffffff;
+        }
+
+        .product-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 6px;
+            object-fit: cover;
+        }
+
+        .product-details {
+            flex: 1;
+        }
+
+        .product-name {
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 4px;
+            font-size: 16px;
+        }
+
+        .product-meta {
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .product-price {
+            font-weight: 600;
+            color: #0f172a;
+            font-size: 16px;
+        }
+
+        /* Price Summary */
+        .price-summary {
+            background: #f0fdf4;
+            border: 1px solid #86efac;
+            border-radius: 8px;
+            padding: 24px;
+            margin-top: 32px;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            color: #047857;
+            font-size: 14px;
+        }
+
+        .price-row.total {
+            font-weight: 600;
+            color: #065f46;
+            font-size: 18px;
+            padding-top: 12px;
+            margin-top: 12px;
+            border-top: 1px solid #d1fae5;
+            margin-bottom: 0;
+        }
+
+        /* Shipping Details */
+        .shipping-details {
+            margin-top: 32px;
+            padding: 24px;
+            background: #f8fafc;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .shipping-title {
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .address-box {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 16px;
+            font-size: 14px;
+            color: #475569;
+            line-height: 1.6;
+        }
+
+        /* Action Button */
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            background: #1e40af;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.2s ease;
+            width: 100%;
+            margin-top: 32px;
+        }
+
+        .button:hover {
+            background: #1e3a8a;
+            transform: translateY(-1px);
+        }
+
+        /* Footer */
+        .footer {
+            background: #f9fafb;
+            padding: 32px;
+            text-align: center;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .footer-text {
+            color: #6b7280;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .footer-links {
+            margin-top: 16px;
+        }
+
+        .footer-links a {
+            color: #1e40af;
+            text-decoration: none;
+            margin: 0 8px;
+            font-size: 14px;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media only screen and (max-width: 600px) {
+            .container {
+                margin: 20px;
+                border-radius: 8px;
+            }
+
+            .content {
+                padding: 32px 24px;
+            }
+
+            .product-item {
+                flex-direction: column;
+            }
+
+            .product-image {
+                width: 100%;
+                height: 200px;
+            }
+
+            .price-row {
+                font-size: 13px;
+            }
+
+            .price-row.total {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="success-icon">
+                <i class="fas fa-check"></i>
+            </div>
+            <div class="welcome-text">Siparişiniz Alındı!</div>
+            <div class="subtitle">Teşekkür ederiz, siparişiniz başarıyla oluşturuldu</div>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Order Summary -->
+            <div class="order-summary">
+                <div class="summary-title">
+                    <i class="fas fa-shopping-bag" style="color: #1e40af;"></i>
+                    Sipariş Özeti
+                </div>
+                <div class="order-number">
+                    Sipariş No: <strong>#ORD-2024-1234</strong><br>
+                    Sipariş Tarihi: 24 Mart 2024
+                </div>
+
+                <!-- Product List -->
+                <div class="product-list">
+                    <div class="product-item">
+                        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRseHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/2wBDAR0XFx4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCADIAMgDASIAAhEBAxEB/8QAHAAAAgIDAQEAAAAAAAAAAAAABQYEBwACAwEI/8QAQBAAAgEDAgQEAwYEBAUDBQAAAQIDAAQRBSEGEjFBEyJRYQcycRQjQoGRoTNSscEVJGLwQ3KC0eEWU/EXY5Ki/8QAGgEAAwEBAQEAAAAAAAAAAAAAAgMEAQUABv/EACURAAICAgICAgIDAQAAAAAAAAABAhEDIRIxBEEiURMyFGFxQv/aAAwDAQACEQMRAD8AuXUbxLWF5ZDhVGTVMcY8ZyXUjQWzlYx3HU0Z+JvEP2eBrWFvvHGDg9BVT20bXEwXBZicADvXN8jK5OkdXxsKirYd0q+vbm7SOOWTLnAKkgD61YVhw1bWiBp2Mr+p6UO4T4Y+wRedxzSEb+1HJpSo2rMEKE7YS5Nk0NlDCgCKAB6VrJsKHXd4kK5Y7+lArvXpGJEI5R60yU0gVFsIz3ccQ3IzQu51SONTk4+tK93ezTn7xjj0rTR7Rr+8QHPIpyxrN5G2qQXGKVsPaJqxuSvhtyp3b0p0iYOgZTkEZBqt0t2guCo+ZDg/SlniLjJuCNWewvxzGMjY9cH0pONcW2x2TvSJHGfFMWgadJKxBlI5Y1PrVBz3c1/dPPMxZ2OSSd6O8V65ca3ftPOcKPljXsBQSOF5zhQcV0sUeMTmZsrlpGAXsKsDgLh/7LCLqZfvJB5c9hWvCXCzTs"
+                            alt="Ürün 1" class="product-image">
+                        <div class="product-details">
+                            <div class="product-name">Premium T-Shirt</div>
+                            <div class="product-meta">Beden: L | Renk: Siyah | Adet: 2</div>
+                            <div class="product-price">₺299.90</div>
+                        </div>
+                    </div>
+
+                    <div class="product-item">
+                        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRseHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/2wBDAR0XFx4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCADIAMgDASIAAhEBAxEB/8QAHAAAAgIDAQEAAAAAAAAAAAAABQYEBwACAwEI/8QAQBAAAgEDAgQEAwYEBAUDBQAAAQIDAAQRBSEGEjFBEyJRYQcycRQjQoGRoTNSscEVJGLwQ3KC0eEWU/EXY5Ki/8QAGgEAAwEBAQEAAAAAAAAAAAAAAgMEAQUABv/EACURAAICAgICAgIDAQAAAAAAAAABAhEDIRIxBEEiURMyFGFxQv/aAAwDAQACEQMRAD8AuXUbxLWF5ZDhVGTVMcY8ZyXUjQWzlYx3HU0Z+JvEP2eBrWFvvHGDg9BVT20bXEwXBZicADvXN8jK5OkdXxsKirYd0q+vbm7SOOWTLnAKkgD61YVhw1bWiBp2Mr+p6UO4T4Y+wRedxzSEb+1HJpSo2rMEKE7YS5Nk0NlDCgCKAB6VrJsKHXd4kK5Y7+lArvXpGJEI5R60yU0gVFsIz3ccQ3IzQu51SONTk4+tK93ezTn7xjj0rTR7Rr+8QHPIpyxrN5G2qQXGKVsPaJqxuSvhtyp3b0p0iYOgZTkEZBqt0t2guCo+ZDg/SlniLjJuCNWewvxzGMjY9cH0pONcW2x2TvSJHGfFMWgadJKxBlI5Y1PrVBz3c1/dPPMxZ2OSSd6O8V65ca3ftPOcKPljXsBQSOF5zhQcV0sUeMTmZsrlpGAXsKsDgLh/7LCLqZfvJB5c9hWvCXCzTs"
+                            alt="Ürün 2" class="product-image">
+                        <div class="product-details">
+                            <div class="product-name">Slim Fit Kot Pantolon</div>
+                            <div class="product-meta">Beden: 32/32 | Renk: Mavi | Adet: 1</div>
+                            <div class="product-price">₺449.90</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Price Summary -->
+                <div class="price-summary">
+                    <div class="price-row">
+                        <span>Ara Toplam</span>
+                        <span>₺1.049,70</span>
+                    </div>
+                    <div class="price-row">
+                        <span>Kargo</span>
+                        <span>₺29,90</span>
+                    </div>
+                    <div class="price-row">
+                        <span>KDV (%18)</span>
+                        <span>₺188,95</span>
+                    </div>
+                    <div class="price-row total">
+                        <span>Toplam</span>
+                        <span>₺1.268,55</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Shipping Details -->
+            <div class="shipping-details">
+                <div class="shipping-title">
+                    <i class="fas fa-truck" style="color: #1e40af;"></i>
+                    Teslimat Bilgileri
+                </div>
+                <div class="address-box">
+                    <strong>Ahmet Yılmaz</strong><br>
+                    Örnek Mahallesi, Test Sokak No:123<br>
+                    Kadıköy, İstanbul, 34700<br>
+                    Telefon: +90 (555) 123 45 67
+                </div>
+            </div>
+
+            <!-- Action Button -->
+            <a href="#" class="button">
+                <i class="fas fa-box" style="margin-right: 8px;"></i>
+                Siparişimi Takip Et
+            </a>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-text">
+                © 2024 Firma Adı. Tüm hakları saklıdır.<br>
+                Bu mail ali@example.com adresine gönderilmiştir.
+            </div>
+            <div class="footer-links">
+                <a href="#">Sipariş Takibi</a>
+                <a href="#">Yardım</a>
+                <a href="#">İletişim</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

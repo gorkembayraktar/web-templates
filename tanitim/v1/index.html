@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="tr" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextGen Pro | Akıllı Saat</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.39/dist/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/split-type"></script>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <style>
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .magnetic {
+            transition: transform 0.3s cubic-bezier(0.33, 1, 0.68, 1);
+        }
+
+        .parallax-bg {
+            transform: translateZ(-10px) scale(2);
+        }
+
+        .gradient-blur {
+            background: radial-gradient(circle at center, rgba(59, 130, 246, 0.1), transparent 70%);
+            filter: blur(60px);
+        }
+
+        .text-gradient {
+            background: linear-gradient(to right, #3B82F6, #8B5CF6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right, #3B82F6, #8B5CF6);
+            transform-origin: 0%;
+            z-index: 1000;
+        }
+
+        .custom-shape {
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+
+        .noise-bg {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.05;
+        }
+
+        /* Yeni Animasyonlar */
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        .hover-glow:hover {
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
+        }
+
+        /* 3D Kart Efekti */
+        .card-3d {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .card-3d-content {
+            transition: transform 0.6s cubic-bezier(0.33, 1, 0.68, 1);
+        }
+
+        .card-3d:hover .card-3d-content {
+            transform: rotateY(10deg) rotateX(5deg);
+        }
+
+        .perspective {
+            perspective: 2000px;
+        }
+
+        .rotate-y-12 {
+            transform: rotateY(12deg);
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Smooth Scroll için CSS optimizasyonu */
+        html {
+            scroll-behavior: auto !important;
+            /* Native smooth scroll'u devre dışı bırak */
+        }
+
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Optimize edilmiş animasyonlar */
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+            will-change: transform, opacity;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Hardware acceleration için */
+        .transform-gpu {
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            perspective: 1000px;
+        }
+
+        .swiper {
+            width: 100%;
+            height: 600px;
+        }
+
+        .swiper-slide {
+            text-align: center;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .swiper-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .swiper-pagination-bullet {
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 1;
+        }
+
+        .swiper-pagination-bullet-active {
+            background: #fff;
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-xl border-b border-gray-200/50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-blue-500/20 blur-xl rounded-full"></div>
+                        <span
+                            class="relative text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">
+                            NextGen
+                        </span>
+                    </div>
+                    <span class="text-blue-600 font-semibold">Pro</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#features"
+                        class="text-gray-600 hover:text-blue-600 transition-all hover:scale-105">Özellikler</a>
+                    <a href="#specs" class="text-gray-600 hover:text-blue-600 transition-all hover:scale-105">Teknik</a>
+                    <a href="#gallery"
+                        class="text-gray-600 hover:text-blue-600 transition-all hover:scale-105">Galeri</a>
+                    <button
+                        class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-2 rounded-full hover:shadow-lg hover:shadow-blue-500/25 transition-all hover:scale-105">
+                        <a href="satin-al.html">Satın Al</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen relative overflow-hidden bg-gradient-to-b from-gray-900 to-gray-800" id="hero">
+        <!-- Dekoratif Elementler -->
+        <div class="absolute inset-0">
+            <div class="absolute inset-0 bg-[url('data:image/svg+xml,...')] opacity-20"></div>
+            <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-500/10 to-purple-500/10"></div>
+            <div class="absolute -top-24 -right-24 w-96 h-96 bg-blue-500/30 rounded-full blur-3xl"></div>
+            <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-purple-500/30 rounded-full blur-3xl"></div>
+        </div>
+
+        <!-- Ana İçerik -->
+        <div class="container mx-auto px-6 relative">
+            <div class="flex min-h-screen items-center">
+                <div class="grid lg:grid-cols-2 gap-16 items-center w-full">
+                    <!-- Sol Taraf - Metin İçeriği -->
+                    <div class="space-y-8 text-center lg:text-left" data-aos="fade-up">
+                        <!-- Badge -->
+                        <div
+                            class="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm border border-white/10 px-4 py-2 rounded-full">
+                            <span class="relative flex h-3 w-3">
+                                <span
+                                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
+                            </span>
+                            <span class="text-white/80 text-sm font-medium">Yeni Nesil Teknoloji</span>
+                        </div>
+
+                        <!-- Başlık -->
+                        <h1 class="text-5xl lg:text-7xl font-bold text-white leading-tight">
+                            Geleceğin <span
+                                class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">Akıllı
+                                Saati</span>
+                            <span class="block mt-2">Bugün Burada</span>
+                        </h1>
+
+                        <!-- Açıklama -->
+                        <p class="text-gray-300 text-lg max-w-xl mx-auto lg:mx-0">
+                            Ultra hafif tasarım, 7/24 sağlık takibi ve 30 gün pil ömrü ile tanışın.
+                            NextGen Pro ile hayatınızı daha akıllı yaşayın.
+                        </p>
+
+                        <!-- Butonlar -->
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                            <a href="satin-al.html" class="group relative px-8 py-4 rounded-full overflow-hidden">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-600 transition-all group-hover:scale-110">
+                                </div>
+                                <span class="relative text-white font-medium">Hemen Satın Al</span>
+                            </a>
+
+                            <button
+                                class="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors">
+                                <span>Daha Fazla Bilgi</span>
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7" />
+                                </svg>
+                            </button>
+                        </div>
+
+                        <!-- İstatistikler -->
+                        <div class="grid grid-cols-3 gap-8 pt-8">
+                            <div class="text-center lg:text-left">
+                                <div
+                                    class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
+                                    30+</div>
+                                <div class="text-sm text-gray-400 mt-1">Gün Pil Ömrü</div>
+                            </div>
+                            <div class="text-center lg:text-left">
+                                <div
+                                    class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
+                                    IP68</div>
+                                <div class="text-sm text-gray-400 mt-1">Su Geçirmez</div>
+                            </div>
+                            <div class="text-center lg:text-left">
+                                <div
+                                    class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
+                                    24/7</div>
+                                <div class="text-sm text-gray-400 mt-1">Sağlık Takibi</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sağ Taraf - Ürün Görseli -->
+                    <div class="relative" data-aos="fade-left">
+                        <div class="card-3d group perspective">
+                            <div class="relative transform transition-all duration-500 group-hover:rotate-y-12">
+                                <div
+                                    class="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-500 blur-xl opacity-50 group-hover:opacity-75 transition-opacity">
+                                </div>
+
+                                <!-- Swiper Slider -->
+                                <div
+                                    class="swiper productSwiper rounded-2xl border border-white/10 backdrop-blur-sm overflow-hidden">
+                                    <div class="swiper-wrapper">
+                                        <div class="swiper-slide">
+                                            <img src="https://images.unsplash.com/photo-1579586337278-3befd40fd17a?auto=format&fit=crop&q=80"
+                                                alt="NextGen Pro 1" class="w-full h-full object-cover">
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?auto=format&fit=crop&q=80"
+                                                alt="NextGen Pro 2" class="w-full h-full object-cover">
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&q=80"
+                                                alt="NextGen Pro 3" class="w-full h-full object-cover">
+                                        </div>
+                                    </div>
+                                    <div class="swiper-pagination"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mevcut floating stats kartları -->
+                        <div
+                            class="absolute top-1/2 -left-8 transform -translate-y-1/2 bg-white/80 backdrop-blur-xl p-4 rounded-xl shadow-lg card-hover">
+                            <div class="text-2xl font-bold text-gradient">30+</div>
+                            <div class="text-sm text-gray-600">Gün Pil Ömrü</div>
+                        </div>
+
+                        <div
+                            class="absolute bottom-1/4 -right-8 bg-white/80 backdrop-blur-xl p-4 rounded-xl shadow-lg card-hover">
+                            <div class="text-2xl font-bold text-gradient">IP68</div>
+                            <div class="text-sm text-gray-600">Su Geçirmez</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+            <div class="flex flex-col items-center gap-2">
+                <span class="text-white/60 text-sm">Scroll</span>
+                <div class="w-6 h-10 rounded-full border-2 border-white/20 flex items-start p-1">
+                    <div class="w-1 h-2 bg-white/60 rounded-full animate-bounce"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Özellikler -->
+    <section class="py-20" id="features">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-4xl font-bold mb-4">Öne Çıkan Özellikler</h2>
+                <p class="text-gray-600">
+                    NextGen Pro ile hayatınızı kolaylaştıran akıllı özellikleri keşfedin
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="feature-card bg-white p-8 rounded-2xl shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1557825835-70d97c4aa567?auto=format&fit=crop&q=80"
+                        alt="Sağlık Takibi" class="w-full h-48 object-cover rounded-xl mb-6">
+                    <h3 class="text-xl font-bold mb-4">Sağlık Takibi</h3>
+                    <p class="text-gray-600">
+                        7/24 kalp ritmi, uyku kalitesi ve stres seviyesi takibi ile sağlığınızı kontrol altında tutun.
+                    </p>
+                </div>
+
+                <div class="feature-card bg-white p-8 rounded-2xl shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&q=80"
+                        alt="Spor Aktiviteleri" class="w-full h-48 object-cover rounded-xl mb-6">
+                    <h3 class="text-xl font-bold mb-4">Spor Aktiviteleri</h3>
+                    <p class="text-gray-600">
+                        20 dakikalık şarj ile 2 günlük kullanım süresi. Toplam 30 gün pil ömrü.
+                    </p>
+                </div>
+
+                <div class="feature-card bg-white p-8 rounded-2xl shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1541534401786-2077eed87a74?auto=format&fit=crop&q=80"
+                        alt="Uyku Takibi" class="w-full h-48 object-cover rounded-xl mb-6">
+                    <h3 class="text-xl font-bold mb-4">Uyku Takibi</h3>
+                    <p class="text-gray-600">
+                        IP68 su geçirmezlik standardı ile yüzme ve dalış aktivitelerinizde güvenle kullanın.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Teknik Özellikler -->
+    <section class="py-20 bg-gray-900 text-white" id="specs">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-4xl font-bold mb-8">Teknik Özellikler</h2>
+                    <div class="space-y-6">
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-400">Ekran</span>
+                            <span class="font-medium">2.5" AMOLED</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-400">Pil Ömrü</span>
+                            <span class="font-medium">30 Gün</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-400">Su Geçirmezlik</span>
+                            <span class="font-medium">IP68</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-400">Sensörler</span>
+                            <span class="font-medium">Kalp Ritmi, SpO2, Jiroskop</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-400">Bağlantı</span>
+                            <span class="font-medium">Bluetooth 5.0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1517420879524-86d64ac2f339?auto=format&fit=crop&q=80"
+                        alt="Teknik Özellikler" class="rounded-2xl w-full object-cover h-[500px]">
+                    <div class="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-transparent rounded-2xl"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galeri -->
+    <section class="py-20" id="gallery">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16">Ürün Galerisi</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="group relative overflow-hidden rounded-2xl">
+                    <img src="https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&q=80"
+                        alt="Galeri 1"
+                        class="w-full h-[500px] object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    </div>
+                </div>
+
+                <div class="group relative overflow-hidden rounded-2xl">
+                    <img src="https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?auto=format&fit=crop&q=80"
+                        alt="Galeri 2"
+                        class="w-full h-[500px] object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    </div>
+                </div>
+
+                <div class="group relative overflow-hidden rounded-2xl">
+                    <img src="https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?auto=format&fit=crop&q=80"
+                        alt="Galeri 3"
+                        class="w-full h-[500px] object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-blue-600 relative overflow-hidden">
+        <div class="absolute inset-0">
+            <img src="https://images.unsplash.com/photo-1557825835-70d97c4aa567?auto=format&fit=crop&q=80"
+                alt="Background" class="w-full h-full object-cover opacity-10">
+        </div>
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold text-white mb-8">Hemen Sipariş Verin</h2>
+            <p class="text-blue-100 mb-8 max-w-2xl mx-auto">
+                NextGen Pro ile geleceğin teknolojisini bugünden yaşamaya başlayın.
+                Sınırlı sayıda ön sipariş fırsatını kaçırmayın.
+            </p>
+            <a href="satin-al.html"
+                class="bg-white text-blue-600 px-8 py-4 rounded-full font-medium hover:bg-blue-50 transition-colors transform hover:scale-105">
+                Şimdi Satın Al
+            </a>
+        </div>
+    </section>
+
+    <script>
+        // Lenis smooth scroll - Optimize edilmiş ayarlar
+        const lenis = new Lenis({
+            duration: 0.8, // Daha hızlı scroll için süreyi düş��rdük
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Smooth easing
+            orientation: 'vertical',
+            gestureOrientation: 'vertical',
+            smoothWheel: true,
+            wheelMultiplier: 1.5, // Wheel hızını artırdık
+            smoothTouch: false, // Touch cihazlarda native scroll
+            touchMultiplier: 2,
+            infinite: false
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+
+        requestAnimationFrame(raf);
+
+        // GSAP Animasyonları - Optimize edilmiş
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Scroll Progress - Daha responsive
+        gsap.to('#scrollProgress', {
+            scaleX: 1,
+            ease: 'none',
+            scrollTrigger: {
+                scrub: 0.1 // Daha hızlı tepki
+            }
+        });
+
+        // Optimize edilmiş animasyonlar
+        gsap.utils.toArray('[data-aos]').forEach(element => {
+            gsap.from(element, {
+                y: 50,
+                opacity: 0,
+                duration: 0.6,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: element,
+                    start: 'top bottom-=100',
+                    toggleActions: 'play none none reverse'
+                }
+            });
+        });
+
+        // Parallax effect - Optimize edilmiş
+        gsap.utils.toArray('.parallax').forEach(element => {
+            gsap.to(element, {
+                y: (i, target) => -ScrollTrigger.maxScroll(window) * target.dataset.speed,
+                ease: 'none',
+                scrollTrigger: {
+                    start: 'top top',
+                    end: 'max',
+                    invalidateOnRefresh: true,
+                    scrub: 0.1 // Daha hızlı tepki
+                }
+            });
+        });
+
+        // Magnetic button effect - Optimize edilmiş
+        const magneticButtons = document.querySelectorAll('.magnetic');
+        magneticButtons.forEach(button => {
+            button.addEventListener('mousemove', magneticMove);
+            button.addEventListener('mouseleave', magneticReset);
+        });
+
+        function magneticMove(event) {
+            const btn = event.currentTarget;
+            const rect = btn.getBoundingClientRect();
+            const x = event.clientX - rect.left - rect.width / 2;
+            const y = event.clientY - rect.top - rect.height / 2;
+
+            gsap.to(btn, {
+                duration: 0.2,
+                x: x * 0.1,
+                y: y * 0.1,
+                ease: 'power2.out'
+            });
+        }
+
+        function magneticReset(event) {
+            const btn = event.currentTarget;
+            gsap.to(btn, {
+                duration: 0.2,
+                x: 0,
+                y: 0,
+                ease: 'power2.out'
+            });
+        }
+
+        // AOS alternatifi - Daha performanslı çözüm
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('[data-aos]').forEach(element => {
+            observer.observe(element);
+        });
+
+        // Scroll event listener - Performans optimizasyonu
+        let scrollTimeout;
+        window.addEventListener('scroll', () => {
+            if (scrollTimeout) {
+                window.cancelAnimationFrame(scrollTimeout);
+            }
+            scrollTimeout = window.requestAnimationFrame(() => {
+                // Scroll işlemleri
+            });
+        }, { passive: true });
+
+        // Swiper initialization
+        const swiper = new Swiper(".productSwiper", {
+            effect: "fade", // Fade efekti
+            loop: true, // Sonsuz döngü
+            autoplay: {
+                delay: 3000, // 3 saniye aralıkla değişim
+                disableOnInteraction: false, // Kullanıcı etkileşiminde durmasın
+            },
+            speed: 1000, // Geçiş süresi
+            fadeEffect: {
+                crossFade: true
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+        });
+    </script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+    </script>
+</body>
+
+</html>

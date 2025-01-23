@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sınav Hazırlık Merkezi | Profesyonel Sınav Hazırlık Kursları</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                        secondary: '#1e40af',
+                        accent: '#3b82f6'
+                    },
+                    animation: {
+                        'bounce-slow': 'bounce 3s linear infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .hover-scale {
+            transition: transform 0.3s ease;
+        }
+
+        .hover-scale:hover {
+            transform: scale(1.05);
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #3b82f6, #1e40af);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .card-shine {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-shine::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.1),
+                    transparent);
+            transform: rotate(45deg);
+            transition: 0.5s;
+            pointer-events: none;
+        }
+
+        .card-shine:hover::before {
+            left: 100%;
+        }
+
+        .mobile-menu {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        .hamburger {
+            cursor: pointer;
+            width: 24px;
+            height: 24px;
+            transition: all 0.25s;
+            position: relative;
+        }
+
+        .hamburger-top,
+        .hamburger-middle,
+        .hamburger-bottom {
+            position: absolute;
+            width: 24px;
+            height: 2px;
+            top: 0;
+            left: 0;
+            background: #ffffff;
+            transform: rotate(0);
+            transition: all 0.5s;
+        }
+
+        .hamburger-middle {
+            transform: translateY(7px);
+        }
+
+        .hamburger-bottom {
+            transform: translateY(14px);
+        }
+
+        .open .hamburger-top {
+            transform: rotate(45deg) translateY(6px) translateX(6px);
+        }
+
+        .open .hamburger-middle {
+            display: none;
+        }
+
+        .open .hamburger-bottom {
+            transform: rotate(-45deg) translateY(6px) translateX(-6px);
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #fff;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .scroll-header {
+            background: rgba(37, 99, 235, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .social-icon {
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px);
+            color: #3b82f6;
+        }
+
+        .footer-link {
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-link::before {
+            content: '→';
+            position: absolute;
+            left: -20px;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .footer-link:hover::before {
+            opacity: 1;
+            left: -15px;
+        }
+
+        .newsletter-input {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-input:focus {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-gray-800">
+    <!-- Enhanced Navbar -->
+    <nav class="fixed w-full z-50 glass-effect transition-all duration-300" id="main-nav">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <a href="#" class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+                        <span class="text-blue-600 text-xl font-bold">SP</span>
+                    </div>
+                    <span class="text-2xl font-bold text-white">SınavPro</span>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#features" class="nav-link text-white hover:text-blue-200 transition">Özellikler</a>
+                    <a href="#courses" class="nav-link text-white hover:text-blue-200 transition">Kurslar</a>
+                    <a href="#stats" class="nav-link text-white hover:text-blue-200 transition">Başarılarımız</a>
+                    <a href="#iletisim" class="nav-link text-white hover:text-blue-200 transition">İletişim</a>
+                    <a href="#iletisim"
+                        class="bg-white text-blue-600 px-6 py-2 rounded-full hover:bg-blue-50 transition duration-300 hover:shadow-lg transform hover:scale-105">
+                        Ücretsiz Danışmanlık
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="menu-btn" class="block md:hidden focus:outline-none" aria-label="Menu">
+                    <div class="hamburger">
+                        <span class="hamburger-top"></span>
+                        <span class="hamburger-middle"></span>
+                        <span class="hamburger-bottom"></span>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <!-- Enhanced Mobile Menu -->
+        <div id="mobile-menu"
+            class="mobile-menu fixed top-0 left-0 w-[80%] h-screen bg-gradient-to-br from-blue-800 to-blue-900 p-10 z-50 md:hidden">
+            <div class="flex flex-col h-full">
+                <div class="flex justify-between items-center mb-8">
+                    <a href="#" class="flex items-center space-x-2">
+                        <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+                            <span class="text-blue-600 text-xl font-bold">SP</span>
+                        </div>
+                        <span class="text-2xl font-bold text-white">SınavPro</span>
+                    </a>
+                    <button id="close-menu" class="text-white text-3xl hover:text-blue-200 transition">&times;</button>
+                </div>
+                <nav class="flex flex-col space-y-6">
+                    <a href="#features"
+                        class="text-white text-lg hover:text-blue-200 transition pl-4 border-l-2 border-transparent hover:border-white">Özellikler</a>
+                    <a href="#courses"
+                        class="text-white text-lg hover:text-blue-200 transition pl-4 border-l-2 border-transparent hover:border-white">Kurslar</a>
+                    <a href="#stats"
+                        class="text-white text-lg hover:text-blue-200 transition pl-4 border-l-2 border-transparent hover:border-white">Başarılarımız</a>
+                    <a href="#iletisim"
+                        class="text-white text-lg hover:text-blue-200 transition pl-4 border-l-2 border-transparent hover:border-white">İletişim</a>
+                </nav>
+                <div class="mt-auto space-y-6">
+                    <a href="#iletisim"
+                        class="block w-full bg-white text-blue-600 px-6 py-3 rounded-full text-center font-semibold hover:bg-blue-50 transition duration-300 transform hover:scale-105">
+                        Ücretsiz Danışmanlık
+                    </a>
+                    <div class="flex justify-center space-x-6">
+                        <a href="#" class="text-white hover:text-blue-200 transition">
+                            <i class="fab fa-facebook text-xl"></i>
+                        </a>
+                        <a href="#" class="text-white hover:text-blue-200 transition">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-white hover:text-blue-200 transition">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-br from-blue-600 via-blue-700 to-blue-900 min-h-screen flex items-center">
+        <div class="absolute inset-0 bg-black/30"></div>
+        <div
+            class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3')] bg-cover bg-center mix-blend-overlay">
+        </div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-3xl mx-auto text-center" data-aos="fade-up">
+                <h1 class="text-6xl md:text-7xl font-bold text-white mb-6 leading-tight">Başarıya Giden Yolda <span
+                        class="text-blue-300">Yanınızdayız</span></h1>
+                <p class="text-xl text-white/90 mb-12">Uzman kadromuz ve modern eğitim yöntemlerimizle hedeflerinize
+                    ulaşmanıza yardımcı oluyoruz.</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#iletisim"
+                        class="inline-block bg-white text-blue-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-blue-50 transition duration-300 hover:shadow-lg hover:scale-105 transform">
+                        Ücretsiz Danışmanlık
+                    </a>
+                    <a href="#courses"
+                        class="inline-block border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 transition duration-300">
+                        Kurslarımız
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <i class="fas fa-chevron-down text-white text-3xl"></i>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-24 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-16 gradient-text" data-aos="fade-up">Neden Bizi Seçmelisiniz?
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition duration-300 card-shine"
+                    data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-blue-600 text-4xl mb-6">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Deneyimli Eğitmenler</h3>
+                    <p class="text-gray-600 leading-relaxed">Alanında uzman ve deneyimli eğitmenlerimizle kaliteli
+                        eğitim garantisi sunuyoruz.</p>
+                </div>
+                <div class="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition duration-300 card-shine"
+                    data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-blue-600 text-4xl mb-6">
+                        <i class="fas fa-book-reader"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Özel Ders İmkanı</h3>
+                    <p class="text-gray-600 leading-relaxed">Birebir özel ders ile kişiye özel eğitim programları ve
+                        maksimum verim.</p>
+                </div>
+                <div class="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition duration-300 card-shine"
+                    data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-blue-600 text-4xl mb-6">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Başarı Takibi</h3>
+                    <p class="text-gray-600 leading-relaxed">Düzenli deneme sınavları ve detaylı başarı analizleri ile
+                        sürekli gelişim.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section id="courses" class="py-24">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-16 gradient-text" data-aos="fade-up">Sınav Hazırlık
+                Programlarımız</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300 hover-scale"
+                    data-aos="fade-up" data-aos-delay="100">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3"
+                            class="w-full h-56 object-cover" alt="YKS Hazırlık">
+                        <div class="absolute top-4 right-4 bg-blue-600 text-white px-4 py-2 rounded-full text-sm">
+                            Popüler
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-4">YKS Hazırlık</h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed">TYT ve AYT için kapsamlı hazırlık programları ve
+                            özel çalışma planları.</p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm">TYT</span>
+                            <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm">AYT</span>
+                            <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm">Deneme
+                                Sınavları</span>
+                        </div>
+                        <a href="#"
+                            class="inline-block bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition duration-300 w-full text-center">
+                            Detaylı Bilgi
+                        </a>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300 hover-scale"
+                    data-aos="fade-up" data-aos-delay="200">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3"
+                            class="w-full h-56 object-cover" alt="LGS Hazırlık">
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-4">LGS Hazırlık</h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed">Liselere geçiş sınavına özel hazırlık programı ve
+                            sürekli destek.</p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm">Konu Anlatımı</span>
+                            <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm">Soru Çözümü</span>
+                            <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm">Online Destek</span>
+                        </div>
+                        <a href="#"
+                            class="inline-block bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition duration-300 w-full text-center">
+                            Detaylı Bilgi
+                        </a>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300 hover-scale"
+                    data-aos="fade-up" data-aos-delay="300">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3"
+                            class="w-full h-56 object-cover" alt="KPSS Hazırlık">
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-4">KPSS Hazırlık</h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed">Memurluğa hazırlık için özel programlar ve güncel
+                            müfredat takibi.</p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm">Genel Kültür</span>
+                            <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm">Genel Yetenek</span>
+                            <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm">Alan Bilgisi</span>
+                        </div>
+                        <a href="#"
+                            class="inline-block bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition duration-300 w-full text-center">
+                            Detaylı Bilgi
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section id="stats" class="py-24 bg-gradient-to-br from-blue-600 to-blue-900 relative overflow-hidden">
+        <div class="absolute inset-0 bg-blue-900/50"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="text-center" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-5xl font-bold text-white mb-2">1000+</div>
+                    <div class="text-blue-200">Başarılı Öğrenci</div>
+                </div>
+                <div class="text-center" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-5xl font-bold text-white mb-2">50+</div>
+                    <div class="text-blue-200">Uzman Eğitmen</div>
+                </div>
+                <div class="text-center" data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-5xl font-bold text-white mb-2">15</div>
+                    <div class="text-blue-200">Yıllık Deneyim</div>
+                </div>
+                <div class="text-center" data-aos="fade-up" data-aos-delay="400">
+                    <div class="text-5xl font-bold text-white mb-2">98%</div>
+                    <div class="text-blue-200">Memnuniyet Oranı</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="iletisim" class="py-24 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-4xl font-bold text-center mb-16 gradient-text" data-aos="fade-up">Ücretsiz Danışmanlık
+                    İçin Bize Ulaşın</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition duration-300 text-center card-shine"
+                        data-aos="fade-up" data-aos-delay="100">
+                        <div class="text-blue-600 text-3xl mb-4">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Telefon</h3>
+                        <p class="text-gray-600">0 (212) 123 45 67</p>
+                    </div>
+                    <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition duration-300 text-center card-shine"
+                        data-aos="fade-up" data-aos-delay="200">
+                        <div class="text-blue-600 text-3xl mb-4">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">E-posta</h3>
+                        <p class="text-gray-600">info@sinavhazirlik.com</p>
+                    </div>
+                    <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition duration-300 text-center card-shine"
+                        data-aos="fade-up" data-aos-delay="300">
+                        <div class="text-blue-600 text-3xl mb-4">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Adres</h3>
+                        <p class="text-gray-600">İstanbul, Türkiye</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Footer -->
+    <footer class="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-16">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-12">
+                <div class="md:col-span-4">
+                    <div class="flex items-center space-x-2 mb-6">
+                        <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+                            <span class="text-blue-600 text-xl font-bold">SP</span>
+                        </div>
+                        <span class="text-2xl font-bold">SınavPro</span>
+                    </div>
+                    <p class="text-gray-400 mb-6">Başarıya giden yolda profesyonel eğitim desteği. Uzman kadromuz ve
+                        modern eğitim yöntemlerimizle yanınızdayız.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="social-icon text-gray-400 hover:text-white transition">
+                            <i class="fab fa-facebook text-xl"></i>
+                        </a>
+                        <a href="#" class="social-icon text-gray-400 hover:text-white transition">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="social-icon text-gray-400 hover:text-white transition">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                        <a href="#" class="social-icon text-gray-400 hover:text-white transition">
+                            <i class="fab fa-linkedin text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="md:col-span-2">
+                    <h4 class="text-lg font-semibold mb-6">Hızlı Bağlantılar</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#features"
+                                class="footer-link text-gray-400 hover:text-white transition pl-5">Özellikler</a></li>
+                        <li><a href="#courses"
+                                class="footer-link text-gray-400 hover:text-white transition pl-5">Kurslar</a></li>
+                        <li><a href="#stats"
+                                class="footer-link text-gray-400 hover:text-white transition pl-5">Başarılarımız</a>
+                        </li>
+                        <li><a href="#iletisim"
+                                class="footer-link text-gray-400 hover:text-white transition pl-5">İletişim</a></li>
+                    </ul>
+                </div>
+                <div class="md:col-span-3">
+                    <h4 class="text-lg font-semibold mb-6">İletişim</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-center space-x-3 text-gray-400">
+                            <div class="w-8 h-8 bg-blue-600/10 rounded-full flex items-center justify-center">
+                                <i class="fas fa-phone text-blue-500"></i>
+                            </div>
+                            <span>0 (212) 123 45 67</span>
+                        </li>
+                        <li class="flex items-center space-x-3 text-gray-400">
+                            <div class="w-8 h-8 bg-blue-600/10 rounded-full flex items-center justify-center">
+                                <i class="fas fa-envelope text-blue-500"></i>
+                            </div>
+                            <span>info@sinavhazirlik.com</span>
+                        </li>
+                        <li class="flex items-center space-x-3 text-gray-400">
+                            <div class="w-8 h-8 bg-blue-600/10 rounded-full flex items-center justify-center">
+                                <i class="fas fa-map-marker-alt text-blue-500"></i>
+                            </div>
+                            <span>İstanbul, Türkiye</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="md:col-span-3">
+                    <h4 class="text-lg font-semibold mb-6">Bültenimize Katılın</h4>
+                    <p class="text-gray-400 mb-4">En son haberler ve güncellemeler için bültenimize abone olun.</p>
+                    <form class="space-y-3">
+                        <input type="email" placeholder="E-posta adresiniz"
+                            class="newsletter-input w-full px-4 py-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <button type="submit"
+                            class="w-full bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300 transform hover:scale-105">
+                            Abone Ol
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 mb-4 md:mb-0">&copy; 2024 SınavPro. Tüm hakları saklıdır.</p>
+                    <div class="flex space-x-6">
+                        <a href="#" class="text-gray-400 hover:text-white transition">Gizlilik Politikası</a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">Kullanım Şartları</a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">KVKK</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function () {
+            const nav = document.getElementById('main-nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scroll-header');
+            } else {
+                nav.classList.remove('scroll-header');
+            }
+        });
+
+        // Mobile Menu Functionality
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMenu = document.getElementById('close-menu');
+        const mobileMenuLinks = document.querySelectorAll('#mobile-menu a');
+
+        function toggleMenu() {
+            menuBtn.classList.toggle('open');
+            mobileMenu.classList.toggle('active');
+            document.body.classList.toggle('overflow-hidden');
+        }
+
+        menuBtn.addEventListener('click', toggleMenu);
+        closeMenu.addEventListener('click', toggleMenu);
+
+        // Close menu when clicking on links
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                toggleMenu();
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (mobileMenu.classList.contains('active') &&
+                !mobileMenu.contains(e.target) &&
+                !menuBtn.contains(e.target)) {
+                toggleMenu();
+            }
+        });
+    </script>
+</body>
+
+</html>

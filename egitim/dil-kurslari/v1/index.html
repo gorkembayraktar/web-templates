@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="tr" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Dil Kursu - Profesyonel Dil Eğitimi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="font-sans">
+    <!-- Top Bar -->
+    <div class="bg-gray-900 text-white py-2">
+        <div class="max-w-7xl mx-auto px-4 flex justify-between items-center text-sm">
+            <div class="flex items-center space-x-4">
+                <a href="tel:+902121234567" class="hover:text-blue-400 flex items-center">
+                    <i class="fas fa-phone mr-2"></i>
+                    +90 (212) 123 45 67
+                </a>
+                <a href="mailto:info@globaldil.com" class="hover:text-blue-400 hidden sm:flex items-center">
+                    <i class="fas fa-envelope mr-2"></i>
+                    info@globaldil.com
+                </a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div class="relative group">
+                    <button class="flex items-center hover:text-blue-400">
+                        <i class="fas fa-globe mr-1"></i>
+                        TR
+                        <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                    </button>
+                    <div
+                        class="absolute right-0 mt-2 w-32 bg-white rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-t-lg">English</a>
+                        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Deutsch</a>
+                        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-b-lg">Español</a>
+                    </div>
+                </div>
+                <a href="#" class="hover:text-blue-400">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="hover:text-blue-400">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="hover:text-blue-400">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation -->
+    <nav class="bg-white/95 backdrop-blur-md shadow-lg fixed w-full z-40 sticky top-0">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="#" class="flex items-center space-x-2 group">
+                        <div
+                            class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-300">
+                            <i class="fas fa-graduation-cap text-2xl text-white"></i>
+                        </div>
+                        <div>
+                            <span
+                                class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Global</span>
+                            <span class="text-2xl font-bold text-gray-700">Dil</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden lg:flex items-center space-x-8">
+                    <div class="flex items-baseline space-x-6">
+                        <a href="#home"
+                            class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200 border-b-2 border-transparent hover:border-blue-600">Ana
+                            Sayfa</a>
+                        <div class="relative group">
+                            <button
+                                class="text-gray-700 group-hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200 flex items-center border-b-2 border-transparent group-hover:border-blue-600">
+                                Kurslar
+                                <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                            </button>
+                            <div
+                                class="absolute left-0 mt-2 w-56 bg-white rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                                <a href="#"
+                                    class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-t-lg">
+                                    <i class="fas fa-graduation-cap mr-2"></i>
+                                    İngilizce Kursu
+                                </a>
+                                <a href="#"
+                                    class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">
+                                    <i class="fas fa-language mr-2"></i>
+                                    Almanca Kursu
+                                </a>
+                                <a href="#"
+                                    class="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-b-lg">
+                                    <i class="fas fa-globe mr-2"></i>
+                                    İspanyolca Kursu
+                                </a>
+                            </div>
+                        </div>
+                        <a href="#teachers"
+                            class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200 border-b-2 border-transparent hover:border-blue-600">Eğitmenler</a>
+                        <a href="#success"
+                            class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200 border-b-2 border-transparent hover:border-blue-600">Başarı
+                            Hikayeleri</a>
+                    </div>
+
+                    <div class="flex items-center space-x-4">
+                        <div class="relative">
+                            <input type="text" placeholder="Kurs ara..."
+                                class="w-40 px-4 py-2 rounded-full text-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <button class="absolute right-3 top-2.5 text-gray-400 hover:text-blue-600">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                        <a href="#contact"
+                            class="bg-blue-600 text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-blue-700 transition-colors duration-200 flex items-center">
+                            <i class="fas fa-calendar-alt mr-2"></i>
+                            Ücretsiz Danışmanlık
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="lg:hidden flex items-center space-x-4">
+                    <button type="button" class="text-gray-700 hover:text-blue-600">
+                        <i class="fas fa-search text-xl"></i>
+                    </button>
+                    <button type="button" onclick="toggleMobileMenu()" class="text-gray-700 hover:text-blue-600">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="hidden lg:hidden pb-6">
+                <div class="flex flex-col space-y-3">
+                    <div class="px-3 py-2">
+                        <input type="text" placeholder="Kurs ara..."
+                            class="w-full px-4 py-2 rounded-lg text-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                    <a href="#home"
+                        class="text-gray-700 hover:text-blue-600 hover:bg-blue-50 px-3 py-2 rounded-md text-sm font-medium">Ana
+                        Sayfa</a>
+                    <div class="relative">
+                        <button onclick="toggleMobileSubmenu()"
+                            class="w-full text-left text-gray-700 hover:text-blue-600 hover:bg-blue-50 px-3 py-2 rounded-md text-sm font-medium flex justify-between items-center">
+                            Kurslar
+                            <i class="fas fa-chevron-down text-xs"></i>
+                        </button>
+                        <div id="mobileSubmenu" class="hidden pl-4 space-y-2 mt-2">
+                            <a href="#"
+                                class="block text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">İngilizce
+                                Kursu</a>
+                            <a href="#"
+                                class="block text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Almanca
+                                Kursu</a>
+                            <a href="#"
+                                class="block text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">İspanyolca
+                                Kursu</a>
+                        </div>
+                    </div>
+                    <a href="#teachers"
+                        class="text-gray-700 hover:text-blue-600 hover:bg-blue-50 px-3 py-2 rounded-md text-sm font-medium">Eğitmenler</a>
+                    <a href="#success"
+                        class="text-gray-700 hover:text-blue-600 hover:bg-blue-50 px-3 py-2 rounded-md text-sm font-medium">Başarı
+                        Hikayeleri</a>
+                    <a href="#contact"
+                        class="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium text-center hover:bg-blue-700">Ücretsiz
+                        Danışmanlık</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <script>
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        function toggleMobileSubmenu() {
+            const mobileSubmenu = document.getElementById('mobileSubmenu');
+            mobileSubmenu.classList.toggle('hidden');
+        }
+
+        // Mobil menüyü kapatmak için link tıklamalarını dinle
+        document.querySelectorAll('#mobileMenu a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('mobileMenu').classList.add('hidden');
+            });
+        });
+    </script>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative pt-20 overflow-hidden">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-white z-0"></div>
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\" 60\" height=\"60\" viewBox=\"0 0 60
+            60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg
+            fill=\"%234a90e2\" fill-opacity=\"0.05\"%3E%3Cpath d=\"M36
+            34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6
+            4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-50 z-0"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="py-20 lg:py-32">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="text-center lg:text-left">
+                        <h1 class="text-4xl lg:text-6xl font-bold mb-6">
+                            <span class="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Dil
+                                Öğrenmenin</span>
+                            <br>Modern Yolu
+                        </h1>
+                        <p class="text-gray-600 text-lg mb-8 max-w-xl mx-auto lg:mx-0">
+                            20 yıllık tecrübemiz ve uzman kadromuzla, sizin için en etkili dil eğitim programlarını
+                            sunuyoruz.
+                            TOEFL, IELTS ve TestDaF sınavlarında %95 başarı oranı.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                            <a href="#contact"
+                                class="bg-blue-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-blue-700 transition duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                                Ücretsiz Seviye Tespit Sınavı
+                            </a>
+                            <a href="#courses"
+                                class="bg-white text-blue-600 px-8 py-4 rounded-full font-semibold hover:bg-gray-50 transition duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 border-2 border-blue-600">
+                                Kursları İncele
+                            </a>
+                        </div>
+
+                        <!-- Stats -->
+                        <div class="mt-12 grid grid-cols-3 gap-8 max-w-2xl mx-auto lg:mx-0">
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-blue-600">20+</div>
+                                <div class="text-gray-600 text-sm">Yıllık Tecrübe</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-blue-600">50K+</div>
+                                <div class="text-gray-600 text-sm">Mezun Öğrenci</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-blue-600">%95</div>
+                                <div class="text-gray-600 text-sm">Başarı Oranı</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative hidden lg:block">
+                        <div class="absolute -inset-4 bg-blue-100 rounded-full blur-3xl opacity-30"></div>
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f" alt="Dil Eğitimi"
+                            class="rounded-3xl shadow-2xl transform -rotate-2 hover:rotate-0 transition-transform duration-500">
+                        <!-- Floating Elements -->
+                        <div class="absolute top-10 -left-10 bg-white p-4 rounded-xl shadow-lg transform -rotate-6">
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <span class="font-semibold">4.9/5 Öğrenci Memnuniyeti</span>
+                            </div>
+                        </div>
+                        <div class="absolute bottom-10 -right-10 bg-white p-4 rounded-xl shadow-lg transform rotate-6">
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-certificate text-blue-600"></i>
+                                <span class="font-semibold">Sertifikalı Eğitim</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section id="courses" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-12">Kurs Programlarımız</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- İngilizce Kursu -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="p-6">
+                        <div class="text-4xl text-blue-600 mb-4"><i class="fas fa-graduation-cap"></i></div>
+                        <h3 class="text-xl font-semibold mb-2">İngilizce</h3>
+                        <p class="text-gray-600 mb-4">A1'den C2'ye kadar tüm seviyelerde İngilizce eğitimi.</p>
+                        <ul class="text-gray-600 mb-6">
+                            <li class="mb-2"><i class="fas fa-check text-green-500 mr-2"></i>Konuşma Pratiği</li>
+                            <li class="mb-2"><i class="fas fa-check text-green-500 mr-2"></i>İş İngilizcesi</li>
+                            <li class="mb-2"><i class="fas fa-check text-green-500 mr-2"></i>TOEFL & IELTS</li>
+                        </ul>
+                        <a href="#contact"
+                            class="block text-center bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700">Detaylı
+                            Bilgi</a>
+                    </div>
+                </div>
+
+                <!-- Almanca Kursu -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="p-6">
+                        <div class="text-4xl text-blue-600 mb-4"><i class="fas fa-language"></i></div>
+                        <h3 class="text-xl font-semibold mb-2">Almanca</h3>
+                        <p class="text-gray-600 mb-4">Temel seviyeden ileri seviyeye Almanca eğitimi.</p>
+                        <ul class="text-gray-600 mb-6">
+                            <li class="mb-2"><i class="fas fa-check text-green-500 mr-2"></i>Günlük Konuşma</li>
+                            <li class="mb-2"><i class="fas fa-check text-green-500 mr-2"></i>TestDaF Hazırlık</li>
+                            <li class="mb-2"><i class="fas fa-check text-green-500 mr-2"></i>Sertifika Programı</li>
+                        </ul>
+                        <a href="#contact"
+                            class="block text-center bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700">Detaylı
+                            Bilgi</a>
+                    </div>
+                </div>
+
+                <!-- İspanyolca Kursu -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="p-6">
+                        <div class="text-4xl text-blue-600 mb-4"><i class="fas fa-globe"></i></div>
+                        <h3 class="text-xl font-semibold mb-2">İspanyolca</h3>
+                        <p class="text-gray-600 mb-4">Hızlı ve etkili İspanyolca öğrenme programı.</p>
+                        <ul class="text-gray-600 mb-6">
+                            <li class="mb-2"><i class="fas fa-check text-green-500 mr-2"></i>Temel İspanyolca</li>
+                            <li class="mb-2"><i class="fas fa-check text-green-500 mr-2"></i>Konuşma Kulübü</li>
+                            <li class="mb-2"><i class="fas fa-check text-green-500 mr-2"></i>DELE Hazırlık</li>
+                        </ul>
+                        <a href="#contact"
+                            class="block text-center bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700">Detaylı
+                            Bilgi</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Teachers Section -->
+    <section id="teachers" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-12">Uzman Eğitmen Kadromuz</h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Eğitmen 1 -->
+                <div class="text-center">
+                    <div class="w-48 h-48 mx-auto rounded-full overflow-hidden mb-4">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330" alt="Eğitmen"
+                            class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-semibold">Sarah Johnson</h3>
+                    <p class="text-gray-600">İngilizce Eğitmeni</p>
+                </div>
+                <!-- Eğitmen 2 -->
+                <div class="text-center">
+                    <div class="w-48 h-48 mx-auto rounded-full overflow-hidden mb-4">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e" alt="Eğitmen"
+                            class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-semibold">Michael Schmidt</h3>
+                    <p class="text-gray-600">Almanca Eğitmeni</p>
+                </div>
+                <!-- Eğitmen 3 -->
+                <div class="text-center">
+                    <div class="w-48 h-48 mx-auto rounded-full overflow-hidden mb-4">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80" alt="Eğitmen"
+                            class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-semibold">Isabella Garcia</h3>
+                    <p class="text-gray-600">İspanyolca Eğitmeni</p>
+                </div>
+                <!-- Eğitmen 4 -->
+                <div class="text-center">
+                    <div class="w-48 h-48 mx-auto rounded-full overflow-hidden mb-4">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e" alt="Eğitmen"
+                            class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-semibold">David Wilson</h3>
+                    <p class="text-gray-600">TOEFL Uzmanı</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Stories -->
+    <section id="success" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-12">Başarı Hikayeleri</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Hikaye 1 -->
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde" alt="Öğrenci"
+                            class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h3 class="font-semibold">Ahmet Yılmaz</h3>
+                            <p class="text-gray-600 text-sm">İngilizce B2 Seviyesi</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"6 ay gibi kısa bir sürede B2 seviyesine ulaştım. Eğitmenlerimizin desteği
+                        ve sistemli çalışma programı sayesinde hedefime ulaştım."</p>
+                </div>
+                <!-- Hikaye 2 -->
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <img src="https://images.unsplash.com/photo-1527980965255-d3b416303d12" alt="Öğrenci"
+                            class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h3 class="font-semibold">Ayşe Kaya</h3>
+                            <p class="text-gray-600 text-sm">Almanca A2 Seviyesi</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"Sıfırdan başladığım Almanca eğitiminde 3 ay gibi kısa bir sürede A2
+                        seviyesine ulaştım. Harika bir deneyimdi!"</p>
+                </div>
+                <!-- Hikaye 3 -->
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2" alt="Öğrenci"
+                            class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h3 class="font-semibold">Mehmet Demir</h3>
+                            <p class="text-gray-600 text-sm">TOEFL 105 Puan</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"TOEFL hazırlık programı sayesinde hedeflediğim puanın üzerine çıktım. Özel
+                        ders programı tam ihtiyacıma yönelikti."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 relative overflow-hidden">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 bg-gradient-to-br from-gray-50 to-white"></div>
+        <div
+            class="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:16px_16px]">
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">İletişime Geçin</h2>
+                <p class="text-gray-600">Size en uygun dil eğitim programını birlikte belirleyelim.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Contact Info -->
+                <div class="lg:col-span-1 bg-white rounded-2xl shadow-lg p-8">
+                    <div class="space-y-8">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-6 flex items-center">
+                                <i class="fas fa-map-marker-alt text-blue-600 mr-2"></i>
+                                Lokasyon
+                            </h3>
+                            <p class="text-gray-600">Merkez Mah. Atatürk Cad. No:123</p>
+                            <p class="text-gray-600">Şişli / İstanbul</p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-6 flex items-center">
+                                <i class="fas fa-clock text-blue-600 mr-2"></i>
+                                Çalışma Saatleri
+                            </h3>
+                            <div class="space-y-2">
+                                <div class="flex justify-between text-gray-600">
+                                    <span>Pazartesi - Cuma:</span>
+                                    <span>09:00 - 21:00</span>
+                                </div>
+                                <div class="flex justify-between text-gray-600">
+                                    <span>Cumartesi:</span>
+                                    <span>10:00 - 17:00</span>
+                                </div>
+                                <div class="flex justify-between text-gray-600">
+                                    <span>Pazar:</span>
+                                    <span>Kapalı</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-6 flex items-center">
+                                <i class="fas fa-phone text-blue-600 mr-2"></i>
+                                İletişim
+                            </h3>
+                            <div class="space-y-3">
+                                <a href="tel:+902121234567"
+                                    class="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+                                    <i class="fas fa-phone-alt mr-2"></i>
+                                    +90 (212) 123 45 67
+                                </a>
+                                <a href="tel:+905301234567"
+                                    class="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+                                    <i class="fas fa-mobile-alt mr-2"></i>
+                                    +90 (530) 123 45 67
+                                </a>
+                                <a href="mailto:info@globaldil.com"
+                                    class="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+                                    <i class="fas fa-envelope mr-2"></i>
+                                    info@globaldil.com
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="lg:col-span-2 bg-white rounded-2xl shadow-lg p-8">
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2" for="name">Ad Soyad</label>
+                                <input type="text" id="name"
+                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                                    placeholder="Adınız Soyadınız">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2" for="phone">Telefon</label>
+                                <input type="tel" id="phone"
+                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                                    placeholder="(5XX) XXX XX XX">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2" for="email">E-posta</label>
+                            <input type="email" id="email"
+                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                                placeholder="ornek@email.com">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2" for="course">İlgilendiğiniz Kurs</label>
+                            <select id="course"
+                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
+                                <option value="">Seçiniz</option>
+                                <option value="english">İngilizce</option>
+                                <option value="german">Almanca</option>
+                                <option value="spanish">İspanyolca</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2" for="message">Mesajınız</label>
+                            <textarea id="message" rows="4"
+                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                                placeholder="Mesajınızı yazın..."></textarea>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="consent"
+                                class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                            <label for="consent" class="ml-2 text-sm text-gray-600">
+                                Kişisel verilerimin işlenmesine izin veriyorum.
+                            </label>
+                        </div>
+                        <button type="submit"
+                            class="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-blue-700 transition-colors duration-300 flex items-center justify-center space-x-2">
+                            <span>Gönder</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="h-96 relative">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3008.232948447795!2d28.987875815413716!3d41.03727997929828!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cab7650656bd63%3A0x8ca058b28c20b6c3!2zxZ5pxZ9saSwgxLBzdGFuYnVs!5e0!3m2!1str!2str!4v1635000000000!5m2!1str!2str"
+            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" class="filter grayscale">
+        </iframe>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white">
+        <!-- Footer Top -->
+        <div class="border-b border-gray-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                    <!-- Company Info -->
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-graduation-cap text-2xl text-white"></i>
+                            </div>
+                            <div>
+                                <span
+                                    class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">Global</span>
+                                <span class="text-2xl font-bold text-white">Dil</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-400 text-sm">20 yıllık tecrübemizle, profesyonel dil eğitiminde Türkiye'nin
+                            önde gelen kurumlarından biriyiz.</p>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Quick Links -->
+                    <div>
+                        <h3 class="text-lg font-semibold mb-6">Hızlı Bağlantılar</h3>
+                        <ul class="space-y-4">
+                            <li>
+                                <a href="#" class="text-gray-400 hover:text-white transition-colors flex items-center">
+                                    <i class="fas fa-chevron-right text-xs mr-2"></i>
+                                    Hakkımızda
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-gray-400 hover:text-white transition-colors flex items-center">
+                                    <i class="fas fa-chevron-right text-xs mr-2"></i>
+                                    Kurslarımız
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-gray-400 hover:text-white transition-colors flex items-center">
+                                    <i class="fas fa-chevron-right text-xs mr-2"></i>
+                                    Eğitmenlerimiz
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-gray-400 hover:text-white transition-colors flex items-center">
+                                    <i class="fas fa-chevron-right text-xs mr-2"></i>
+                                    Blog
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-gray-400 hover:text-white transition-colors flex items-center">
+                                    <i class="fas fa-chevron-right text-xs mr-2"></i>
+                                    İletişim
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Courses -->
+                    <div>
+                        <h3 class="text-lg font-semibold mb-6">Kurslarımız</h3>
+                        <ul class="space-y-4">
+                            <li>
+                                <a href="#" class="text-gray-400 hover:text-white transition-colors flex items-center">
+                                    <i class="fas fa-chevron-right text-xs mr-2"></i>
+                                    Genel İngilizce
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-gray-400 hover:text-white transition-colors flex items-center">
+                                    <i class="fas fa-chevron-right text-xs mr-2"></i>
+                                    İş İngilizcesi
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-gray-400 hover:text-white transition-colors flex items-center">
+                                    <i class="fas fa-chevron-right text-xs mr-2"></i>
+                                    TOEFL Hazırlık
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-gray-400 hover:text-white transition-colors flex items-center">
+                                    <i class="fas fa-chevron-right text-xs mr-2"></i>
+                                    IELTS Hazırlık
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-gray-400 hover:text-white transition-colors flex items-center">
+                                    <i class="fas fa-chevron-right text-xs mr-2"></i>
+                                    YDS Hazırlık
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Newsletter -->
+                    <div>
+                        <h3 class="text-lg font-semibold mb-6">Bültenimize Katılın</h3>
+                        <p class="text-gray-400 text-sm mb-4">Kampanyalar ve yeni kurslardan haberdar olmak için
+                            bültenimize abone olun.</p>
+                        <form class="space-y-4">
+                            <div class="relative">
+                                <input type="email" placeholder="E-posta adresiniz"
+                                    class="w-full px-4 py-3 bg-gray-800 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <button type="submit"
+                                    class="absolute right-2 top-2 bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="newsletter-consent"
+                                    class="w-4 h-4 bg-gray-800 border-gray-600 rounded text-blue-600 focus:ring-blue-500">
+                                <label for="newsletter-consent" class="ml-2 text-sm text-gray-400">
+                                    E-bülten gönderimini kabul ediyorum.
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="md:flex md:items-center md:justify-between">
+                <div class="text-center md:text-left">
+                    <p class="text-sm text-gray-400">&copy; 2024 GlobalDil. Tüm hakları saklıdır.</p>
+                </div>
+                <div class="mt-4 md:mt-0">
+                    <ul class="flex flex-wrap justify-center md:justify-end space-x-6">
+                        <li>
+                            <a href="#" class="text-sm text-gray-400 hover:text-white transition-colors">Gizlilik
+                                Politikası</a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-sm text-gray-400 hover:text-white transition-colors">Kullanım
+                                Şartları</a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-sm text-gray-400 hover:text-white transition-colors">KVKK</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

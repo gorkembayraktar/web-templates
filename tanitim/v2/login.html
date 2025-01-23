@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="tr" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DigiFlow | Giriş Yap</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(125deg, #0A0A0B 0%, #13151A 100%);
+            color: #fff;
+            min-height: 100vh;
+            display: block;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .form-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            overflow: hidden;
+        }
+
+        .forms-wrapper {
+            display: flex;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .form {
+            min-width: 100%;
+            padding: 2rem;
+            transform-origin: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.15s ease;
+        }
+
+        .form.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .gradient-border {
+            position: relative;
+            border-radius: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+
+        .input-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0.5rem;
+            color: white;
+            height: 3rem;
+            font-size: 0.95rem;
+            letter-spacing: 0.01em;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #3B82F6;
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .input-group label {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.6);
+            transition: all 0.3s ease;
+            pointer-events: none;
+            font-size: 0.95rem;
+        }
+
+        .input-group input:focus+label,
+        .input-group input:not(:placeholder-shown)+label {
+            top: 0;
+            transform: translateY(-50%) scale(0.85);
+            background: #0A0A0B;
+            padding: 0 0.5rem;
+        }
+
+        .gradient-btn {
+            background-size: 200% auto;
+            background-image: linear-gradient(to right, #3B82F6 0%, #8B5CF6 50%, #3B82F6 100%);
+            transition: all 0.5s ease;
+        }
+
+        .gradient-btn:hover {
+            background-position: right center;
+            transform: translateY(-1px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.2);
+        }
+
+        .form-nav-btn {
+            position: relative;
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.6);
+            transition: all 0.3s ease;
+        }
+
+        .form-nav-btn::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, #3B82F6, #8B5CF6);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .form-nav-btn.active {
+            color: white;
+        }
+
+        .form-nav-btn.active::after {
+            transform: scaleX(1);
+        }
+
+        .noise-bg {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.05;
+        }
+
+        .glow {
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, rgba(59, 130, 246, 0) 70%);
+            border-radius: 50%;
+            filter: blur(50px);
+            opacity: 0.15;
+            mix-blend-mode: screen;
+            z-index: -1;
+        }
+
+        input[type="checkbox"] {
+            width: 1rem;
+            height: 1rem;
+            border-radius: 0.25rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            cursor: pointer;
+            position: relative;
+        }
+
+        input[type="checkbox"]:checked {
+            background: linear-gradient(to right, #3B82F6, #8B5CF6);
+            border-color: transparent;
+        }
+
+        input[type="checkbox"]:checked::after {
+            content: '✓';
+            position: absolute;
+            color: white;
+            font-size: 0.75rem;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Logo animation */
+        .logo-text {
+            position: relative;
+            display: inline-block;
+        }
+
+        .logo-text::after {
+            content: '';
+            position: absolute;
+            width: 120%;
+            height: 100%;
+            left: -10%;
+            top: 0;
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(59, 130, 246, 0.1),
+                    transparent);
+            animation: shimmer 2s infinite;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Background Elements -->
+    <div class="noise-bg fixed inset-0"></div>
+    <div class="glow fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+
+    <!-- Logo -->
+    <a href="index.html" class="absolute top-8 left-1/2 -translate-x-1/2 text-3xl font-bold">
+        <span class="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">DigiFlow</span>
+    </a>
+
+    <div class="container mx-auto px-6 min-h-screen flex items-center justify-center">
+        <div class="form-container mt-20">
+            <!-- Form Navigation -->
+            <div class="flex justify-center mb-12">
+                <div class="flex gap-6">
+                    <button onclick="switchForm('login')" class="form-nav-btn active">Giriş Yap</button>
+                    <button onclick="switchForm('register')" class="form-nav-btn">Kayıt Ol</button>
+                </div>
+            </div>
+
+            <!-- Forms Wrapper -->
+            <div class="forms-wrapper">
+                <!-- Login Form -->
+                <form class="form active" id="loginForm">
+                    <div class="gradient-border p-10">
+                        <h2 class="text-2xl font-bold mb-8">Hoş Geldiniz</h2>
+                        <div class="input-group">
+                            <input type="email" id="loginEmail" placeholder=" ">
+                            <label for="loginEmail">E-posta</label>
+                        </div>
+                        <div class="input-group">
+                            <input type="password" id="loginPassword" placeholder=" ">
+                            <label for="loginPassword">Şifre</label>
+                        </div>
+                        <div class="flex justify-between items-center mb-6">
+                            <label class="flex items-center gap-2 text-sm text-white/60">
+                                <input type="checkbox">
+                                <span>Beni hatırla</span>
+                            </label>
+                            <button type="button" onclick="switchForm('forgot')"
+                                class="text-sm text-white/60 hover:text-white transition-colors">
+                                Şifremi unuttum
+                            </button>
+                        </div>
+                        <button class="w-full py-3 rounded-lg gradient-btn">
+                            Giriş Yap
+                        </button>
+
+                        <div class="mt-8 text-center">
+                            <p class="text-white/40 text-sm mb-4">Veya şununla devam et</p>
+                            <div class="flex justify-center gap-4">
+                                <button class="p-3 rounded-lg border border-white/10 hover:bg-white/5 transition-all">
+                                    <i class="fab fa-google text-white/60 hover:text-white transition-colors"></i>
+                                </button>
+                                <button class="p-3 rounded-lg border border-white/10 hover:bg-white/5 transition-all">
+                                    <i class="fab fa-github text-white/60 hover:text-white transition-colors"></i>
+                                </button>
+                                <button class="p-3 rounded-lg border border-white/10 hover:bg-white/5 transition-all">
+                                    <i class="fab fa-apple text-white/60 hover:text-white transition-colors"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Register Form -->
+                <form class="form" id="registerForm">
+                    <div class="gradient-border p-10">
+                        <h2 class="text-2xl font-bold mb-8">Hesap Oluştur</h2>
+                        <div class="input-group">
+                            <input type="text" id="registerName" placeholder=" ">
+                            <label for="registerName">Ad Soyad</label>
+                        </div>
+                        <div class="input-group">
+                            <input type="email" id="registerEmail" placeholder=" ">
+                            <label for="registerEmail">E-posta</label>
+                        </div>
+                        <div class="input-group">
+                            <input type="password" id="registerPassword" placeholder=" ">
+                            <label for="registerPassword">Şifre</label>
+                        </div>
+                        <div class="mb-6">
+                            <label class="flex items-start gap-2 text-sm text-white/60">
+                                <input type="checkbox" class="mt-1">
+                                <span>
+                                    <a href="#" class="text-blue-500 hover:text-blue-400">Kullanım şartlarını</a> ve
+                                    <a href="#" class="text-blue-500 hover:text-blue-400">Gizlilik politikasını</a>
+                                    kabul ediyorum
+                                </span>
+                            </label>
+                        </div>
+                        <button class="w-full py-3 rounded-lg gradient-btn">
+                            Kayıt Ol
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Forgot Password Form -->
+                <form class="form" id="forgotForm">
+                    <div class="gradient-border p-10">
+                        <h2 class="text-2xl font-bold mb-6">Şifremi Unuttum</h2>
+                        <p class="text-white/60 mb-8">E-posta adresinizi girin, size şifre sıfırlama bağlantısı
+                            gönderelim.</p>
+                        <div class="input-group">
+                            <input type="email" id="forgotEmail" placeholder=" ">
+                            <label for="forgotEmail">E-posta</label>
+                        </div>
+                        <button class="w-full py-3 rounded-lg gradient-btn mb-4">
+                            Şifremi Sıfırla
+                        </button>
+                        <div class="text-center">
+                            <button type="button" onclick="switchForm('login')"
+                                class="text-sm text-white/60 hover:text-white transition-colors">
+                                Giriş sayfasına dön
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchForm(formId) {
+            // Remove active class from all buttons and forms
+            document.querySelectorAll('.form-nav-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.form').forEach(form => form.classList.remove('active'));
+
+            // Add active class to clicked button and target form
+            const targetForm = document.getElementById(`${formId}Form`);
+            const clickedBtn = document.querySelector(`[onclick="switchForm('${formId}')"]`);
+
+            if (clickedBtn) clickedBtn.classList.add('active');
+            if (targetForm) targetForm.classList.add('active');
+
+            // Animate form transition
+            const formsWrapper = document.querySelector('.forms-wrapper');
+            const formIndex = formId === 'login' ? 0 : formId === 'register' ? 1 : 2;
+
+            gsap.to(formsWrapper, {
+                x: `-${formIndex * 100}%`,
+                duration: 0.3,
+                ease: 'power2.inOut'
+            });
+
+            // Animate form content
+            gsap.fromTo(targetForm,
+                {
+                    opacity: 0,
+                    scale: 0.95,
+                    y: 20
+                },
+                {
+                    opacity: 1,
+                    scale: 1,
+                    y: 0,
+                    duration: 0.25,
+                    delay: 0.1,
+                    ease: 'power2.out'
+                }
+            );
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            switchForm('login');
+        });
+    </script>
+</body>
+
+</html>

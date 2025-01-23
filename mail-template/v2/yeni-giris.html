@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Güvenlik Uyarısı - Yeni Giriş Bildirimi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f9fafb;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #1f2937;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Header */
+        .header {
+            background: #1e40af;
+            padding: 40px 32px;
+            text-align: center;
+            position: relative;
+        }
+
+        .logo {
+            margin-bottom: 24px;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .welcome-text {
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            letter-spacing: -0.025em;
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 16px;
+        }
+
+        /* Content */
+        .content {
+            padding: 48px 32px;
+        }
+
+        .greeting {
+            font-size: 20px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 16px;
+        }
+
+        .message {
+            color: #4b5563;
+            font-size: 16px;
+            line-height: 1.7;
+            margin-bottom: 32px;
+        }
+
+        /* Features */
+        .features {
+            margin: 40px 0;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .feature {
+            text-align: left;
+        }
+
+        .feature-icon {
+            color: #1e40af;
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .feature-title {
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .feature-text {
+            color: #6b7280;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* Button */
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.2s ease;
+            width: 100%;
+        }
+
+        /* Footer */
+        .footer {
+            background: #f9fafb;
+            padding: 32px;
+            text-align: center;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .social-links {
+            margin-bottom: 24px;
+        }
+
+        .social-links a {
+            color: #4b5563;
+            text-decoration: none;
+            margin: 0 12px;
+            font-size: 20px;
+            transition: color 0.2s ease;
+        }
+
+        .social-links a:hover {
+            color: #1e40af;
+        }
+
+        .footer-text {
+            color: #6b7280;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .footer-links {
+            margin-top: 16px;
+        }
+
+        .footer-links a {
+            color: #1e40af;
+            text-decoration: none;
+            margin: 0 8px;
+            font-size: 14px;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Alert Box */
+        .alert-box {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 32px;
+        }
+
+        .alert-title {
+            color: #dc2626;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .alert-text {
+            color: #991b1b;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* Login Details */
+        .login-details {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 24px;
+            margin: 32px 0;
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .detail-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .detail-label {
+            color: #475569;
+            font-size: 14px;
+        }
+
+        .detail-value {
+            color: #0f172a;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 32px 0;
+        }
+
+        .button-primary {
+            background: #dc2626;
+        }
+
+        .button-primary:hover {
+            background: #b91c1c;
+            transform: translateY(-1px);
+        }
+
+        .button-secondary {
+            background: #1e40af;
+        }
+
+        .button-secondary:hover {
+            background: #1e3a8a;
+            transform: translateY(-1px);
+        }
+
+        /* Map Preview */
+        .map-preview {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 24px;
+        }
+
+        .map-preview img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .location-text {
+            color: #475569;
+            font-size: 14px;
+            margin-top: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Security Notice */
+        .security-notice {
+            background: #fff8f1;
+            border: 1px solid #fed7aa;
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 32px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .security-notice i {
+            color: #ea580c;
+            margin-top: 2px;
+        }
+
+        .security-text {
+            color: #9a3412;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* Responsive */
+        @media only screen and (max-width: 600px) {
+            .container {
+                margin: 20px;
+                border-radius: 8px;
+            }
+
+            .content {
+                padding: 32px 24px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .action-buttons {
+                grid-template-columns: 1fr;
+            }
+
+            .action-buttons {
+                grid-template-columns: 1fr;
+            }
+
+            .map-preview img {
+                height: 160px;
+            }
+
+            .detail-item {
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .detail-value {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                <img src="logo.png" alt="Logo">
+            </div>
+            <div class="welcome-text">Güvenlik Uyarısı</div>
+            <div class="subtitle">Hesabınıza yeni bir giriş tespit edildi</div>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <div class="greeting">Merhaba Ahmet,</div>
+
+            <!-- Alert Box -->
+            <div class="alert-box">
+                <div class="alert-title">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Yeni Giriş Bildirimi
+                </div>
+                <div class="alert-text">
+                    Hesabınıza yeni bir cihazdan giriş yapıldı. Bu işlemi siz gerçekleştirmediyseniz, lütfen hemen
+                    güvenlik önlemlerini alın.
+                </div>
+            </div>
+
+            <!-- Login Details -->
+            <div class="login-details">
+                <div class="detail-item">
+                    <span class="detail-label">Tarih ve Saat</span>
+                    <span class="detail-value">24 Mart 2024, 15:30</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Cihaz</span>
+                    <span class="detail-value">iPhone 13 Pro (iOS 17.1)</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Tarayıcı</span>
+                    <span class="detail-value">Safari 17.0</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">IP Adresi</span>
+                    <span class="detail-value">192.168.1.1</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Konum</span>
+                    <span class="detail-value">İstanbul, Türkiye</span>
+                </div>
+            </div>
+
+            <!-- Map Preview -->
+            <div class="map-preview">
+                <img src="map-preview.jpg" alt="Giriş Konumu">
+                <div class="location-text">
+                    <i class="fas fa-map-marker-alt"></i>
+                    Yaklaşık konum: İstanbul, Türkiye
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <a href="#" class="button button-primary">
+                    <i class="fas fa-ban" style="margin-right: 8px;"></i>
+                    Bu Ben Değilim
+                </a>
+                <a href="#" class="button button-secondary">
+                    <i class="fas fa-check" style="margin-right: 8px;"></i>
+                    Bu Bendim
+                </a>
+            </div>
+
+            <!-- Security Steps -->
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="feature-title">Şifrenizi Değiştirin</div>
+                    <div class="feature-text">Hesabınızı korumak için hemen şifrenizi güncelleyin</div>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="feature-title">2FA'yı Etkinleştirin</div>
+                    <div class="feature-text">İki faktörlü doğrulama ile ekstra güvenlik sağlayın</div>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-lock"></i>
+                    </div>
+                    <div class="feature-title">Oturumları Kontrol Edin</div>
+                    <div class="feature-text">Tüm aktif oturumlarınızı gözden geçirin</div>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <div class="feature-title">Bildirimleri Açın</div>
+                    <div class="feature-text">Güvenlik uyarılarını anında alın</div>
+                </div>
+            </div>
+
+            <!-- Security Notice -->
+            <div class="security-notice">
+                <i class="fas fa-info-circle"></i>
+                <div class="security-text">
+                    Hesap güvenliğiniz bizim için önemli. Şüpheli bir durum fark ederseniz hemen <a href="#"
+                        style="color: #ea580c; text-decoration: underline;">müşteri hizmetlerimizle</a> iletişime geçin.
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+            <div class="footer-text">
+                © 2024 Firma Adı. Tüm hakları saklıdır.<br>
+                Adres: İstanbul, Türkiye
+            </div>
+            <div class="footer-links">
+                <a href="#">Gizlilik Politikası</a>
+                <a href="#">Güvenlik</a>
+                <a href="#">Yardım</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
