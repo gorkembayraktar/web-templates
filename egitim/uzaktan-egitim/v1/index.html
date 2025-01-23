@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Eğitim Platformu | Profesyonel Uzaktan Eğitim</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6366f1',
+                        secondary: '#4f46e5',
+                        accent: '#818cf8'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* ... Önceki stil tanımlamaları ... */
+        .wave-shape {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+        }
+
+        .wave-shape svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 150px;
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% {
+                transform: translate(0, 0px);
+            }
+
+            50% {
+                transform: translate(0, 15px);
+            }
+
+            100% {
+                transform: translate(0, -0px);
+            }
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(to bottom right, #4f46e5, #6366f1);
+            transition: 0.3s ease-in-out;
+            z-index: 40;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s ease-in-out;
+            z-index: 30;
+        }
+
+        .menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .hamburger {
+            width: 24px;
+            height: 24px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: #4f46e5;
+            position: absolute;
+            transition: 0.3s ease;
+        }
+
+        .hamburger span:nth-child(1) {
+            top: 2px;
+        }
+
+        .hamburger span:nth-child(2) {
+            top: 11px;
+        }
+
+        .hamburger span:nth-child(3) {
+            top: 20px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg);
+            top: 11px;
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg);
+            top: 11px;
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-gray-800">
+    <!-- Enhanced Navbar -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <a href="#" class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-indigo-600 rounded-full flex items-center justify-center">
+                        <span class="text-white text-xl font-bold">OE</span>
+                    </div>
+                    <span class="text-2xl font-bold text-gray-800">OnlineEdu</span>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#features" class="text-gray-600 hover:text-indigo-600 transition">Özellikler</a>
+                    <a href="#courses" class="text-gray-600 hover:text-indigo-600 transition">Dersler</a>
+                    <a href="#how-it-works" class="text-gray-600 hover:text-indigo-600 transition">Nasıl Çalışır?</a>
+                    <a href="#pricing" class="text-gray-600 hover:text-indigo-600 transition">Fiyatlandırma</a>
+                    <a href="#contact"
+                        class="bg-indigo-600 text-white px-6 py-2 rounded-full hover:bg-indigo-700 transition">
+                        Ücretsiz Dene
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="menu-btn" class="block md:hidden" aria-label="Menu">
+                    <div class="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu">
+            <div class="flex flex-col h-full">
+                <div class="flex justify-between items-center mb-8">
+                    <a href="#" class="flex items-center space-x-2">
+                        <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+                            <span class="text-indigo-600 text-xl font-bold">OE</span>
+                        </div>
+                        <span class="text-2xl font-bold text-white">OnlineEdu</span>
+                    </a>
+                    <button id="close-menu" class="text-white text-3xl">&times;</button>
+                </div>
+
+                <div class="flex flex-col space-y-6">
+                    <a href="#features"
+                        class="text-white text-lg hover:text-indigo-200 transition border-b border-indigo-400/30 pb-4">
+                        <div class="flex items-center space-x-4">
+                            <i class="fas fa-star w-6"></i>
+                            <span>Özellikler</span>
+                        </div>
+                    </a>
+                    <a href="#courses"
+                        class="text-white text-lg hover:text-indigo-200 transition border-b border-indigo-400/30 pb-4">
+                        <div class="flex items-center space-x-4">
+                            <i class="fas fa-book w-6"></i>
+                            <span>Dersler</span>
+                        </div>
+                    </a>
+                    <a href="#how-it-works"
+                        class="text-white text-lg hover:text-indigo-200 transition border-b border-indigo-400/30 pb-4">
+                        <div class="flex items-center space-x-4">
+                            <i class="fas fa-question-circle w-6"></i>
+                            <span>Nasıl Çalışır?</span>
+                        </div>
+                    </a>
+                    <a href="#pricing"
+                        class="text-white text-lg hover:text-indigo-200 transition border-b border-indigo-400/30 pb-4">
+                        <div class="flex items-center space-x-4">
+                            <i class="fas fa-tags w-6"></i>
+                            <span>Fiyatlandırma</span>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="mt-auto">
+                    <a href="#contact"
+                        class="block w-full bg-white text-indigo-600 px-6 py-3 rounded-full text-center font-semibold hover:bg-indigo-50 transition mb-6">
+                        Ücretsiz Dene
+                    </a>
+                    <div class="flex justify-center space-x-6">
+                        <a href="#" class="text-white hover:text-indigo-200 transition">
+                            <i class="fab fa-facebook text-xl"></i>
+                        </a>
+                        <a href="#" class="text-white hover:text-indigo-200 transition">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-white hover:text-indigo-200 transition">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                        <a href="#" class="text-white hover:text-indigo-200 transition">
+                            <i class="fab fa-linkedin text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menu Overlay -->
+        <div id="menu-overlay" class="menu-overlay"></div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 bg-gradient-to-br from-indigo-50 to-indigo-100">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="md:w-1/2 mb-10 md:mb-0" data-aos="fade-right">
+                    <h1 class="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+                        Eğitimde Yeni Nesil <span class="text-indigo-600">Online</span> Deneyim
+                    </h1>
+                    <p class="text-xl text-gray-600 mb-8">
+                        Uzman eğitmenler, interaktif dersler ve kişiselleştirilmiş öğrenme deneyimi ile geleceğinizi
+                        şekillendirin.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#contact"
+                            class="bg-indigo-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-indigo-700 transition text-center">
+                            Hemen Başla
+                        </a>
+                        <a href="#how-it-works"
+                            class="border-2 border-indigo-600 text-indigo-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-indigo-50 transition text-center">
+                            Nasıl Çalışır?
+                        </a>
+                    </div>
+                    <div class="mt-8 flex items-center space-x-4">
+                        <div class="flex -space-x-2">
+                            <img src="https://i.pravatar.cc/100?img=1"
+                                class="w-10 h-10 rounded-full border-2 border-white" alt="User">
+                            <img src="https://i.pravatar.cc/100?img=2"
+                                class="w-10 h-10 rounded-full border-2 border-white" alt="User">
+                            <img src="https://i.pravatar.cc/100?img=3"
+                                class="w-10 h-10 rounded-full border-2 border-white" alt="User">
+                        </div>
+                        <div class="text-gray-600">
+                            <span class="font-bold text-indigo-600">1000+</span> öğrenci bize güveniyor
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2 relative" data-aos="fade-left">
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3"
+                        class="rounded-2xl shadow-2xl floating" alt="Online Education">
+                    <div class="absolute -bottom-10 -left-10 bg-white p-6 rounded-xl shadow-lg">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-video text-2xl text-indigo-600"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-500">Aktif Canlı Ders</div>
+                                <div class="font-semibold">Matematik</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wave-shape">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"
+                preserveAspectRatio="none">
+                <path
+                    d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+                    class="fill-white"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="text-indigo-600 font-semibold mb-2 block">AVANTAJLAR</span>
+                <h2 class="text-4xl font-bold mb-4">Neden Online Eğitim?</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Geleneksel eğitimin sınırlarını aşın, geleceğin
+                    eğitim modeliyle tanışın. Size özel, esnek ve etkili bir öğrenme deneyimi sunuyoruz.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition duration-300 border border-gray-100"
+                    data-aos="fade-up">
+                    <div class="w-14 h-14 bg-indigo-100 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-clock text-2xl text-indigo-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Zaman Özgürlüğü</h3>
+                    <p class="text-gray-600 mb-4">Kendi programınızı oluşturun, istediğiniz zaman ve yerde eğitiminize
+                        devam edin.</p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>7/24 ders erişimi</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Esnek program</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition duration-300 border border-gray-100"
+                    data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-14 h-14 bg-indigo-100 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-chalkboard-teacher text-2xl text-indigo-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Uzman Kadro</h3>
+                    <p class="text-gray-600 mb-4">Alanında uzman eğitmenlerle birebir eğitim ve sürekli destek alın.</p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Deneyimli öğretmenler</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Kişisel danışmanlık</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition duration-300 border border-gray-100"
+                    data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-14 h-14 bg-indigo-100 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-laptop text-2xl text-indigo-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">İnteraktif İçerik</h3>
+                    <p class="text-gray-600 mb-4">Modern teknolojilerle zenginleştirilmiş eğitim materyalleri.</p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>HD video dersler</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Etkileşimli alıştırmalar</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition duration-300 border border-gray-100"
+                    data-aos="fade-up">
+                    <div class="w-14 h-14 bg-indigo-100 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-chart-line text-2xl text-indigo-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Gelişim Takibi</h3>
+                    <p class="text-gray-600 mb-4">Detaylı raporlar ve analizlerle ilerlemenizi takip edin.</p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Performans analizi</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Kişisel gelişim raporu</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition duration-300 border border-gray-100"
+                    data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-14 h-14 bg-indigo-100 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-users text-2xl text-indigo-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Sosyal Öğrenme</h3>
+                    <p class="text-gray-600 mb-4">Diğer öğrencilerle etkileşim kurarak öğrenme deneyiminizi
+                        zenginleştirin.</p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Grup çalışmaları</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Forum tartışmaları</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition duration-300 border border-gray-100"
+                    data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-14 h-14 bg-indigo-100 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-shield-alt text-2xl text-indigo-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Güvenli Öğrenme</h3>
+                    <p class="text-gray-600 mb-4">Güvenli ve kesintisiz bir eğitim deneyimi için teknik altyapı.</p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>7/24 teknik destek</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Veri güvenliği</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-16 text-center" data-aos="fade-up">
+                <div class="inline-flex items-center p-4 bg-indigo-50 rounded-lg">
+                    <i class="fas fa-graduation-cap text-2xl text-indigo-600 mr-3"></i>
+                    <p class="text-gray-700">Öğrencilerimizin <span class="font-bold text-indigo-600">%92'si</span>
+                        online eğitim deneyiminden memnun kaldı</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-20 bg-indigo-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Nasıl Çalışır?</h2>
+                <p class="text-xl text-gray-600">Üç basit adımda online eğitime başlayın</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center" data-aos="fade-up">
+                    <div class="w-20 h-20 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-3xl font-bold text-white">1</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Üye Ol</h3>
+                    <p class="text-gray-600">Hızlı üyelik işlemi ile platformumuza katılın.</p>
+                </div>
+                <div class="text-center" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-20 h-20 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-3xl font-bold text-white">2</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Ders Seç</h3>
+                    <p class="text-gray-600">İhtiyacınıza uygun dersleri seçin ve programınızı oluşturun.</p>
+                </div>
+                <div class="text-center" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-20 h-20 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-3xl font-bold text-white">3</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Öğrenmeye Başla</h3>
+                    <p class="text-gray-600">Canlı derslere katılın ve öğrenme yolculuğunuza başlayın.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Fiyatlandırma</h2>
+                <p class="text-xl text-gray-600">Size en uygun paketi seçin</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div class="bg-white rounded-2xl shadow-lg p-8 border border-gray-100 hover:shadow-xl transition duration-300"
+                    data-aos="fade-up">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold mb-4">Başlangıç</h3>
+                        <div class="text-4xl font-bold mb-2">₺199<span class="text-lg text-gray-500">/ay</span></div>
+                        <p class="text-gray-500">Temel özelliklerle başlayın</p>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>5 Canlı Ders / Ay</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Sınırlı Video İçerik</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Forum Desteği</span>
+                        </li>
+                    </ul>
+                    <a href="#"
+                        class="block text-center bg-gray-100 text-gray-800 py-3 rounded-lg hover:bg-gray-200 transition">
+                        Başla
+                    </a>
+                </div>
+                <div class="bg-indigo-600 rounded-2xl shadow-lg p-8 border border-indigo-500 transform scale-105"
+                    data-aos="fade-up" data-aos-delay="100">
+                    <div
+                        class="absolute top-0 right-0 bg-yellow-400 text-xs font-bold px-3 py-1 rounded-tr-2xl rounded-bl-lg">
+                        POPüLER
+                    </div>
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold mb-4 text-white">Profesyonel</h3>
+                        <div class="text-4xl font-bold mb-2 text-white">₺399<span
+                                class="text-lg text-indigo-200">/ay</span></div>
+                        <p class="text-indigo-200">Tam kapsamlı eğitim deneyimi</p>
+                    </div>
+                    <ul class="space-y-4 mb-8 text-white">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-2"></i>
+                            <span>Sınırsız Canlı Ders</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-2"></i>
+                            <span>Tüm Video İçerikler</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-2"></i>
+                            <span>7/24 Destek</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-2"></i>
+                            <span>Özel Grup Dersleri</span>
+                        </li>
+                    </ul>
+                    <a href="#"
+                        class="block text-center bg-white text-indigo-600 py-3 rounded-lg hover:bg-indigo-50 transition">
+                        Hemen Başla
+                    </a>
+                </div>
+                <div class="bg-white rounded-2xl shadow-lg p-8 border border-gray-100 hover:shadow-xl transition duration-300"
+                    data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold mb-4">Kurumsal</h3>
+                        <div class="text-4xl font-bold mb-2">Özel<span class="text-lg text-gray-500">/yıllık</span>
+                        </div>
+                        <p class="text-gray-500">Kurumunuza özel çözümler</p>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Özel Müfredat</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Özel Eğitmen Desteği</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Raporlama Sistemi</span>
+                        </li>
+                    </ul>
+                    <a href="#"
+                        class="block text-center bg-gray-100 text-gray-800 py-3 rounded-lg hover:bg-gray-200 transition">
+                        İletişime Geç
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gradient-to-br from-indigo-50 to-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-grid-indigo-500/[0.05] bg-[size:20px_20px]"></div>
+        <div class="container mx-auto px-4 relative">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <span class="text-indigo-600 font-semibold mb-2 block">HEMEN BAŞLAYIN</span>
+                    <h2 class="text-4xl font-bold mb-4">Ücretsiz Deneme Dersi</h2>
+                    <p class="text-xl text-gray-600">İlk adımı atın, başarı yolculuğunuz başlasın</p>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+                    <!-- Form Section -->
+                    <div class="lg:col-span-3">
+                        <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100" data-aos="fade-right">
+                            <form class="space-y-6">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div class="relative">
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Ad Soyad</label>
+                                        <div class="relative">
+                                            <input type="text"
+                                                class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition pl-10">
+                                            <i
+                                                class="fas fa-user absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                        </div>
+                                    </div>
+                                    <div class="relative">
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">E-posta</label>
+                                        <div class="relative">
+                                            <input type="email"
+                                                class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition pl-10">
+                                            <i
+                                                class="fas fa-envelope absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div class="relative">
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Telefon</label>
+                                        <div class="relative">
+                                            <input type="tel"
+                                                class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition pl-10">
+                                            <i
+                                                class="fas fa-phone absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                        </div>
+                                    </div>
+                                    <div class="relative">
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Ders Seçimi</label>
+                                        <div class="relative">
+                                            <select
+                                                class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition pl-10 appearance-none">
+                                                <option value="" disabled selected>Ders seçiniz</option>
+                                                <option>Matematik</option>
+                                                <option>Fizik</option>
+                                                <option>Kimya</option>
+                                                <option>Biyoloji</option>
+                                                <option>İngilizce</option>
+                                            </select>
+                                            <i
+                                                class="fas fa-book absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                                            <i
+                                                class="fas fa-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Mesajınız</label>
+                                    <div class="relative">
+                                        <textarea rows="4"
+                                            class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition pl-10"></textarea>
+                                        <i class="fas fa-comment absolute left-3 top-4 text-gray-400"></i>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <input type="checkbox" id="consent"
+                                        class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+                                    <label for="consent" class="text-sm text-gray-600">KVKK şartlarını kabul
+                                        ediyorum</label>
+                                </div>
+                                <button type="submit"
+                                    class="w-full bg-gradient-to-r from-indigo-600 to-indigo-500 text-white py-4 rounded-lg hover:from-indigo-700 hover:to-indigo-600 transition shadow-lg flex items-center justify-center space-x-2 group">
+                                    <span>Ücretsiz Ders Al</span>
+                                    <i class="fas fa-arrow-right transition transform group-hover:translate-x-1"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Info Section -->
+                    <div class="lg:col-span-2">
+                        <div class="space-y-8" data-aos="fade-left">
+                            <!-- Why Choose Us Card -->
+                            <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+                                <h3 class="text-xl font-bold mb-6 flex items-center">
+                                    <i class="fas fa-star text-yellow-400 mr-2"></i>
+                                    Neden Bizi Seçmelisiniz?
+                                </h3>
+                                <ul class="space-y-4">
+                                    <li class="flex items-start space-x-3">
+                                        <div
+                                            class="flex-shrink-0 w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
+                                            <i class="fas fa-check text-xs text-green-500"></i>
+                                        </div>
+                                        <span class="text-gray-600">Alanında uzman öğretmenler</span>
+                                    </li>
+                                    <li class="flex items-start space-x-3">
+                                        <div
+                                            class="flex-shrink-0 w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
+                                            <i class="fas fa-check text-xs text-green-500"></i>
+                                        </div>
+                                        <span class="text-gray-600">Kişiye özel eğitim programı</span>
+                                    </li>
+                                    <li class="flex items-start space-x-3">
+                                        <div
+                                            class="flex-shrink-0 w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
+                                            <i class="fas fa-check text-xs text-green-500"></i>
+                                        </div>
+                                        <span class="text-gray-600">Esnek ders saatleri</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Contact Info Card -->
+                            <div
+                                class="bg-gradient-to-br from-indigo-600 to-indigo-700 rounded-2xl p-8 text-white shadow-lg">
+                                <h3 class="text-xl font-bold mb-6 flex items-center">
+                                    <i class="fas fa-headset mr-2"></i>
+                                    Hızlı İletişim
+                                </h3>
+                                <ul class="space-y-4">
+                                    <li class="flex items-center space-x-3">
+                                        <i class="fas fa-phone-alt text-indigo-200"></i>
+                                        <span>0 (212) 123 45 67</span>
+                                    </li>
+                                    <li class="flex items-center space-x-3">
+                                        <i class="fas fa-envelope text-indigo-200"></i>
+                                        <span>info@onlineedu.com</span>
+                                    </li>
+                                    <li class="flex items-center space-x-3">
+                                        <i class="fas fa-clock text-indigo-200"></i>
+                                        <span>7/24 Destek</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-br from-gray-900 to-gray-800 text-white pt-20 pb-10">
+        <div class="container mx-auto px-4">
+            <!-- Newsletter Section -->
+            <div
+                class="max-w-4xl mx-auto bg-gradient-to-r from-indigo-600 to-indigo-500 rounded-2xl p-8 mb-16 shadow-xl transform -translate-y-24">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-2">Eğitim Bültenimize Katılın</h3>
+                        <p class="text-indigo-100">Yeni kurslar, eğitim içerikleri ve fırsatlardan ilk siz haberdar
+                            olun.</p>
+                    </div>
+                    <form class="flex gap-2">
+                        <input type="email" placeholder="E-posta adresiniz"
+                            class="flex-1 px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none focus:border-white">
+                        <button type="submit"
+                            class="px-6 py-3 bg-white text-indigo-600 rounded-lg font-semibold hover:bg-indigo-50 transition">
+                            Katıl
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <!-- Brand Column -->
+                <div class="space-y-6">
+                    <div class="flex items-center space-x-2">
+                        <div
+                            class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg">
+                            <span class="text-white text-xl font-bold">OE</span>
+                        </div>
+                        <span
+                            class="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 text-transparent bg-clip-text">OnlineEdu</span>
+                    </div>
+                    <p class="text-gray-400 leading-relaxed">Türkiye'nin lider online eğitim platformu. Uzman kadromuz
+                        ve modern eğitim teknolojilerimizle yanınızdayız.</p>
+                    <div class="flex space-x-4">
+                        <a href="#"
+                            class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-indigo-600 transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-indigo-600 transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-indigo-600 transition">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-indigo-600 transition">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-6 relative inline-block">
+                        Hızlı Bağlantılar
+                        <div class="absolute -bottom-2 left-0 w-12 h-1 bg-indigo-600 rounded-full"></div>
+                    </h4>
+                    <ul class="space-y-4">
+                        <li><a href="#features" class="text-gray-400 hover:text-white transition flex items-center"><i
+                                    class="fas fa-chevron-right text-xs mr-2 text-indigo-500"></i>Özellikler</a></li>
+                        <li><a href="#courses" class="text-gray-400 hover:text-white transition flex items-center"><i
+                                    class="fas fa-chevron-right text-xs mr-2 text-indigo-500"></i>Dersler</a></li>
+                        <li><a href="#how-it-works"
+                                class="text-gray-400 hover:text-white transition flex items-center"><i
+                                    class="fas fa-chevron-right text-xs mr-2 text-indigo-500"></i>Nasıl Çalışır?</a>
+                        </li>
+                        <li><a href="#pricing" class="text-gray-400 hover:text-white transition flex items-center"><i
+                                    class="fas fa-chevron-right text-xs mr-2 text-indigo-500"></i>Fiyatlandırma</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition flex items-center"><i
+                                    class="fas fa-chevron-right text-xs mr-2 text-indigo-500"></i>İletişim</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-6 relative inline-block">
+                        İletişim
+                        <div class="absolute -bottom-2 left-0 w-12 h-1 bg-indigo-600 rounded-full"></div>
+                    </h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start space-x-3 text-gray-400">
+                            <div class="mt-1">
+                                <i class="fas fa-map-marker-alt text-indigo-500"></i>
+                            </div>
+                            <span>Maslak, Büyükdere Cad. No:123<br>Sarıyer/İstanbul</span>
+                        </li>
+                        <li class="flex items-center space-x-3 text-gray-400">
+                            <i class="fas fa-phone text-indigo-500"></i>
+                            <span>0 (212) 123 45 67</span>
+                        </li>
+                        <li class="flex items-center space-x-3 text-gray-400">
+                            <i class="fas fa-envelope text-indigo-500"></i>
+                            <span>info@onlineedu.com</span>
+                        </li>
+                        <li class="flex items-center space-x-3 text-gray-400">
+                            <i class="fas fa-clock text-indigo-500"></i>
+                            <span>7/24 Destek</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Mobile App -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-6 relative inline-block">
+                        Mobil Uygulama
+                        <div class="absolute -bottom-2 left-0 w-12 h-1 bg-indigo-600 rounded-full"></div>
+                    </h4>
+                    <p class="text-gray-400 mb-6">Mobil uygulamamızı indirin, eğitiminize her yerden devam edin.</p>
+                    <div class="space-y-3">
+                        <a href="#" class="block">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg"
+                                alt="App Store" class="h-10">
+                        </a>
+                        <a href="#" class="block">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
+                                alt="Play Store" class="h-10">
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                    <div class="flex items-center space-x-3">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b2/SSL_secure.svg" alt="SSL"
+                            class="h-10">
+                        <div class="text-sm text-gray-400">
+                            256-bit SSL ile güvenli ödeme
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap justify-center gap-6 text-sm">
+                        <a href="#" class="text-gray-400 hover:text-white transition">Gizlilik Politikası</a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">Kullanım Şartları</a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">KVKK</a>
+                        <span class="text-gray-400">&copy; 2024 OnlineEdu. Tüm hakları saklıdır.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // Enhanced Mobile Menu Functionality
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMenu = document.getElementById('close-menu');
+        const menuOverlay = document.getElementById('menu-overlay');
+        const hamburger = document.querySelector('.hamburger');
+
+        function toggleMenu() {
+            mobileMenu.classList.toggle('active');
+            menuOverlay.classList.toggle('active');
+            hamburger.classList.toggle('active');
+            document.body.classList.toggle('overflow-hidden');
+        }
+
+        menuBtn.addEventListener('click', toggleMenu);
+        closeMenu.addEventListener('click', toggleMenu);
+        menuOverlay.addEventListener('click', toggleMenu);
+
+        // Close menu when clicking on mobile menu links
+        const mobileMenuLinks = document.querySelectorAll('#mobile-menu a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                toggleMenu();
+            });
+        });
+
+        // Close menu on window resize if mobile menu is open
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768 && mobileMenu.classList.contains('active')) {
+                toggleMenu();
+            }
+        });
+    </script>
+</body>
+
+</html>
