@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeknikServis | Profesyonel Beyaz Eşya Servisi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Glide.js CSS and JS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.6.0/css/glide.core.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.6.0/css/glide.theme.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.6.0/glide.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0f172a',
+                        secondary: '#334155',
+                        accent: '#0ea5e9'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, #0f172a 0%, #334155 100%);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 40;
+            padding: 2rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+            opacity: 1;
+        }
+
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 30;
+            backdrop-filter: blur(4px);
+        }
+
+        .menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .hamburger {
+            width: 30px;
+            height: 30px;
+            position: relative;
+            cursor: pointer;
+            z-index: 41;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: #0f172a;
+            position: absolute;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hamburger span:nth-child(1) {
+            top: 4px;
+        }
+
+        .hamburger span:nth-child(2) {
+            top: 14px;
+            width: 80%;
+        }
+
+        .hamburger span:nth-child(3) {
+            top: 24px;
+        }
+
+        .hamburger.active span {
+            background: #ffffff;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg);
+            top: 14px;
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+            width: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg);
+            top: 14px;
+        }
+
+        .glide__slide {
+            height: auto;
+            opacity: 0.5;
+            transform: scale(0.9);
+            transition: all 0.3s ease;
+        }
+
+        .glide__slide--active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .glide__slides {
+            padding: 20px 0;
+        }
+
+        .glide__arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            padding: 12px;
+            color: #0f172a;
+            transition: all 0.3s;
+            z-index: 2;
+        }
+
+        .glide__arrow:hover {
+            background-color: #0ea5e9;
+            color: white;
+        }
+
+        .glide__arrow--left {
+            left: -30px;
+        }
+
+        .glide__arrow--right {
+            right: -30px;
+        }
+
+        .glide__bullets {
+            position: relative;
+            z-index: 2;
+            margin-top: 20px;
+        }
+
+        .glide__bullet {
+            width: 10px;
+            height: 10px;
+            background-color: #e2e8f0;
+            border: none;
+            margin: 0 4px;
+            transition: all 0.3s;
+            padding: 0;
+        }
+
+        .glide__bullet--active {
+            background-color: #0ea5e9;
+            width: 24px;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .glide__arrow--left {
+                left: -15px;
+            }
+
+            .glide__arrow--right {
+                right: -15px;
+            }
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-gray-800">
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <!-- Logo and Brand -->
+                <div class="flex items-center space-x-3">
+                    <div
+                        class="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center shadow-lg">
+                        <span class="text-white text-xl font-bold">TS</span>
+                    </div>
+                    <div>
+                        <span class="text-xl font-bold text-primary">TeknikServis</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-1">
+                    <a href="#services"
+                        class="px-4 py-2 text-gray-600 hover:text-primary transition rounded-lg hover:bg-gray-50 flex items-center space-x-1">
+                        <i class="fas fa-tools text-sm"></i>
+                        <span>Hizmetler</span>
+                    </a>
+                    <a href="#brands"
+                        class="px-4 py-2 text-gray-600 hover:text-primary transition rounded-lg hover:bg-gray-50 flex items-center space-x-1">
+                        <i class="fas fa-star text-sm"></i>
+                        <span>Markalar</span>
+                    </a>
+                    <a href="#about"
+                        class="px-4 py-2 text-gray-600 hover:text-primary transition rounded-lg hover:bg-gray-50 flex items-center space-x-1">
+                        <i class="fas fa-building text-sm"></i>
+                        <span>Hakkımızda</span>
+                    </a>
+                    <a href="#contact"
+                        class="px-4 py-2 text-gray-600 hover:text-primary transition rounded-lg hover:bg-gray-50 flex items-center space-x-1">
+                        <i class="fas fa-phone text-sm"></i>
+                        <span>İletişim</span>
+                    </a>
+                    <div class="h-6 w-px bg-gray-200 mx-2"></div>
+                    <a href="tel:08501234567"
+                        class="px-4 py-2 text-accent hover:text-primary transition rounded-lg hover:bg-blue-50 flex items-center space-x-2">
+                        <i class="fas fa-phone-alt text-sm"></i>
+                        <span class="font-medium">0850 123 45 67</span>
+                    </a>
+                    <a href="#contact"
+                        class="bg-primary text-white px-6 py-2.5 rounded-xl hover:bg-secondary transition duration-300 flex items-center space-x-2 shadow-lg shadow-primary/20 hover:shadow-secondary/20">
+                        <i class="fas fa-headset"></i>
+                        <span>Servis Çağır</span>
+                    </a>
+                </div>
+
+                <!-- Mobile Actions -->
+                <div class="flex items-center space-x-4 md:hidden">
+                    <a href="tel:08501234567"
+                        class="bg-blue-50 text-accent px-3 py-2 rounded-lg text-sm font-medium flex items-center">
+                        <i class="fas fa-phone-alt mr-2"></i>
+                        <span>Ara</span>
+                    </a>
+                    <button id="menu-btn" class="w-10 h-10 flex items-center justify-center text-white rounded-xl"
+                        aria-label="Menu">
+                        <div class="hamburger">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Top Bar -->
+        <div class="hidden md:block bg-gradient-to-r from-primary to-secondary py-1.5">
+            <div class="container mx-auto px-4">
+                <div class="flex justify-between items-center text-white/90 text-sm">
+                    <div class="flex items-center space-x-6">
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-clock"></i>
+                            <span>7/24 Hizmet</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>1 Yıl Garanti</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-tools"></i>
+                            <span>Aynı Gün Servis</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <a href="#" class="hover:text-white transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="hover:text-white transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="hover:text-white transition">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu">
+            <div class="flex flex-col h-full">
+                <div class="flex justify-between items-center mb-12">
+                    <a href="#" class="flex items-center space-x-2">
+                        <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center">
+                            <span class="text-primary text-2xl font-bold">TS</span>
+                        </div>
+                        <span class="text-3xl font-bold text-white">TeknikServis</span>
+                    </a>
+                </div>
+
+                <div class="flex flex-col space-y-8">
+                    <a href="#services" class="mobile-menu-link group">
+                        <div
+                            class="flex items-center space-x-6 text-white/80 hover:text-white transition-all duration-300">
+                            <div
+                                class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center group-hover:bg-white/20 transition-all duration-300">
+                                <i class="fas fa-tools text-xl"></i>
+                            </div>
+                            <div>
+                                <span class="text-xl font-semibold">Hizmetler</span>
+                                <p class="text-sm text-white/60 mt-1">Teknik servis hizmetlerimiz</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="#brands" class="mobile-menu-link group">
+                        <div
+                            class="flex items-center space-x-6 text-white/80 hover:text-white transition-all duration-300">
+                            <div
+                                class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center group-hover:bg-white/20 transition-all duration-300">
+                                <i class="fas fa-star text-xl"></i>
+                            </div>
+                            <div>
+                                <span class="text-xl font-semibold">Markalar</span>
+                                <p class="text-sm text-white/60 mt-1">Hizmet verdiğimiz markalar</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="#about" class="mobile-menu-link group">
+                        <div
+                            class="flex items-center space-x-6 text-white/80 hover:text-white transition-all duration-300">
+                            <div
+                                class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center group-hover:bg-white/20 transition-all duration-300">
+                                <i class="fas fa-building text-xl"></i>
+                            </div>
+                            <div>
+                                <span class="text-xl font-semibold">Hakkımızda</span>
+                                <p class="text-sm text-white/60 mt-1">Bizi tanıyın</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="#contact" class="mobile-menu-link group">
+                        <div
+                            class="flex items-center space-x-6 text-white/80 hover:text-white transition-all duration-300">
+                            <div
+                                class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center group-hover:bg-white/20 transition-all duration-300">
+                                <i class="fas fa-phone text-xl"></i>
+                            </div>
+                            <div>
+                                <span class="text-xl font-semibold">İletişim</span>
+                                <p class="text-sm text-white/60 mt-1">Bize ulaşın</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="mt-auto">
+                    <a href="#contact"
+                        class="block w-full bg-white text-primary px-6 py-4 rounded-xl text-center font-semibold text-lg hover:bg-gray-50 transition mb-8">
+                        Servis Çağır
+                    </a>
+                    <div class="flex justify-center space-x-8">
+                        <a href="#" class="text-white/80 hover:text-white transition">
+                            <i class="fab fa-facebook text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-white/80 hover:text-white transition">
+                            <i class="fab fa-instagram text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-white/80 hover:text-white transition">
+                            <i class="fab fa-whatsapp text-2xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menu Overlay -->
+        <div id="menu-overlay" class="menu-overlay"></div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-44 pb-20 bg-gradient-to-br from-gray-50 to-blue-50 relative overflow-hidden">
+        <div class="absolute inset-0">
+            <div class="absolute inset-0 bg-grid-slate-900/[0.04] bg-[size:20px_20px]"></div>
+        </div>
+        <div class="container mx-auto px-4 relative">
+            <div class="flex flex-col lg:flex-row items-center justify-between gap-12">
+                <div class="lg:w-1/2" data-aos="fade-right">
+                    <div class="inline-flex items-center bg-blue-50 rounded-full px-4 py-2 mb-6">
+                        <div class="w-2 h-2 rounded-full bg-accent mr-2"></div>
+                        <span class="text-accent font-medium">7/24 Teknik Servis</span>
+                    </div>
+                    <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+                        Profesyonel <span class="text-accent">Beyaz Eşya</span> Teknik Servisi
+                    </h1>
+                    <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+                        Deneyimli ekibimiz ve garantili hizmet anlayışımızla tüm beyaz eşya markalarına özel teknik
+                        servis hizmeti sunuyoruz.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#contact"
+                            class="bg-primary text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-secondary transition text-center inline-flex items-center justify-center">
+                            <span>Hemen Servis Çağır</span>
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                        <a href="#services"
+                            class="border-2 border-primary text-primary px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-50 transition text-center inline-flex items-center justify-center">
+                            <span>Hizmetlerimiz</span>
+                            <i class="fas fa-chevron-right ml-2"></i>
+                        </a>
+                    </div>
+                    <div class="mt-12 grid grid-cols-3 gap-8">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-primary mb-2">15+</div>
+                            <div class="text-gray-600">Yıllık Deneyim</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-primary mb-2">10K+</div>
+                            <div class="text-gray-600">Mutlu Müşteri</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-primary mb-2">%100</div>
+                            <div class="text-gray-600">Müşteri Memnuniyeti</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-1/2 relative" data-aos="fade-left">
+                    <div class="relative">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 rounded-3xl transform rotate-3">
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3"
+                            class="rounded-3xl shadow-2xl relative z-10 transform -rotate-3 transition-transform hover:rotate-0 duration-500"
+                            alt="Beyaz Eşya Servisi">
+                    </div>
+                    <div class="absolute -bottom-10 -left-10 bg-white p-6 rounded-xl shadow-lg z-20">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-shield-alt text-2xl text-green-600"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-500">1 Yıl Garanti</div>
+                                <div class="font-semibold">Güvenilir Hizmet</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute -top-10 -right-10 bg-white p-6 rounded-xl shadow-lg z-20">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-tools text-2xl text-accent"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-500">Aynı Gün Servis</div>
+                                <div class="font-semibold">Hızlı Çözüm</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="absolute -bottom-px left-0 right-0 h-20 bg-gradient-to-b from-transparent to-white"></div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <div class="inline-flex items-center bg-blue-50 rounded-full px-4 py-2 mb-4">
+                    <div class="w-2 h-2 rounded-full bg-accent mr-2"></div>
+                    <span class="text-accent font-medium">Teknik Servis Hizmetlerimiz</span>
+                </div>
+                <h2 class="text-3xl font-bold mb-3">Beyaz Eşya Servis Çözümleri</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    Tüm beyaz eşya markalarına özel profesyonel teknik servis hizmeti sunuyoruz
+                </p>
+            </div>
+
+            <div class="glide services-glide" data-aos="fade-up">
+                <div class="glide__track" data-glide-el="track">
+                    <div class="glide__slides">
+                        <!-- Buzdolabı Servisi -->
+                        <div class="glide__slide h-full">
+                            <div
+                                class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition duration-300 border border-gray-100 mx-2 h-[400px] flex flex-col">
+                                <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center mb-6">
+                                    <i class="fas fa-snowflake text-2xl text-accent"></i>
+                                </div>
+                                <h3 class="text-xl font-bold mb-4">Buzdolabı Servisi</h3>
+                                <p class="text-gray-600 mb-6">Buzdolabınızın tüm arıza ve bakım işlemlerini garantili
+                                    olarak yapıyoruz.</p>
+                                <ul class="space-y-3 mt-auto">
+                                    <li class="flex items-center text-gray-600">
+                                        <i class="fas fa-check text-green-500 mr-2"></i>
+                                        <span>Gaz Kaçağı Tespiti</span>
+                                    </li>
+                                    <li class="flex items-center text-gray-600">
+                                        <i class="fas fa-check text-green-500 mr-2"></i>
+                                        <span>Fan Motoru Değişimi</span>
+                                    </li>
+                                    <li class="flex items-center text-gray-600">
+                                        <i class="fas fa-check text-green-500 mr-2"></i>
+                                        <span>Anakart Tamiri</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Çamaşır Makinesi Servisi -->
+                        <div class="glide__slide h-full">
+                            <div
+                                class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition duration-300 border border-gray-100 mx-2 h-[400px] flex flex-col">
+                                <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center mb-6">
+                                    <i class="fas fa-tshirt text-2xl text-accent"></i>
+                                </div>
+                                <h3 class="text-xl font-bold mb-4">Çamaşır Makinesi Servisi</h3>
+                                <p class="text-gray-600 mb-6">Çamaşır makinenizin tüm sorunlarına hızlı ve kalıcı
+                                    çözümler sunuyoruz.</p>
+                                <ul class="space-y-3 mt-auto">
+                                    <li class="flex items-center text-gray-600">
+                                        <i class="fas fa-check text-green-500 mr-2"></i>
+                                        <span>Motor Arızaları</span>
+                                    </li>
+                                    <li class="flex items-center text-gray-600">
+                                        <i class="fas fa-check text-green-500 mr-2"></i>
+                                        <span>Pompa Değişimi</span>
+                                    </li>
+                                    <li class="flex items-center text-gray-600">
+                                        <i class="fas fa-check text-green-500 mr-2"></i>
+                                        <span>Elektronik Kart Tamiri</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Bulaşık Makinesi Servisi -->
+                        <div class="glide__slide h-full">
+                            <div
+                                class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition duration-300 border border-gray-100 mx-2 h-[400px] flex flex-col">
+                                <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center mb-6">
+                                    <i class="fas fa-sink text-2xl text-accent"></i>
+                                </div>
+                                <h3 class="text-xl font-bold mb-4">Bulaşık Makinesi Servisi</h3>
+                                <p class="text-gray-600 mb-6">Bulaşık makinenizin performansını en üst seviyeye
+                                    çıkarıyoruz.</p>
+                                <ul class="space-y-3 mt-auto">
+                                    <li class="flex items-center text-gray-600">
+                                        <i class="fas fa-check text-green-500 mr-2"></i>
+                                        <span>Su Kaçağı Tamiri</span>
+                                    </li>
+                                    <li class="flex items-center text-gray-600">
+                                        <i class="fas fa-check text-green-500 mr-2"></i>
+                                        <span>Rezistans Değişimi</span>
+                                    </li>
+                                    <li class="flex items-center text-gray-600">
+                                        <i class="fas fa-check text-green-500 mr-2"></i>
+                                        <span>Program Arızaları</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Fırın Servisi -->
+                        <div class="glide__slide h-full">
+                            <div
+                                class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition duration-300 border border-gray-100 mx-2 h-[400px] flex flex-col">
+                                <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center mb-6">
+                                    <i class="fas fa-fire text-2xl text-accent"></i>
+                                </div>
+                                <h3 class="text-xl font-bold mb-4">Fırın Servisi</h3>
+                                <p class="text-gray-600 mb-6">Fırın ve ocak problemlerinize profesyonel çözümler
+                                    sunuyoruz.</p>
+                                <ul class="space-y-3 mt-auto">
+                                    <li class="flex items-center text-gray-600">
+                                        <i class="fas fa-check text-green-500 mr-2"></i>
+                                        <span>Termostat Arızaları</span>
+                                    </li>
+                                    <li class="flex items-center text-gray-600">
+                                        <i class="fas fa-check text-green-500 mr-2"></i>
+                                        <span>Rezistans Değişimi</span>
+                                    </li>
+                                    <li class="flex items-center text-gray-600">
+                                        <i class="fas fa-check text-green-500 mr-2"></i>
+                                        <span>Elektronik Kart Tamiri</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Klima Servisi -->
+                        <div class="glide__slide h-full">
+                            <div class="glide__slide">
+                                <div
+                                    class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition duration-300 border border-gray-100 mx-2">
+                                    <div class="flex items-start space-x-6">
+                                        <div
+                                            class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                                            <i class="fas fa-fire text-2xl text-accent"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-xl font-bold mb-4">Fırın Servisi</h3>
+                                            <p class="text-gray-600 mb-4">Fırın ve ocak problemlerinize profesyonel
+                                                çözümler
+                                                sunuyoruz.
+                                            </p>
+                                            <ul class="space-y-2">
+                                                <li class="flex items-center text-gray-600">
+                                                    <i class="fas fa-check text-green-500 mr-2"></i>
+                                                    <span>Termostat Arızaları</span>
+                                                </li>
+                                                <li class="flex items-center text-gray-600">
+                                                    <i class="fas fa-check text-green-500 mr-2"></i>
+                                                    <span>Rezistans Değişimi</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Klima Servisi -->
+                            <div class="glide__slide">
+                                <div
+                                    class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition duration-300 border border-gray-100 mx-2">
+                                    <div class="flex items-start space-x-6">
+                                        <div
+                                            class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                                            <i class="fas fa-wind text-2xl text-accent"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-xl font-bold mb-4">Klima Servisi</h3>
+                                            <p class="text-gray-600 mb-4">Klimanızın bakım ve onarım işlemlerini uzman
+                                                ekibimizle
+                                                gerçekleştiriyoruz.</p>
+                                            <ul class="space-y-2">
+                                                <li class="flex items-center text-gray-600">
+                                                    <i class="fas fa-check text-green-500 mr-2"></i>
+                                                    <span>Gaz Dolumu</span>
+                                                </li>
+                                                <li class="flex items-center text-gray-600">
+                                                    <i class="fas fa-check text-green-500 mr-2"></i>
+                                                    <span>Periyodik Bakım</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glide__arrows" data-glide-el="controls">
+                        <button class="glide__arrow glide__arrow--left" data-glide-dir="<">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="glide__arrow glide__arrow--right" data-glide-dir=">">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+
+                    <div class="glide__bullets" data-glide-el="controls[nav]">
+                        <button class="glide__bullet" data-glide-dir="=0"></button>
+                        <button class="glide__bullet" data-glide-dir="=1"></button>
+                        <button class="glide__bullet" data-glide-dir="=2"></button>
+                        <button class="glide__bullet" data-glide-dir="=3"></button>
+                        <button class="glide__bullet" data-glide-dir="=4"></button>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <!-- Brands Section -->
+    <section id="brands" class="py-24 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <div class="inline-flex items-center bg-blue-50 rounded-full px-4 py-2 mb-4">
+                    <div class="w-2 h-2 rounded-full bg-accent mr-2"></div>
+                    <span class="text-accent font-medium">Çalıştığımız Markalar</span>
+                </div>
+                <h2 class="text-3xl font-bold mb-3">Tüm Markalara Teknik Servis</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    Deneyimli ekibimizle tüm beyaz eşya markalarına profesyonel servis hizmeti sunuyoruz
+                </p>
+            </div>
+
+            <div class="glide brands-glide" data-aos="fade-up">
+                <div class="glide__track" data-glide-el="track">
+                    <div class="glide__slides">
+                        <!-- Arçelik -->
+                        <div class="glide__slide">
+                            <div
+                                class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition duration-300 group mx-2">
+                                <div class="flex items-center justify-center h-24">
+                                    <i
+                                        class="fas fa-star text-4xl text-accent group-hover:scale-110 transition duration-300"></i>
+                                </div>
+                                <div class="text-center mt-4">
+                                    <h3 class="font-bold text-lg">Arçelik</h3>
+                                    <p class="text-gray-600 text-sm mt-2">Yetkili Servis</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Beko -->
+                        <div class="glide__slide">
+                            <div
+                                class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition duration-300 group mx-2">
+                                <div class="flex items-center justify-center h-24">
+                                    <i
+                                        class="fas fa-star text-4xl text-accent group-hover:scale-110 transition duration-300"></i>
+                                </div>
+                                <div class="text-center mt-4">
+                                    <h3 class="font-bold text-lg">Beko</h3>
+                                    <p class="text-gray-600 text-sm mt-2">Yetkili Servis</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bosch -->
+                        <div class="glide__slide">
+                            <div
+                                class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition duration-300 group mx-2">
+                                <div class="flex items-center justify-center h-24">
+                                    <i
+                                        class="fas fa-star text-4xl text-accent group-hover:scale-110 transition duration-300"></i>
+                                </div>
+                                <div class="text-center mt-4">
+                                    <h3 class="font-bold text-lg">Bosch</h3>
+                                    <p class="text-gray-600 text-sm mt-2">Yetkili Servis</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Siemens -->
+                        <div class="glide__slide">
+                            <div
+                                class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition duration-300 group mx-2">
+                                <div class="flex items-center justify-center h-24">
+                                    <i
+                                        class="fas fa-star text-4xl text-accent group-hover:scale-110 transition duration-300"></i>
+                                </div>
+                                <div class="text-center mt-4">
+                                    <h3 class="font-bold text-lg">Siemens</h3>
+                                    <p class="text-gray-600 text-sm mt-2">Yetkili Servis</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Vestel -->
+                        <div class="glide__slide">
+                            <div
+                                class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition duration-300 group mx-2">
+                                <div class="flex items-center justify-center h-24">
+                                    <i
+                                        class="fas fa-star text-4xl text-accent group-hover:scale-110 transition duration-300"></i>
+                                </div>
+                                <div class="text-center mt-4">
+                                    <h3 class="font-bold text-lg">Vestel</h3>
+                                    <p class="text-gray-600 text-sm mt-2">Yetkili Servis</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Samsung -->
+                        <div class="glide__slide">
+                            <div
+                                class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition duration-300 group mx-2">
+                                <div class="flex items-center justify-center h-24">
+                                    <i
+                                        class="fas fa-star text-4xl text-accent group-hover:scale-110 transition duration-300"></i>
+                                </div>
+                                <div class="text-center mt-4">
+                                    <h3 class="font-bold text-lg">Samsung</h3>
+                                    <p class="text-gray-600 text-sm mt-2">Yetkili Servis</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- LG -->
+                        <div class="glide__slide">
+                            <div
+                                class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition duration-300 group mx-2">
+                                <div class="flex items-center justify-center h-24">
+                                    <i
+                                        class="fas fa-star text-4xl text-accent group-hover:scale-110 transition duration-300"></i>
+                                </div>
+                                <div class="text-center mt-4">
+                                    <h3 class="font-bold text-lg">LG</h3>
+                                    <p class="text-gray-600 text-sm mt-2">Yetkili Servis</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Profilo -->
+                        <div class="glide__slide">
+                            <div
+                                class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition duration-300 group mx-2">
+                                <div class="flex items-center justify-center h-24">
+                                    <i
+                                        class="fas fa-star text-4xl text-accent group-hover:scale-110 transition duration-300"></i>
+                                </div>
+                                <div class="text-center mt-4">
+                                    <h3 class="font-bold text-lg">Profilo</h3>
+                                    <p class="text-gray-600 text-sm mt-2">Yetkili Servis</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glide__arrows" data-glide-el="controls">
+                    <button class="glide__arrow glide__arrow--left" data-glide-dir="<">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="glide__arrow glide__arrow--right" data-glide-dir=">">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+
+                <div class="glide__bullets" data-glide-el="controls[nav]">
+                    <button class="glide__bullet" data-glide-dir="=0"></button>
+                    <button class="glide__bullet" data-glide-dir="=1"></button>
+                    <button class="glide__bullet" data-glide-dir="=2"></button>
+                    <button class="glide__bullet" data-glide-dir="=3"></button>
+                    <button class="glide__bullet" data-glide-dir="=4"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <div class="inline-flex items-center bg-blue-50 rounded-full px-4 py-2 mb-4">
+                    <div class="w-2 h-2 rounded-full bg-accent mr-2"></div>
+                    <span class="text-accent font-medium">7/24 Hizmet</span>
+                </div>
+                <h2 class="text-3xl font-bold mb-3">Hemen İletişime Geçin</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    Size en yakın teknik servis ekibimiz 30 dakika içinde yanınızda
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Contact Form -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg" data-aos="fade-right">
+                    <form class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Ad Soyad</label>
+                            <input type="text" id="name" name="name"
+                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-accent focus:border-accent transition">
+                        </div>
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Telefon</label>
+                            <input type="tel" id="phone" name="phone"
+                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-accent focus:border-accent transition">
+                        </div>
+                        <div>
+                            <label for="address" class="block text-sm font-medium text-gray-700 mb-2">Adres</label>
+                            <textarea id="address" name="address" rows="3"
+                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-accent focus:border-accent transition"></textarea>
+                        </div>
+                        <div>
+                            <label for="service" class="block text-sm font-medium text-gray-700 mb-2">Servis
+                                Türü</label>
+                            <select id="service" name="service"
+                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-accent focus:border-accent transition">
+                                <option value="">Seçiniz</option>
+                                <option value="buzdolabi">Buzdolabı Servisi</option>
+                                <option value="camasir">Çamaşır Makinesi Servisi</option>
+                                <option value="bulasik">Bulaşık Makinesi Servisi</option>
+                                <option value="firin">Fırın Servisi</option>
+                                <option value="klima">Klima Servisi</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Arıza
+                                Detayı</label>
+                            <textarea id="message" name="message" rows="4"
+                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-accent focus:border-accent transition"></textarea>
+                        </div>
+                        <button type="submit"
+                            class="w-full bg-primary text-white px-8 py-4 rounded-lg hover:bg-secondary transition flex items-center justify-center space-x-2 group">
+                            <span>Servis Talebi Oluştur</span>
+                            <i class="fas fa-arrow-right transform group-hover:translate-x-1 transition"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="space-y-8" data-aos="fade-left">
+                    <!-- Map -->
+                    <div class="bg-white rounded-2xl p-2 shadow-lg h-[300px] overflow-hidden">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3011.044444444444!2d28.9795305!3d41.0370004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14caa7040068086b%3A0xe1ccfe98bc0add6!2zVGVrc2l2aXNlciBTZXJ2aWNlcywgU29ja2V0IFNob3QgQ29kZSBTdGF0aW9uLCBTb2Nrd2F0ZSBTb3V0aCwgMzQ0MzQgQ29kZSBTdGF0aW9uLCBTb2Nrd2F0ZSBTb3V0aCwgTmF0aW9uYWwgU291dGggU291dGggQ29kZSBTdGF0aW9u!5e0!3m2!1str!2str!4v1682304000000!5m2!1str!2str"
+                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+
+                    <!-- Contact Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Phone -->
+                        <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition duration-300">
+                            <div class="flex items-start space-x-4">
+                                <div
+                                    class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-phone text-xl text-accent"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold mb-2">Telefon</h3>
+                                    <p class="text-gray-600">0850 123 45 67</p>
+                                    <p class="text-gray-600">0532 123 45 67</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Working Hours -->
+                        <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition duration-300">
+                            <div class="flex items-start space-x-4">
+                                <div
+                                    class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-clock text-xl text-accent"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold mb-2">Çalışma Saatleri</h3>
+                                    <p class="text-gray-600">Hafta içi: 09:00 - 18:00</p>
+                                    <p class="text-gray-600">Hafta sonu: 10:00 - 16:00</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Address -->
+                        <div
+                            class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition duration-300 md:col-span-2">
+                            <div class="flex items-start space-x-4">
+                                <div
+                                    class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-map-marker-alt text-xl text-accent"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold mb-2">Adres</h3>
+                                    <p class="text-gray-600">Merkez Mahallesi, Çınar Sokak No:5,</p>
+                                    <p class="text-gray-600">Şişli / İstanbul</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social Media -->
+                    <div class="flex justify-center space-x-6">
+                        <a href="#"
+                            class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center hover:bg-blue-200 transition">
+                            <i class="fab fa-facebook-f text-xl text-accent"></i>
+                        </a>
+                        <a href="#"
+                            class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center hover:bg-blue-200 transition">
+                            <i class="fab fa-instagram text-xl text-accent"></i>
+                        </a>
+                        <a href="#"
+                            class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center hover:bg-blue-200 transition">
+                            <i class="fab fa-whatsapp text-xl text-accent"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <!-- Company Info -->
+                <div>
+                    <div class="flex items-center space-x-2 mb-6">
+                        <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+                            <span class="text-primary text-xl font-bold">TS</span>
+                        </div>
+                        <span class="text-2xl font-bold">TeknikServis</span>
+                    </div>
+                    <p class="text-gray-400 mb-6">
+                        15 yıllık deneyimimizle tüm beyaz eşya markalarına profesyonel teknik servis hizmeti sunuyoruz.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#"
+                            class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-accent transition duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-accent transition duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-accent transition duration-300">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-bold mb-6">Hızlı Bağlantılar</h3>
+                    <ul class="space-y-4">
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition">Hizmetlerimiz</a></li>
+                        <li><a href="#brands" class="text-gray-400 hover:text-white transition">Markalar</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition">Hakkımızda</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition">İletişim</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <h3 class="text-lg font-bold mb-6">Servis Hizmetleri</h3>
+                    <ul class="space-y-4">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Buzdolabı Servisi</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Çamaşır Makinesi Servisi</a>
+                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Bulaşık Makinesi Servisi</a>
+                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Fırın Servisi</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Klima Servisi</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h3 class="text-lg font-bold mb-6">İletişim</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start space-x-3">
+                            <i class="fas fa-map-marker-alt mt-1 text-accent"></i>
+                            <span class="text-gray-400">Merkez Mahallesi, Çınar Sokak No:5, Şişli / İstanbul</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fas fa-phone text-accent"></i>
+                            <span class="text-gray-400">0850 123 45 67</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fas fa-envelope text-accent"></i>
+                            <span class="text-gray-400">info@teknikservis.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 text-sm">© 2024 TeknikServis. Tüm hakları saklıdır.</p>
+                    <div class="flex space-x-6 mt-4 md:mt-0">
+                        <a href="#" class="text-gray-400 hover:text-white transition">Gizlilik Politikası</a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">Kullanım Şartları</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop"
+        class="fixed bottom-8 right-8 w-12 h-12 bg-white/90 backdrop-blur rounded-xl flex items-center justify-center text-primary hover:bg-accent hover:text-white shadow-lg hover:-translate-y-1 transition-all duration-300 opacity-0 invisible z-50 md:w-14 md:h-14"
+        aria-label="Yukarı Çık">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Mobile Menu Functionality
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuOverlay = document.getElementById('menu-overlay');
+        const hamburger = document.querySelector('.hamburger');
+
+        function toggleMenu() {
+            mobileMenu.classList.toggle('active');
+            menuOverlay.classList.toggle('active');
+            hamburger.classList.toggle('active');
+            document.body.classList.toggle('overflow-hidden');
+        }
+
+        menuBtn.addEventListener('click', toggleMenu);
+        menuOverlay.addEventListener('click', toggleMenu);
+
+        // Close menu when clicking on mobile menu links
+        const mobileMenuLinks = document.querySelectorAll('#mobile-menu a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                toggleMenu();
+            });
+        });
+
+        // Close menu on window resize if mobile menu is open
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768 && mobileMenu.classList.contains('active')) {
+                toggleMenu();
+            }
+        });
+
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // Initialize Glide.js for services
+        new Glide('.services-glide', {
+            type: 'carousel',
+            perView: 3,
+            gap: 30,
+            bound: true,
+            breakpoints: {
+                1024: {
+                    perView: 2,
+                    gap: 20
+                },
+                768: {
+                    perView: 1,
+                    gap: 20
+                }
+            },
+            autoplay: 5000,
+            hoverpause: true,
+            animationDuration: 800
+        }).mount();
+
+        // Initialize Glide.js for brands
+        new Glide('.brands-glide', {
+            type: 'carousel',
+            perView: 4,
+            gap: 30,
+            bound: true,
+            breakpoints: {
+                1024: {
+                    perView: 3,
+                    gap: 20
+                },
+                768: {
+                    perView: 2,
+                    gap: 20
+                },
+                640: {
+                    perView: 1,
+                    gap: 20
+                }
+            },
+            autoplay: 4000,
+            hoverpause: true,
+            animationDuration: 800
+        }).mount();
+
+        // Back to Top Button Functionality
+        const backToTopButton = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+            } else {
+                backToTopButton.classList.add('opacity-0', 'invisible');
+            }
+        });
+
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+
+</html>
